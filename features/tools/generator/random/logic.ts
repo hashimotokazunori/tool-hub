@@ -26,6 +26,25 @@ export function randomNumbers(o: RandomOptions, randomInt: (n: number) => number
   return { values: out };
 }
 
+/** 配列をランダムに並べ替える（フィッシャー–イェーツ） */
+export function shuffle<T>(items: T[], randomInt: (n: number) => number = secureRandomInt): T[] {
+  const a = [...items];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = randomInt(i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/** ビンゴの列の文字（1〜15 B、16〜30 I、31〜45 N、46〜60 G、61〜75 O） */
+export const bingoLetter = (n: number) => "BINGO"[Math.floor((n - 1) / 15)];
+
+/** まだ出ていない番号から1つ引く。全部出ていたら null */
+export function drawBingo(drawn: number[], randomInt: (n: number) => number = secureRandomInt): number | null {
+  const rest = Array.from({ length: 75 }, (_, i) => i + 1).filter((n) => !drawn.includes(n));
+  return rest.length ? rest[randomInt(rest.length)] : null;
+}
+
 const hex = (b: Uint8Array) => [...b].map((x) => x.toString(16).padStart(2, "0")).join("");
 const format = (h: string) => `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20)}`;
 

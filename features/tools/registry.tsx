@@ -13,6 +13,12 @@ import CharacterCounter from "./text/character-counter/Tool";
 import { CaseConverter, HiraganaKatakana, RemoveDuplicateLines, TextReplace, WhitespaceRemover, ZenkakuHankaku } from "./text/convert/Tools";
 import ManuscriptPaper from "./text/manuscript-paper/Tool";
 import TextDiff from "./text/text-diff/Tool";
+import { TravelExpenseSplit, UnitPrice, Budget, ElectricityCost, Tip, DataSize } from "./life/money/Tools";
+import { BulkImageResize, ImageCompress, ImageConvert, ImageResize } from "./image/convert/Tools";
+import { ImageToPdf, PdfCompress, PdfMerge, PdfSplit } from "./pdf/Tools";
+import CsvEncoding from "./data/charset/Tool";
+import { Bingo, Lottery } from "./generator/random/Lottery";
+import TaskPriority from "./business/priority/Tool";
 
 /** 画面キー → ツールの画面。keys.ts のキーがすべてそろっていないと型エラーになる */
 export const toolComponents: Record<ToolComponentKey, ComponentType> = {
@@ -47,4 +53,22 @@ export const toolComponents: Record<ToolComponentKey, ComponentType> = {
   wageConverter: WageConverter,
   presentationTime: PresentationTime,
   readingTime: ReadingTime,
+  imageConvert: ImageConvert,
+  imageResize: ImageResize,
+  imageCompress: ImageCompress,
+  bulkImageResize: BulkImageResize,
+  pdfMerge: PdfMerge,
+  pdfSplit: PdfSplit,
+  imageToPdf: ImageToPdf,
+  pdfCompress: PdfCompress,
+  csvEncoding: CsvEncoding,
+  travelExpenseSplit: TravelExpenseSplit,
+  unitPrice: UnitPrice,
+  budget: Budget,
+  electricityCost: ElectricityCost,
+  tip: Tip,
+  dataSize: DataSize,
+  lottery: Lottery,
+  bingo: Bingo,
+  taskPriority: TaskPriority,
 };

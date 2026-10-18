@@ -42,3 +42,6 @@ next-env.d.ts
 
 # ローカルの開発設定
 .claude/
+
+# npm install でコピーされる
+public/pdf.worker.min.mjs

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // npm install でコピーされる pdf.js のワーカー（外部ライブラリ）
+    "public/pdf.worker.min.mjs",
   ]),
 ]);
 

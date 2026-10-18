@@ -42,6 +42,25 @@ export const TOOL_COMPONENT_KEYS = [
   // 学習・ビジネス
   "presentationTime",
   "readingTime",
+  // 第3弾：記事で紹介するツール
+  "imageConvert",
+  "imageResize",
+  "imageCompress",
+  "bulkImageResize",
+  "pdfMerge",
+  "pdfSplit",
+  "imageToPdf",
+  "pdfCompress",
+  "csvEncoding",
+  "travelExpenseSplit",
+  "unitPrice",
+  "budget",
+  "electricityCost",
+  "tip",
+  "dataSize",
+  "lottery",
+  "bingo",
+  "taskPriority",
 ] as const;
 
 export type ToolComponentKey = (typeof TOOL_COMPONENT_KEYS)[number];
