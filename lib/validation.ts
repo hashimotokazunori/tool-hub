@@ -2,7 +2,6 @@ import { articles } from "@/data/articles";
 import { buyingGuides } from "@/data/buying-guides";
 import { allCategories, goodsCategories, toolCategories } from "@/data/categories";
 import { products } from "@/data/products";
-import { site } from "@/data/site";
 import { tools } from "@/data/tools";
 import { hasToolComponent } from "@/features/tools/keys";
 
@@ -72,8 +71,6 @@ export function validateData(): string[] {
 /** 本番公開の前に埋める必要がある設定（警告として扱う） */
 export function launchChecklist(): string[] {
   const todo: string[] = [];
-  if (!site.operator.name) todo.push("data/site.ts の運営者名（operator.name）");
-  if (!site.operator.contact) todo.push("data/site.ts の問い合わせ先（operator.contact）");
   if (!process.env.NEXT_PUBLIC_SITE_URL) todo.push("環境変数 NEXT_PUBLIC_SITE_URL（本番のURL）");
   return todo;
 }

@@ -35,8 +35,7 @@
 4. `data/tools.ts` の `PUBLISHED` に「slug: キー」を追加する。
 5. `npm run check` が通ったら公開できる。
 
-## 公開前に埋めるもの
+## 公開前に設定するもの
 
-- `data/site.ts` の運営者名・問い合わせ先
-- `NEXT_PUBLIC_SITE_URL`
-- プライバシーポリシーの制定日
+- `NEXT_PUBLIC_SITE_URL`（本番のURL）
+- 任意：`data/site.ts` の運営者名・問い合わせ先・プライバシーポリシーの制定日（空のままなら表示しない。問い合わせ先が空なら問い合わせページも出さない）

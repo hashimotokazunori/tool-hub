@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { goodsCategories, toolCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicArticles, getPublicProducts, getPublicTools, getToolsByCategory, isArticlePublic, isProductPublic } from "@/lib/content";
+import { site } from "@/data/site";
 import { absoluteUrl } from "@/lib/seo";
 
 /** 公開済みのページだけを載せる（下書き・中身のないカテゴリは載せない） */
@@ -15,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/about/"),
     page("/disclosure/"),
     page("/privacy/"),
-    page("/contact/"),
+    ...(site.operator.contact ? [page("/contact/")] : []),
     ...toolCategories.filter((c) => getToolsByCategory(c.id).length > 0).map((c) => page(`/tools/category/${c.slug}/`)),
     ...getPublicTools().map((t) => page(`/tools/${t.slug}/`, t.updatedAt)),
     ...goodsCategories.filter((c) => getProductsByCategory(c.id).length > 0 || getBuyingGuides(c.id).length > 0).map((c) => page(`/goods/category/${c.slug}/`)),

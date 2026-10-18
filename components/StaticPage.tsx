@@ -12,8 +12,3 @@ export function StaticPage({ title, lead, children }: { title: string; lead?: st
     </div>
   );
 }
-
-/** 公開前に記入が必要な項目の目印 */
-export function Todo({ children }: { children: ReactNode }) {
-  return <mark className="rounded bg-warn px-1 text-white">【要記入】{children}</mark>;
-}

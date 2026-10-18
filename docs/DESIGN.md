@@ -36,7 +36,7 @@
 | 商品 | `/goods/items/[slug]/` | `app/goods/items/[slug]/page.tsx` |
 | 比較ガイド | `/guides/[slug]/` | `app/guides/[slug]/page.tsx` |
 | 悩み別 | `/solutions/[slug]/` | `app/solutions/[slug]/page.tsx` |
-| 運営者情報・広告表記・プライバシー・問い合わせ | `/about/` `/disclosure/` `/privacy/` `/contact/` | 各 `page.tsx` |
+| 運営者情報・広告表記・プライバシー・問い合わせ | `/about/` `/disclosure/` `/privacy/` `/contact/` | 各 `page.tsx`（問い合わせは `operator.contact` を設定したときだけ表示） |
 | サイトマップ・robots | `/sitemap.xml` `/robots.txt` | `app/sitemap.ts` `app/robots.ts` |
 
 ## 4. ディレクトリ

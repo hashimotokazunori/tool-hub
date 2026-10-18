@@ -5,14 +5,13 @@ const LINKS = [
   { href: "/about/", label: "運営者情報" },
   { href: "/disclosure/", label: "広告・PR表記" },
   { href: "/privacy/", label: "プライバシーポリシー" },
-  { href: "/contact/", label: "お問い合わせ" },
 ];
 
 export function Footer() {
   return (
     <footer className="mt-6 flex flex-col gap-3 border-t border-line pt-5 text-xs text-muted">
       <nav aria-label="サイトについて" className="flex flex-wrap gap-x-4 gap-y-2">
-        {LINKS.map((l) => (
+        {[...LINKS, ...(site.operator.contact ? [{ href: "/contact/", label: "お問い合わせ" }] : [])].map((l) => (
           <Link key={l.href} href={l.href} className="text-muted underline-offset-2 hover:underline">
             {l.label}
           </Link>
