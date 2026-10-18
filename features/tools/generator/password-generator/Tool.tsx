@@ -7,12 +7,13 @@ import { useClientValue } from "@/components/useClientValue";
 import { entropyBits, generatePassword, strengthLabel, type PasswordOptions } from "./logic";
 
 // 設定と「作り直した回数」が同じあいだは、同じパスワードを返す
-const cache = { key: "", value: "" };
-function passwordFor(o: PasswordOptions, round: number): string {
-  const key = `${JSON.stringify(o)}#${round}`;
+const cache: { key: string; value: string[] } = { key: "", value: [] };
+const EMPTY: string[] = [];
+function passwordsFor(o: PasswordOptions, count: number, round: number): string[] {
+  const key = `${JSON.stringify(o)}#${count}#${round}`;
   if (cache.key !== key) {
     cache.key = key;
-    cache.value = generatePassword(o);
+    cache.value = Array.from({ length: count }, () => generatePassword(o));
   }
   return cache.value;
 }
@@ -28,8 +29,10 @@ const CHECKS: { key: keyof Omit<PasswordOptions, "length">; label: string }[] = 
 export default function PasswordGenerator() {
   const [o, setO] = useState<PasswordOptions>({ length: 16, upper: true, lower: true, digits: true, symbols: false, excludeAmbiguous: true });
   const [round, setRound] = useState(0);
+  const [count, setCount] = useState(1);
   // 乱数は端末の中で作る（静的生成のHTMLにパスワードを入れない）
-  const pw = useClientValue(() => passwordFor(o, round), "");
+  const list = useClientValue(() => passwordsFor(o, count, round), EMPTY);
+  const pw = list[0] ?? "";
   const regenerate = () => setRound((n) => n + 1);
   const bits = entropyBits(o);
   const label = strengthLabel(bits);
@@ -57,12 +60,33 @@ export default function PasswordGenerator() {
           </label>
         ))}
       </div>
+      <label className={ui.label}>
+        一度に作る数
+        <select className={`${ui.input} w-auto`} value={count} onChange={(e) => setCount(Number(e.target.value))}>
+          {[1, 5, 10, 20].map((n) => (
+            <option key={n} value={n}>
+              {n} 個
+            </option>
+          ))}
+        </select>
+      </label>
       <div className="flex flex-wrap gap-2">
         <button type="button" className={ui.buttonPrimary} onClick={regenerate} disabled={none}>
           もう一度作る
         </button>
         <CopyButton text={pw} />
+        {count > 1 && <CopyButton text={list.join("\n")} label={`${count}個まとめてコピー`} />}
       </div>
+      {count > 1 && !none && (
+        <ol className="flex flex-col divide-y divide-line rounded-lg border border-line">
+          {list.slice(1).map((p, i) => (
+            <li key={i} className="flex items-center justify-between gap-3 px-3 py-1.5">
+              <code className="font-mono text-sm break-all">{p}</code>
+              <CopyButton text={p} />
+            </li>
+          ))}
+        </ol>
+      )}
     </div>
   );
 }

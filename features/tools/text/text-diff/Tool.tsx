@@ -64,6 +64,28 @@ export default function TextDiff() {
       </div>
       <div className="flex flex-wrap items-center gap-4">
         <Check label="前後の空白の違いを無視" checked={ignoreWs} onChange={setIgnoreWs} />
+        <button
+          type="button"
+          className={ui.button}
+          onClick={() => {
+            setA(b);
+            setB(a);
+          }}
+          disabled={!a && !b}
+        >
+          左右を入れ替え
+        </button>
+        <button
+          type="button"
+          className={ui.button}
+          onClick={() => {
+            setA("");
+            setB("");
+          }}
+          disabled={!a && !b}
+        >
+          消す
+        </button>
         <span className="text-sm" aria-live="polite">
           {!ops ? "行数が多すぎます（それぞれ4,000行程度まで）" : a || b ? (added || removed ? `追加 ${added} 行・削除 ${removed} 行` : "違いはありません") : "2つの文章を入れると、違いを色分けします"}
         </span>

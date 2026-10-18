@@ -4,8 +4,13 @@ import { useState } from "react";
 import { Field, FieldGrid, Stats } from "@/components/ToolUI";
 import { ui } from "@/components/styles";
 import { useClientValue } from "@/components/useClientValue";
-import { formatJa, parseYmd, toYmd, wareki } from "@/lib/date";
+import { WEEKDAYS, formatJa, parseYmd, toYmd, wareki } from "@/lib/date";
 import { daysBetween } from "./logic";
+
+const weekdayOf = (ymd: string) => {
+  const d = parseYmd(ymd);
+  return d ? `（${WEEKDAYS[d.getDay()]}）` : "";
+};
 
 export default function DaysBetween() {
   // 今日の日付は表示する端末で決まる。入力されるまでは「今日〜今年の大みそか」を使う
@@ -19,13 +24,31 @@ export default function DaysBetween() {
   return (
     <div className="flex flex-col gap-4">
       <FieldGrid>
-        <Field label="開始日">
+        <Field label={`開始日${weekdayOf(start)}`}>
           <input className={ui.input} type="date" value={start} onChange={(ev) => setStart(ev.target.value)} />
         </Field>
-        <Field label="終了日">
+        <Field label={`終了日${weekdayOf(end)}`}>
           <input className={ui.input} type="date" value={end} onChange={(ev) => setEnd(ev.target.value)} />
         </Field>
       </FieldGrid>
+      <div className="flex flex-wrap gap-2">
+        <button type="button" className={ui.chip} onClick={() => setStart(today)} disabled={!today}>
+          開始日を今日に
+        </button>
+        <button type="button" className={ui.chip} onClick={() => setEnd(today)} disabled={!today}>
+          終了日を今日に
+        </button>
+        <button
+          type="button"
+          className={ui.chip}
+          onClick={() => {
+            setStart(end);
+            setEnd(start);
+          }}
+        >
+          開始日と終了日を入れ替え
+        </button>
+      </div>
       {r ? (
         <>
           <Stats

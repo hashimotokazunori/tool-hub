@@ -115,3 +115,40 @@ describe("サイト内検索", () => {
     expect(search(items, "税込")[0].href).toBe("/tools/consumption-tax/");
   });
 });
+
+describe("ブラッシュアップ（第4弾）", () => {
+  it("全角・半角・単語の数", async () => {
+    const { countText } = await import("@/features/tools/text/character-counter/logic");
+    const c = countText("ｱｲｳ abc　日本語\nhello world");
+    expect(c.halfWidth).toBe(3 + 1 + 3 + 5 + 1 + 5);
+    expect(c.fullWidth).toBe(1 + 3);
+    expect(c.words).toBe(5);
+  });
+  it("目標文字数との比較", async () => {
+    const { compareLimit, countText } = await import("@/features/tools/text/character-counter/logic");
+    const c = countText("あいう\nえお");
+    expect(compareLimit(c, 4, "charsNoNewline")).toEqual({ count: 5, remaining: -1, ratio: 1.25 });
+    expect(compareLimit(c, 10, "chars")?.remaining).toBe(4);
+    expect(compareLimit(c, 0, "chars")).toBeNull();
+  });
+  it("8%と10%が混ざった品目は税率ごとに合計してから端数処理", async () => {
+    const { calcReceipt } = await import("@/features/tools/calculator/consumption-tax/logic");
+    // 1品ずつ切り捨てると 8+8+15=31 円だが、税率ごとにまとめると 8%: 228→18、10%: 155→15
+    const r = calcReceipt(
+      [
+        { name: "a", price: 114, rate: 8 },
+        { name: "b", price: 114, rate: 8 },
+        { name: "c", price: 155, rate: 10 },
+        { name: "空", price: 0, rate: 10 },
+      ],
+      "excluded",
+      "floor",
+    );
+    expect(r.rows.map((x) => [x.rate, x.count, x.tax])).toEqual([
+      [10, 1, 15],
+      [8, 2, 18],
+    ]);
+    expect(r.total).toEqual({ excluded: 383, tax: 33, included: 416 });
+    expect(calcReceipt([], "included", "floor").total.included).toBe(0);
+  });
+});

@@ -26,3 +26,22 @@ export function calcTax({ amount, basis, rate, rounding }: TaxInput): TaxResult 
   const tax = round((a * rate) / (100 + rate), rounding);
   return { excluded: a - tax, tax, included: a };
 }
+
+export type ReceiptItem = { name: string; price: number; rate: number };
+export type ReceiptRow = TaxResult & { rate: number; count: number };
+
+/**
+ * 複数の品目をまとめて計算する。インボイス（適格請求書）と同じく、
+ * 税率ごとに金額を合計してから1回だけ端数処理する。
+ */
+export function calcReceipt(items: ReceiptItem[], basis: TaxInput["basis"], rounding: TaxRounding): { rows: ReceiptRow[]; total: TaxResult } {
+  const rows: ReceiptRow[] = [];
+  for (const rate of [10, 8]) {
+    const list = items.filter((it) => it.rate === rate && it.price > 0);
+    if (list.length === 0) continue;
+    const sum = list.reduce((s, it) => s + Math.floor(it.price), 0);
+    rows.push({ rate, count: list.length, ...calcTax({ amount: sum, basis, rate, rounding }) });
+  }
+  const total = rows.reduce((t, r) => ({ excluded: t.excluded + r.excluded, tax: t.tax + r.tax, included: t.included + r.included }), { excluded: 0, tax: 0, included: 0 });
+  return { rows, total };
+}

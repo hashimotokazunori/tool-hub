@@ -17,17 +17,45 @@ export function FieldGrid({ children }: { children: ReactNode }) {
   return <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">{children}</div>;
 }
 
-/** 計算結果のタイル。数が多くても行が欠けないよう、件数に合わせて折り返す */
-export function Stats({ items }: { items: { label: string; value: ReactNode; emphasis?: boolean }[] }) {
+type StatItem = { label: string; value: ReactNode; emphasis?: boolean };
+
+/** 計算結果のタイル。数が多くても行が欠けないよう、件数に合わせて折り返す。文字や数の値は押すとコピーできる */
+export function Stats({ items }: { items: StatItem[] }) {
   return (
     <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4" aria-live="polite">
       {items.map((it) => (
-        <div key={it.label} className={`flex flex-col-reverse rounded-lg border px-3 py-2 ${it.emphasis ? "border-accent bg-accent-soft" : "border-line bg-panel"}`}>
-          <dt className="text-xs text-muted">{it.label}</dt>
-          <dd className="font-mono text-xl font-semibold tabular-nums">{it.value}</dd>
-        </div>
+        <StatTile key={it.label} {...it} />
       ))}
     </dl>
+  );
+}
+
+function StatTile({ label, value, emphasis }: StatItem) {
+  const [copied, setCopied] = useState(false);
+  const text = typeof value === "string" || typeof value === "number" ? String(value) : null;
+  return (
+    <div className={`group relative flex flex-col-reverse rounded-lg border px-3 py-2 ${emphasis ? "border-accent bg-accent-soft" : "border-line bg-panel"}`}>
+      <dt className="text-xs text-muted">{copied ? "コピーしました" : label}</dt>
+      <dd className="font-mono text-xl font-semibold tabular-nums">{value}</dd>
+      {text !== null && (
+        <button
+          type="button"
+          className="absolute inset-0 cursor-copy rounded-lg focus-visible:outline-2 focus-visible:outline-accent"
+          aria-label={`${label}の値「${text}」をコピー`}
+          title="押すとコピー"
+          onClick={async () => {
+            try {
+              // 「1,234 円」のような表示は数字だけをコピーする
+              await navigator.clipboard.writeText(/^[\d,.\-−]+\s*(円|枚|文字|日|%|％)?$/.test(text) ? text.replace(/[,\s円枚文字日%％]/g, "").replace("−", "-") : text);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 1500);
+            } catch {
+              // コピーできない環境では何もしない（値は画面で読める）
+            }
+          }}
+        />
+      )}
+    </div>
   );
 }
 
