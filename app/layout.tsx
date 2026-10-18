@@ -13,6 +13,8 @@ export const metadata: Metadata = {
   title: { template: `%s | ${site.name}`, default: `${site.name}｜無料Webツールと便利グッズの選び方` },
   description: site.description,
   openGraph: { siteName: site.name, locale: site.locale, type: "website" },
+  // Google Search Console の所有権確認
+  verification: { google: "dmfHrw8nkN4c9Zjad-isZ4BnPD-d7Mn47HT1nr9mpz8" },
 };
 
 export const viewport: Viewport = {
