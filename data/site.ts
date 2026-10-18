@@ -4,8 +4,15 @@ export const site = {
   tagline: "暮らしと仕事の「困った」を、すぐ解決",
   description:
     "登録不要で使える無料Webツールと、便利グッズの選び方・比較ガイドをまとめた総合サイト。ツールはブラウザの中だけで動き、入力した内容やファイルを送信しません。",
-  /** 本番のURL。環境変数 NEXT_PUBLIC_SITE_URL で上書きできる */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  /**
+   * 本番のURL。環境変数 NEXT_PUBLIC_SITE_URL で上書きできる。
+   * 未設定でも Vercel 上では本番ドメインを使う（検索エンジンへの登録は NEXT_PUBLIC_SITE_URL を設定するまで止めたまま）
+   */
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000"),
   locale: "ja_JP",
   operator: {
     /** 運営者名。空なら運営者名は表示しない */

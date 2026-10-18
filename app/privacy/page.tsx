@@ -3,7 +3,7 @@ import { StaticPage } from "@/components/StaticPage";
 import { site } from "@/data/site";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata = pageMetadata({ title: "プライバシーポリシー", description: `${site.name}での個人情報・入力データ・Cookieの取り扱い。`, path: "/privacy/" });
+export const metadata = pageMetadata({ title: "プライバシーポリシー", description: `${site.name}での個人情報・入力データ・アクセス解析の取り扱い。`, path: "/privacy/" });
 
 export default function PrivacyPage() {
   return (
@@ -14,7 +14,14 @@ export default function PrivacyPage() {
       <h2>ツールに入力した内容</h2>
       <p>当サイトのツールは、入力した文字・数値・ファイルをブラウザの中だけで処理し、運営者のサーバーには送信しません。</p>
       <h2>アクセス解析・広告</h2>
-      <p>現在、アクセス解析ツールや広告配信サービスは使用していません。今後導入する場合は、利用するサービス名、Cookieなどで取得する情報、その目的と、無効にする方法を、このページに記載してから導入します。</p>
+      <p>
+        当サイトは、閲覧数の把握とサイトの改善のために、Vercel Inc. の「Vercel Web Analytics」を使っています。取得するのは、見られたページのURL、参照元、国・地域、ブラウザやOS・端末の種類などで、Cookieは使わず、個人を特定できる情報は集めません。訪問者の識別に使う値は、日ごとに破棄されます。詳しくは
+        <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">
+          Vercel のプライバシーに関する説明
+        </a>
+        をご覧ください。
+      </p>
+      <p>広告配信サービスは使用していません。今後導入する場合は、利用するサービス名、Cookieなどで取得する情報、その目的と、無効にする方法を、このページに記載してから導入します。</p>
       {site.operator.contact && (
         <>
           <h2>お問い合わせでいただいた情報</h2>

@@ -13,6 +13,7 @@
     "postinstall": "node scripts/copy-pdf-worker.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "encoding-japanese": "^2.4.0",
     "heic2any": "^0.0.4",
     "jszip": "^3.10.1",

@@ -24,8 +24,12 @@
 
 | 名前 | 内容 |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | 本番のURL。設定するまで robots.txt は全ページを検索エンジンに登録させない |
+| `NEXT_PUBLIC_SITE_URL` | 本番のURL。設定するまで robots.txt は全ページを検索エンジンに登録させない（未設定でも Vercel 上ではリンクやサイトマップに本番ドメインを使う） |
 | `SHOW_DRAFTS` | `1` で下書きも表示（本番では設定しない） |
+
+## 閲覧数
+
+Vercel Web Analytics で計測する（`app/layout.tsx` の `<Analytics />`）。Vercel のプロジェクト画面の「Analytics」タブで有効にすると、ページごとの閲覧数・訪問者数・参照元・国・端末を見られる。Cookie は使わない。
 
 ## ツールを追加する手順
 
