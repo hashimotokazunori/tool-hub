@@ -56,7 +56,7 @@ export function validateData(): string[] {
     for (const s of a.toolSlugs) if (!toolSlugs.has(s)) errors.push(`記事 ${a.slug} の関連ツールがありません: ${s}`);
     for (const id of a.productIds) if (!productIds.has(id)) errors.push(`記事 ${a.slug} の商品がありません: ${id}`);
     for (const id of a.goodsCategoryIds) if (!goodsCat.has(id)) errors.push(`記事 ${a.slug} のグッズカテゴリがありません: ${id}`);
-    if (a.status === "published" && (a.reviewStatus !== "verified" || !a.reviewedAt)) errors.push(`記事 ${a.slug} は人の確認前なのに公開になっています`);
+    if (a.status === "published" && (a.reviewStatus !== "verified" || !a.reviewedAt)) errors.push(`記事 ${a.slug} は確認前なのに公開になっています`);
   }
 
   for (const g of buyingGuides) {

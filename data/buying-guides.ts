@@ -2,7 +2,7 @@ import type { BuyingGuide } from "@/lib/types";
 
 /**
  * 便利グッズの品目ごとの選び方（特定の商品を指さない一般的な情報）。
- * 試作版から移したAIの下書きなので、人が出典を確認するまで draft / pending。
+ * 2026-10-19 にAI（Claude）が公的機関・メーカーの情報と照らし合わせて確認し、公開している（記録：docs/review/）。
  */
 export const buyingGuides: BuyingGuide[] = [
   {
@@ -25,8 +25,8 @@ export const buyingGuides: BuyingGuide[] = [
       "budget",
       "unit-price"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "desk-02",
@@ -47,8 +47,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "budget"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "desk-03",
@@ -70,8 +70,8 @@ export const buyingGuides: BuyingGuide[] = [
       "unit-converter",
       "qr-code"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "desk-04",
@@ -93,8 +93,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "css-unit"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "gadgets-05",
@@ -116,8 +116,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "electricity-cost"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "gadgets-06",
@@ -128,7 +128,7 @@ export const buyingGuides: BuyingGuide[] = [
       "容量の目安：10,000mAhでスマホ約1.5〜2回分",
       "表示容量と実際に充電できる量は違う（変換ロスで6〜7割程度になることが多い）",
       "2019年2月1日以降、PSEマーク（丸形）のないモバイルバッテリーは販売できない",
-      "飛行機は160Wh以下・1人2個まで。預け入れ不可、機内での充電・給電も不可（2026年4月24日から。Wh＝定格容量mAh×定格電圧V÷1000）"
+      "飛行機の機内持ち込みは160Wh以下・1人2個まで、機内での充電・給電も不可（2026年4月24日から）。預け入れは以前から不可。Wh＝定格容量mAh×定格電圧V÷1000"
     ],
     "specsToCompare": [
       "容量（mAh・Wh）",
@@ -140,8 +140,8 @@ export const buyingGuides: BuyingGuide[] = [
       "electricity-cost",
       "data-size"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "gadgets-07",
@@ -162,8 +162,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "data-size"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "gadgets-08",
@@ -185,8 +185,8 @@ export const buyingGuides: BuyingGuide[] = [
       "timezone",
       "meeting-planner"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "home-09",
@@ -208,8 +208,8 @@ export const buyingGuides: BuyingGuide[] = [
       "unit-converter",
       "unit-price"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "home-10",
@@ -230,8 +230,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "unit-price"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "home-11",
@@ -253,8 +253,8 @@ export const buyingGuides: BuyingGuide[] = [
       "unit-converter",
       "qr-code"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "home-12",
@@ -274,8 +274,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "unit-converter"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "travel-13",
@@ -295,8 +295,8 @@ export const buyingGuides: BuyingGuide[] = [
       "travel-expense-split",
       "tip"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "travel-14",
@@ -317,8 +317,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "travel-expense-split"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "travel-15",
@@ -340,8 +340,8 @@ export const buyingGuides: BuyingGuide[] = [
       "timezone",
       "tip"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "travel-16",
@@ -361,8 +361,8 @@ export const buyingGuides: BuyingGuide[] = [
     "toolSlugs": [
       "steps-distance"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "stationery-17",
@@ -383,8 +383,8 @@ export const buyingGuides: BuyingGuide[] = [
       "qr-code",
       "unit-price"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "stationery-18",
@@ -405,8 +405,8 @@ export const buyingGuides: BuyingGuide[] = [
       "image-to-pdf",
       "bulk-rename"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "stationery-19",
@@ -428,8 +428,8 @@ export const buyingGuides: BuyingGuide[] = [
       "countdown",
       "days-between"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   },
   {
     "id": "stationery-20",
@@ -449,7 +449,7 @@ export const buyingGuides: BuyingGuide[] = [
       "hanko",
       "task-priority"
     ],
-    "reviewStatus": "pending",
-    "status": "draft"
+    "reviewStatus": "verified",
+    "status": "published"
   }
 ];

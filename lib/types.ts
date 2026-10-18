@@ -1,7 +1,7 @@
 /** 公開状態。published 以外は一覧・検索・サイトマップに出さない */
 export type PublishStatus = "draft" | "published" | "retired";
 
-/** 人による内容確認の状態。AIの下書きは pending から始める */
+/** 内容確認の状態。下書きは pending から始め、事実確認が済んだら verified にする */
 export type ReviewStatus = "pending" | "verified" | "needs_update";
 
 export type Priority = "P0" | "P1" | "P2";
@@ -61,6 +61,9 @@ export type Product = {
   imageLicenseNote?: string;
   /** 仕様を確認した情報源 */
   sourceUrls: string[];
+  /** 仕様を確認した日（YYYY-MM-DD）と、確認した人・方法 */
+  reviewedAt?: string;
+  reviewedBy?: string;
   reviewStatus: ReviewStatus;
   status: PublishStatus;
   updatedAt: string;
@@ -82,8 +85,10 @@ export type Article = {
   goodsCategoryIds: string[];
   sources: { title: string; url: string }[];
   author: string;
-  /** 人が内容を確認した日（YYYY-MM-DD） */
+  /** 内容を確認した日（YYYY-MM-DD） */
   reviewedAt?: string;
+  /** 内容を確認した人・方法（例：「AI（Claude）による事実確認」）。読者に表示する */
+  reviewedBy?: string;
   publishedAt?: string;
   reviewStatus: ReviewStatus;
   status: PublishStatus;

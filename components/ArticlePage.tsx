@@ -19,7 +19,7 @@ export function ArticlePage({ article, section }: { article: Article; section: {
     <article className="flex flex-col gap-6">
       <Breadcrumbs items={[section, { label: article.title }]} />
       {article.status !== "published" && (
-        <p className="rounded-lg bg-warn px-3 py-2 text-sm font-bold text-white">下書きです（人の確認前のため公開されていません。SHOW_DRAFTS=1 のときだけ表示）</p>
+        <p className="rounded-lg bg-warn px-3 py-2 text-sm font-bold text-white">下書きです（確認前のため公開されていません。SHOW_DRAFTS=1 のときだけ表示）</p>
       )}
       <div className="flex flex-col gap-3">
         <span className={`${ui.eyebrow} flex items-center gap-1.5 ${article.type === "guide" ? "text-guide" : "text-solution"}`}>
@@ -36,7 +36,7 @@ export function ArticlePage({ article, section }: { article: Article; section: {
           <div className="flex items-center gap-1">
             <Icon name="shield" size={14} />
             <dt>内容確認</dt>
-            <dd className="font-medium text-ink">{article.reviewedAt ? article.reviewedAt.replaceAll("-", "/") : "確認前"}</dd>
+            <dd className="font-medium text-ink">{article.reviewedAt ? `${article.reviewedAt.replaceAll("-", "/")}${article.reviewedBy ? `（${article.reviewedBy}）` : ""}` : "確認前"}</dd>
           </div>
           <div className="flex gap-1">
             <dt>参考にした情報</dt>
