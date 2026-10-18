@@ -79,6 +79,7 @@ export function ProductCard({ product }: { product: Product }) {
         {link?.sponsored && <span className="absolute top-2 right-2 rounded bg-panel/95 px-1.5 text-[11px] font-bold text-muted ring-1 ring-line">PR</span>}
       </Link>
       <div className="flex flex-1 flex-col gap-2.5 p-4">
+        {product.status !== "published" && <span className="w-fit rounded bg-warn px-1.5 text-[11px] font-bold text-white">下書き（非公開）</span>}
         {product.brand && <span className="text-xs text-muted">{product.brand}</span>}
         <Link href={`/goods/items/${product.slug}/`} className="font-bold leading-snug text-ink hover:underline">
           {product.name}

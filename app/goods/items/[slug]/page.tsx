@@ -32,6 +32,7 @@ export default async function ProductPage({ params }: PageProps<"/goods/items/[s
   return (
     <div className="flex flex-col gap-6">
       <Breadcrumbs items={[{ label: "便利グッズ", href: "/goods/" }, { label: c.name, href: `/goods/category/${c.slug}/` }, { label: p.name }]} />
+      {p.status !== "published" && <p className="rounded-lg bg-warn px-3 py-2 text-sm font-bold text-white">下書きです（人の確認前のため公開されていません。SHOW_DRAFTS=1 のときだけ表示）</p>}
       {link?.sponsored && (
         <p className="w-fit rounded border border-muted px-2 text-xs font-bold text-muted">
           PR　このページには広告（アフィリエイトリンク）が含まれます

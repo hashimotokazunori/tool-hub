@@ -3,7 +3,46 @@
  * 画面そのものは registry.tsx（クライアント部品）で対応づける。
  * ここに無いキーのツールは公開できない（lib/validation.ts で検査）。
  */
-export const TOOL_COMPONENT_KEYS = ["characterCounter", "consumptionTax", "daysBetween", "warikan", "passwordGenerator"] as const;
+export const TOOL_COMPONENT_KEYS = [
+  // 文章・日本語
+  "characterCounter",
+  "manuscriptPaper",
+  "hiraganaKatakana",
+  "zenkakuHankaku",
+  "caseConverter",
+  "whitespaceRemover",
+  "textReplace",
+  "removeDuplicateLines",
+  "textDiff",
+  // 計算・単位変換
+  "consumptionTax",
+  "discount",
+  "percentage",
+  "ratio",
+  "average",
+  "rounding",
+  // 日付・時間
+  "daysBetween",
+  "dateAdd",
+  "weekday",
+  "age",
+  // 生成・作成
+  "passwordGenerator",
+  "randomNumber",
+  "uuid",
+  // Web・開発者
+  "jsonFormatter",
+  "urlEncode",
+  "base64",
+  "htmlEscape",
+  "regexTester",
+  // 日常生活・お金
+  "warikan",
+  "wageConverter",
+  // 学習・ビジネス
+  "presentationTime",
+  "readingTime",
+] as const;
 
 export type ToolComponentKey = (typeof TOOL_COMPONENT_KEYS)[number];
 
