@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ツールひろば（仮称）
 
-## Getting Started
+無料Webツールと便利グッズの選び方・比較ガイドをまとめた総合サイトです。設計は [docs/DESIGN.md](docs/DESIGN.md) を参照してください。
 
-First, run the development server:
+## 必要なもの
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 24 以上
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## よく使うコマンド
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| コマンド | 内容 |
+|---|---|
+| `npm run dev` | 開発用サーバー（http://localhost:3000） |
+| `npm run build` | 本番用にビルド（全ページを静的生成） |
+| `npm run start` | ビルドしたサイトを起動 |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | ルートの型を生成して型チェック |
+| `npm test` | 計算ロジックとデータの整合性のテスト |
+| `npm run check` | 上の4つ（lint・型・テスト・ビルド）をまとめて実行 |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+下書きの記事や選び方も表示して確認したいときは、`SHOW_DRAFTS=1` を付けて起動します。
 
-## Learn More
+## 環境変数
 
-To learn more about Next.js, take a look at the following resources:
+| 名前 | 内容 |
+|---|---|
+| `NEXT_PUBLIC_SITE_URL` | 本番のURL。設定するまで robots.txt は全ページを検索エンジンに登録させない |
+| `SHOW_DRAFTS` | `1` で下書きも表示（本番では設定しない） |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ツールを追加する手順
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. `features/tools/<分類>/<ツール>/logic.ts` に計算ロジックを書き、`tests/` にテストを追加する。
+2. 同じフォルダに `Tool.tsx`（`"use client"`）で画面を作る。
+3. `features/tools/keys.ts` にキーを、`features/tools/registry.tsx` に画面を登録する。
+4. `data/tools.ts` の `PUBLISHED` に「slug: キー」を追加する。
+5. `npm run check` が通ったら公開できる。
 
-## Deploy on Vercel
+## 公開前に埋めるもの
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `data/site.ts` の運営者名・問い合わせ先
+- `NEXT_PUBLIC_SITE_URL`
+- プライバシーポリシーの制定日

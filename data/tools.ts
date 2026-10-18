@@ -1,0 +1,160 @@
+import type { Priority, PublishStatus, Tool } from "@/lib/types";
+
+/**
+ * ツールの登録データ。
+ * [slug, カテゴリID, 名前, 一覧用の説明, 優先度, 検索用の関連語]
+ * 実装して動作を確認したものだけ PUBLISHED に slug を入れる。
+ */
+type Row = [slug: string, categoryId: string, name: string, summary: string, priority: Priority, keywords?: string];
+
+const ROWS: Row[] = [
+  // 文章・日本語
+  ["character-counter", "text", "文字数カウンター", "文字数・空白除外・行数・バイト数・原稿用紙の枚数", "P0", "文字数 カウント 数える バイト 原稿用紙 X"],
+  ["manuscript-paper", "text", "原稿用紙換算", "400字・200字詰めの枚数と縦書きイメージ", "P0", "原稿用紙 作文 小論文 読書感想文"],
+  ["hiragana-katakana", "text", "ひらがな・カタカナ変換", "ひらがなとカタカナを相互変換", "P0", "ひらがな カタカナ ふりがな フリガナ"],
+  ["zenkaku-hankaku", "text", "全角・半角変換", "英数字・記号・スペース・カナを変換", "P0", "全角 半角 英数字 カナ"],
+  ["case-converter", "text", "大文字・小文字変換", "UPPER・lower・camelCase などに変換", "P0", "大文字 小文字 英字 キャメルケース スネークケース"],
+  ["whitespace-remover", "text", "改行・空白削除", "余計な空白・空行・改行を整理", "P0", "改行 空白 スペース 削除 整形"],
+  ["text-replace", "text", "テキスト置換", "文章の中の言葉を一括で置換", "P0", "置換 置き換え 検索 一括"],
+  ["remove-duplicate-lines", "text", "重複行削除", "重複した行を除いて並べ替え", "P0", "重複 削除 ユニーク 名簿 並べ替え"],
+  ["text-diff", "text", "テキスト比較", "2つの文章の違いを色分け", "P0", "比較 差分 diff 違い 変更点"],
+  ["line-paragraph-counter", "text", "行数・段落数カウント", "段落と改行の数を集計", "P1", "行数 段落 改行 数える"],
+  // 計算・単位変換
+  ["consumption-tax", "calc", "消費税計算", "税込・税抜の計算、軽減税率8%", "P0", "消費税 税込 税抜 軽減税率 10% 8% 端数"],
+  ["discount", "calc", "割引計算", "割引後の価格と二重割引", "P0", "割引 値引き 何割引き オフ セール"],
+  ["percentage", "calc", "割合計算", "何％・増減率・〇％はいくつ", "P0", "割合 パーセント 増減率 何%"],
+  ["ratio", "calc", "比率計算", "比の拡大・縮小と簡単な比", "P0", "比率 比 縦横比 アスペクト比"],
+  ["average", "calc", "平均値計算", "平均・合計・中央値・標準偏差", "P0", "平均 合計 中央値 標準偏差"],
+  ["rounding", "calc", "四捨五入計算", "指定した桁で四捨五入・切り捨て・切り上げ", "P0", "四捨五入 切り捨て 切り上げ 端数"],
+  ["compound-interest", "calc", "複利計算", "元本・積立・利率・期間から将来の金額", "P1", "複利 積立 投資 NISA 利息"],
+  ["loan-simulator", "calc", "ローン返済シミュレーター", "毎月の返済額と総返済額", "P1", "ローン 住宅ローン 返済 金利 元利均等"],
+  ["unit-converter", "calc", "単位変換", "長さ・重さ・面積・体積・温度、坪・畳", "P1", "単位 変換 坪 畳 インチ ポンド 尺"],
+  ["data-size", "calc", "データ容量変換", "B・KB・MB・GB・TBと転送時間", "P1", "容量 GB MB KB バイト"],
+  // 日付・時間
+  ["days-between", "date", "日数計算", "2つの日付の間の日数と営業日の目安", "P0", "日数 何日 期間 日付"],
+  ["date-add", "date", "日付加算・減算", "指定した日から何日後・何日前", "P0", "何日後 何日前 日付 計算"],
+  ["weekday", "date", "曜日計算", "日付から曜日・祝日・和暦を調べる", "P0", "曜日 祝日 和暦"],
+  ["age", "date", "年齢計算", "満年齢・数え年・干支", "P0", "年齢 満年齢 数え年 干支 生年月日"],
+  ["business-days", "date", "営業日計算", "土日祝を除いた日数と○営業日後", "P1", "営業日 土日祝 締め切り 納期"],
+  ["countdown", "date", "カウントダウン", "指定した日時までの残り時間", "P1", "カウントダウン あと何日 残り"],
+  ["timezone", "date", "タイムゾーン変換", "世界の主要都市の時刻", "P1", "時差 タイムゾーン 海外 現地時間"],
+  ["unix-time", "date", "Unix時間変換", "日時とUnix時間を相互変換", "P1", "Unix エポック タイムスタンプ"],
+  ["time-units", "date", "時間・分・秒変換", "時間の単位を相互に変換", "P1", "時間 分 秒 換算"],
+  ["week-number", "date", "週番号計算", "ISO週番号と第何週", "P2", "週番号 第何週 ISO"],
+  ["school-years", "date", "入学・卒業年早見", "履歴書の学歴の年を西暦・和暦で", "P1", "履歴書 入学 卒業 学歴 早生まれ"],
+  // 画像
+  ["image-resize", "image", "画像リサイズ", "幅・高さを指定して縮小", "P0", "リサイズ 縮小 サイズ変更"],
+  ["image-compress", "image", "画像圧縮", "画質を調整してファイルを軽く", "P0", "圧縮 軽く 容量"],
+  ["image-convert", "image", "画像形式変換", "HEIC・PNG・WebP・JPGを相互変換", "P0", "HEIC JPG PNG WebP 変換 iPhone"],
+  ["image-crop", "image", "画像トリミング", "SNSサイズの比率で切り抜き", "P1", "トリミング 切り抜き インスタ サムネ"],
+  ["square-image", "image", "正方形画像作成", "写真を切らずに正方形に", "P1", "正方形 インスタ 余白"],
+  ["image-rotate", "image", "画像回転・反転", "画像の向きを修正", "P1", "回転 反転 向き"],
+  ["bulk-image-resize", "image", "複数画像の一括リサイズ", "まとめて同じサイズに", "P1", "一括 まとめて リサイズ"],
+  ["image-color-picker", "image", "画像から色を抽出", "画像の主な色とカラーコード", "P1", "色 抽出 カラーコード スポイト"],
+  ["image-text", "image", "画像に文字を入れる", "写真にタイトルや説明を入れる", "P2", "文字入れ テキスト 写真"],
+  ["image-padding", "image", "画像の余白追加", "背景付きの余白を追加", "P2", "余白 枠 背景"],
+  ["image-mosaic", "image", "モザイク・ぼかし", "画像の個人情報を隠す", "P1", "モザイク ぼかし 黒塗り 個人情報"],
+  ["background-remover", "image", "背景透過", "単色の背景を透明に", "P1", "背景 透過 透明 PNG"],
+  ["video-to-gif", "image", "動画をGIFに変換", "動画からGIFアニメを作る", "P1", "GIF 動画 アニメ"],
+  // PDF・ファイル
+  ["pdf-merge", "pdf", "PDF結合", "複数のPDFを1つにまとめる", "P1", "PDF 結合 まとめる"],
+  ["pdf-split", "pdf", "PDF分割", "ページ範囲を指定して抽出", "P1", "PDF 分割 抽出"],
+  ["pdf-rotate", "pdf", "PDFページ回転", "ページの向きを修正", "P1", "PDF 回転 向き"],
+  ["pdf-delete-pages", "pdf", "PDFページ削除", "不要なページを除く", "P1", "PDF ページ 削除"],
+  ["pdf-organize", "pdf", "PDFページ整理", "ページを見ながら並べ替え・回転・削除", "P1", "PDF 並べ替え 整理"],
+  ["pdf-editor", "pdf", "PDF編集", "文字の書き込み・修正テープ・押印", "P1", "PDF 編集 書き込み 押印 署名"],
+  ["pdf-to-image", "pdf", "PDF画像化", "PDFのページを画像に", "P1", "PDF JPG PNG 画像"],
+  ["image-to-pdf", "pdf", "画像からPDF作成", "複数の画像を1つのPDFに", "P1", "画像 PDF 写真 スキャン"],
+  ["pdf-compress", "pdf", "PDF容量の最適化", "PDFを圧縮して軽くする", "P2", "PDF 圧縮 軽く 容量"],
+  ["text-file-merge", "pdf", "テキストファイル結合", "複数のテキストを1つに", "P2", "テキスト 結合 CSV まとめる"],
+  ["bulk-rename", "pdf", "ファイル名一括変更", "連番・置換のルールで名前を変更", "P2", "ファイル名 一括 連番 リネーム"],
+  ["csv-to-json", "pdf", "CSVをJSONに変換", "表データをJSONに", "P2", "CSV JSON 変換"],
+  ["audio-converter", "pdf", "音声変換", "動画から音声を取り出しMP3に", "P1", "MP3 音声 MP4 M4A 変換"],
+  // 生成・作成
+  ["qr-code", "gen", "QRコード作成", "URLや文字列からQRコード", "P0", "QRコード 作成"],
+  ["password-generator", "gen", "パスワード生成", "文字種と長さを指定して作成", "P0", "パスワード 生成 ランダム 安全"],
+  ["random-number", "gen", "乱数生成", "範囲・個数・重複なしの乱数", "P0", "乱数 ランダム くじ"],
+  ["uuid", "gen", "UUID生成", "v4・v7の一意な識別子", "P0", "UUID GUID 識別子"],
+  ["dummy-data", "gen", "ダミーデータ生成", "名前・メールなどのテスト用データ", "P1", "ダミー テストデータ 名簿"],
+  ["dummy-text", "gen", "ダミー文章生成", "レイアウト確認用の文章", "P1", "ダミーテキスト Lorem ipsum"],
+  ["sns-character-count", "gen", "SNS投稿文字数チェック", "X・Instagramなどの上限を確認", "P1", "X Twitter インスタ 文字数"],
+  ["email-templates", "gen", "メール文面テンプレート", "依頼・お礼・催促などのビジネスメール", "P1", "メール 例文 ビジネス 依頼 お礼"],
+  ["lottery", "gen", "抽選ツール", "リストからランダムに抽選", "P2", "抽選 くじ 当選"],
+  ["bingo", "gen", "ビンゴ番号生成", "重複なしで1〜75の番号を抽出", "P2", "ビンゴ 番号"],
+  ["hanko", "gen", "電子印鑑", "丸印・角印・日付印の画像を作成", "P1", "電子印鑑 ハンコ 印鑑"],
+  // Web・開発者
+  ["json-formatter", "web", "JSON整形・検証", "整形・圧縮・構文エラーの表示", "P0", "JSON 整形 検証"],
+  ["url-encode", "web", "URLエンコード・デコード", "URL文字列の変換", "P0", "URL エンコード デコード"],
+  ["base64", "web", "Base64変換", "文字列のエンコード・デコード", "P0", "Base64 エンコード デコード"],
+  ["html-escape", "web", "HTMLエスケープ", "特殊文字の変換", "P0", "HTML エスケープ 特殊文字"],
+  ["regex-tester", "web", "正規表現テスター", "一致箇所とグループを確認", "P0", "正規表現 regex テスト"],
+  ["color-converter", "web", "カラーコード変換", "HEX・RGB・HSL・CMYK", "P1", "カラーコード HEX RGB HSL"],
+  ["hash-generator", "web", "SHAハッシュ生成", "SHA-256・SHA-1・MD5", "P1", "ハッシュ SHA256 MD5"],
+  ["jwt-decoder", "web", "JWTデコード", "トークンの中身を表示", "P1", "JWT トークン デコード"],
+  ["timestamp", "web", "タイムスタンプ変換", "日時とUnix時間を相互変換", "P1", "タイムスタンプ Unix 日時"],
+  ["cron-parser", "web", "Cron式の読み取り", "実行スケジュールを日本語で確認", "P2", "cron crontab スケジュール"],
+  // 日常生活・お金
+  ["warikan", "life", "割り勘計算", "人数・端数・多めに払う人を考えて計算", "P0", "割り勘 わりかん 飲み会 幹事 精算"],
+  ["wage-converter", "life", "時給・月給換算", "時給と月給・年収を相互に換算", "P0", "時給 月給 年収 換算"],
+  ["overtime-pay", "life", "残業代概算", "時間外・深夜・休日の割増で計算", "P1", "残業代 割増 深夜 休日"],
+  ["savings-goal", "life", "貯金目標シミュレーター", "毎月の積立額と達成時期", "P1", "貯金 積立 目標"],
+  ["travel-expense-split", "life", "旅行費用の分担", "立て替えた費用の精算方法", "P1", "旅行 精算 立て替え 割り勘"],
+  ["unit-price", "life", "買い物単価比較", "容量あたりの価格を比べる", "P1", "単価 比較 コスパ 100gあたり"],
+  ["budget", "life", "予算配分計算", "費目ごとの割合で予算を配分", "P1", "予算 家計 配分"],
+  ["electricity-cost", "life", "電気料金の概算", "家電の消費電力から電気代", "P2", "電気代 消費電力 kWh"],
+  ["steps-distance", "life", "歩数・距離換算", "歩幅から歩いた距離を推定", "P2", "歩数 距離 歩幅"],
+  ["tip", "life", "チップ・サービス料計算", "チップやサービス料を加えた金額", "P2", "チップ サービス料 海外旅行"],
+  // 学習・ビジネス
+  ["presentation-time", "biz", "プレゼン時間計算", "原稿の文字数から話す時間", "P0", "プレゼン スピーチ 原稿 時間"],
+  ["reading-time", "biz", "読書時間計算", "ページ数と読む速さから時間", "P0", "読書 時間 ページ"],
+  ["achievement-rate", "biz", "目標達成率計算", "達成率と着地の見込み", "P1", "達成率 目標 売上 ノルマ"],
+  ["progress-rate", "biz", "進捗率計算", "進捗率と完了予定日", "P1", "進捗 完了予定"],
+  ["meeting-planner", "biz", "時差を考慮した会議時間", "全員の業務時間が重なる時刻", "P1", "会議 時差 海外"],
+  ["meeting-minutes", "biz", "議事録テンプレート", "決定事項・担当・期限を整理", "P1", "議事録 テンプレート"],
+  ["task-priority", "biz", "タスク優先順位整理", "緊急度と重要度で4つに分類", "P2", "タスク 優先順位 アイゼンハワー"],
+  ["study-time", "biz", "学習時間計算", "試験日までの1日あたりの勉強時間", "P2", "勉強時間 資格 試験"],
+  // 色・デザイン
+  ["gradient", "design", "グラデーション作成", "CSSのグラデーションを作成", "P1", "グラデーション CSS"],
+  ["color-palette", "design", "配色パレット生成", "補色・類似色などの組み合わせ", "P1", "配色 パレット 補色"],
+  ["contrast-checker", "design", "コントラスト比計算", "文字と背景の読みやすさを判定", "P1", "コントラスト WCAG アクセシビリティ"],
+  ["box-shadow", "design", "CSSボックスシャドウ作成", "影の見た目とコード", "P2", "box-shadow 影 CSS"],
+  ["css-unit", "design", "CSS単位変換", "px・rem・em・vwを換算", "P2", "px rem em 単位"],
+  ["favicon", "design", "ファビコン作成・プレビュー", "サイトのアイコンを作って表示を確認", "P2", "ファビコン favicon アイコン"],
+  // データ・変換
+  ["csv-dedupe", "data", "CSVの重複行削除", "重複したレコードを整理", "P0", "CSV 重複 削除"],
+  ["csv-columns", "data", "CSV列の抽出", "必要な列だけを取り出す", "P0", "CSV 列 抽出"],
+  ["csv-delimiter", "data", "CSV区切り文字変換", "カンマ・タブなどを変換", "P1", "CSV TSV 区切り"],
+  ["csv-encoding", "data", "CSV文字コード変換", "UTF-8とShift_JISを変換", "P1", "CSV 文字コード 文字化け Shift_JIS"],
+  ["csv-diff", "data", "CSV比較", "2つの表の差分を確認", "P1", "CSV 比較 差分"],
+  ["json-to-csv", "data", "JSONからCSVへ変換", "JSON配列を表形式に", "P2", "JSON CSV 変換"],
+  ["excel-csv-converter", "data", "Excel・CSV変換", "xlsx・CSV・JSONを相互変換", "P1", "Excel エクセル CSV xlsx"],
+];
+
+/** 実装・動作確認が済んで公開するツール（slug → 画面のキー） */
+const PUBLISHED: Record<string, string> = {
+  "character-counter": "characterCounter",
+  "consumption-tax": "consumptionTax",
+  "days-between": "daysBetween",
+  warikan: "warikan",
+  "password-generator": "passwordGenerator",
+};
+
+const UPDATED_AT = "2026-10-19";
+
+export const tools: Tool[] = ROWS.map(([slug, categoryId, name, summary, priority, keywords]) => {
+  const componentKey = PUBLISHED[slug] ?? null;
+  const status: PublishStatus = componentKey ? "published" : "draft";
+  return {
+    id: slug,
+    slug,
+    name,
+    categoryId,
+    summary,
+    description: `${name}の無料ツール。${summary}。登録不要で、入力した内容はブラウザの中だけで処理します。`,
+    keywords: keywords ? keywords.split(" ") : [],
+    componentKey,
+    status,
+    priority,
+    updatedAt: UPDATED_AT,
+  };
+});
