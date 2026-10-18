@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ToolCard } from "@/components/Cards";
+import { Icon, toolCategoryIcon } from "@/components/icons";
 import { PageHeading } from "@/components/PageHeading";
 import { ui } from "@/components/styles";
 import { toolCategories } from "@/data/categories";
@@ -31,12 +32,15 @@ export default function ToolsPage() {
       </PageHeading>
       {cats.map((c) => (
         <section key={c.id} className="flex flex-col gap-3">
-          <h2 className={ui.h2}>
+          <h2 className={`${ui.h2} flex items-center gap-2`}>
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-tool-soft text-tool">
+              <Icon name={toolCategoryIcon[c.id] ?? "tool"} size={20} />
+            </span>
             <Link href={`/tools/category/${c.slug}/`} className="text-ink hover:underline">
               {c.name}
             </Link>
           </h2>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {getToolsByCategory(c.id).map((t) => (
               <ToolCard key={t.id} tool={t} />
             ))}

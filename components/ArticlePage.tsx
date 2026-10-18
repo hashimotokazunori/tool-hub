@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/Cards";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Icon } from "@/components/icons";
 import { PageHeading } from "@/components/PageHeading";
 import { RelatedContent } from "@/components/RelatedContent";
 import { ui } from "@/components/styles";
@@ -20,12 +21,29 @@ export function ArticlePage({ article, section }: { article: Article; section: {
       {article.status !== "published" && (
         <p className="rounded-lg bg-warn px-3 py-2 text-sm font-bold text-white">下書きです（人の確認前のため公開されていません。SHOW_DRAFTS=1 のときだけ表示）</p>
       )}
-      <PageHeading title={article.title} lead={article.description}>
-        <p className={ui.note}>
-          {article.author}
-          {article.reviewedAt && `・内容確認日 ${article.reviewedAt.replaceAll("-", "/")}`}
-        </p>
-      </PageHeading>
+      <div className="flex flex-col gap-3">
+        <span className={`${ui.eyebrow} flex items-center gap-1.5 ${article.type === "guide" ? "text-guide" : "text-solution"}`}>
+          <Icon name={article.type === "guide" ? "book" : "bulb"} size={16} />
+          {article.type === "guide" ? "Guide · ガイド" : "Solution · 悩み別"}
+        </span>
+        <PageHeading title={article.type === "solution" ? `「${article.title}」ときは` : article.title} lead={article.description} />
+        {/* 信頼性の手がかり：だれが書き、いつ確認し、何を参考にしたか */}
+        <dl className="flex flex-wrap gap-x-5 gap-y-1 rounded-xl border border-line bg-panel px-4 py-2.5 text-xs text-muted">
+          <div className="flex gap-1">
+            <dt>執筆</dt>
+            <dd className="font-medium text-ink">{article.author}</dd>
+          </div>
+          <div className="flex items-center gap-1">
+            <Icon name="shield" size={14} />
+            <dt>内容確認</dt>
+            <dd className="font-medium text-ink">{article.reviewedAt ? article.reviewedAt.replaceAll("-", "/") : "確認前"}</dd>
+          </div>
+          <div className="flex gap-1">
+            <dt>参考にした情報</dt>
+            <dd className="font-medium text-ink">{article.sources.length}件</dd>
+          </div>
+        </dl>
+      </div>
       {products.length > 0 && <p className="w-fit rounded border border-muted px-2 text-xs font-bold text-muted">PR　この記事には広告（アフィリエイトリンク）が含まれます</p>}
       <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />
       {products.length > 0 && (

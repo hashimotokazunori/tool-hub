@@ -1,18 +1,30 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useId, useMemo, useRef, useState } from "react";
 import { search, type SearchItem } from "@/lib/search";
 import { Icon } from "./icons";
 
-/** ツール・グッズ・記事をまとめて探す検索窓。索引はビルド時に作ってpropsで受け取る */
-export function GlobalSearch({ items }: { items: SearchItem[] }) {
+const KIND_STYLE: Record<SearchItem["kind"], string> = {
+  ツール: "border-tool text-tool",
+  グッズ: "border-goods text-goods",
+  悩み別: "border-solution text-solution",
+  ガイド: "border-guide text-guide",
+};
+
+/**
+ * ツール・グッズ・記事をまとめて探す検索窓。索引はビルド時に作ってpropsで受け取る。
+ * variant="hero" はトップの濃い背景用の大きな検索窓。
+ */
+export function GlobalSearch({ items, variant = "default" }: { items: SearchItem[]; variant?: "default" | "hero" }) {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
   const listId = useId();
   const wrap = useRef<HTMLDivElement>(null);
   const results = useMemo(() => search(items, q), [items, q]);
   const office = /word|ワード|excel|エクセル|パワポ|powerpoint|docx|xlsx/i.test(q) && /pdf/i.test(q);
+  const hero = variant === "hero";
 
   return (
     <div
@@ -22,9 +34,13 @@ export function GlobalSearch({ items }: { items: SearchItem[] }) {
         if (!wrap.current?.contains(e.relatedTarget as Node)) setOpen(false);
       }}
     >
-      <label className="flex items-center gap-2 rounded-xl border border-line bg-panel px-3 text-muted focus-within:outline-2 focus-within:outline-accent">
-        <Icon name="search" />
-        <span className="sr-only">ツール・便利グッズを検索</span>
+      <label
+        className={`flex items-center gap-3 border text-muted focus-within:outline-2 focus-within:outline-offset-2 ${
+          hero ? "rounded-2xl border-transparent bg-white px-4 shadow-lg focus-within:outline-lime" : "rounded-xl border-line bg-panel px-3 focus-within:outline-accent"
+        }`}
+      >
+        <Icon name="search" size={hero ? 24 : 22} className={hero ? "text-[#56645f]" : undefined} />
+        <span className="sr-only">ツール・便利グッズ・記事を検索</span>
         <input
           type="search"
           value={q}
@@ -34,14 +50,14 @@ export function GlobalSearch({ items }: { items: SearchItem[] }) {
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
-          placeholder="ツール・便利グッズを検索（例：文字数、消費税、割り勘）"
-          className="w-full bg-transparent py-3 text-base text-ink outline-none"
+          placeholder={hero ? "やりたいことから検索（例：割り勘、消費税、文字数）" : "ツール・便利グッズを検索"}
+          className={`w-full bg-transparent outline-none ${hero ? "py-4 text-lg text-[#1b2422] placeholder:text-[#7a8783]" : "py-3 text-base text-ink"}`}
           aria-controls={listId}
           autoComplete="off"
         />
       </label>
       {open && q.trim() && (
-        <div id={listId} className="absolute inset-x-0 top-full z-40 mt-1 max-h-[60vh] overflow-auto rounded-xl border border-line bg-panel p-1.5 shadow-xl">
+        <div id={listId} className="absolute inset-x-0 top-full z-40 mt-2 max-h-[60vh] overflow-auto rounded-xl border border-line bg-panel p-1.5 text-left shadow-xl">
           {office && (
             <p className="px-3 py-2 text-xs text-muted">
               Word・Excel・PowerPointは、アプリの「ファイル」→「名前を付けて保存」（エクスポート）で「PDF」を選ぶと、見た目そのままのPDFにできます。
@@ -50,7 +66,7 @@ export function GlobalSearch({ items }: { items: SearchItem[] }) {
           {results.length > 0 ? (
             results.map((r) => (
               <Link key={r.href} href={r.href} onClick={() => setOpen(false)} className="grid grid-cols-[auto_1fr] items-center gap-x-3 rounded-lg px-3 py-2 text-ink no-underline hover:bg-accent-soft">
-                <span className="row-span-2 rounded border border-accent px-1.5 text-[11px] font-bold text-accent">{r.kind}</span>
+                <span className={`row-span-2 rounded border px-1.5 text-[11px] font-bold ${KIND_STYLE[r.kind]}`}>{r.kind}</span>
                 <b className="text-sm">{r.title}</b>
                 <small className="text-xs text-muted">{r.summary}</small>
               </Link>
@@ -62,4 +78,11 @@ export function GlobalSearch({ items }: { items: SearchItem[] }) {
       )}
     </div>
   );
+}
+
+/** ヘッダーの検索窓。トップページでは大きな検索窓があるので出さない */
+export function HeaderSearch({ items }: { items: SearchItem[] }) {
+  const path = usePathname();
+  if (path === "/") return null;
+  return <GlobalSearch items={items} />;
 }

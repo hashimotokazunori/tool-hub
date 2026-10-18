@@ -13,6 +13,21 @@
   --c-accent-soft: #d9ece8;
   --c-warn: #b4471f;
   --c-ok: #2f7d32;
+  /* コンテンツの種類ごとの色（ツール・グッズ・悩み・ガイド）。サイト全体で同じ意味に使う */
+  --c-tool: #1f7a5c;
+  --c-tool-soft: #e3f1ea;
+  --c-goods: #9a5c12;
+  --c-goods-soft: #f6eedb;
+  --c-solution: #3a5bb5;
+  --c-solution-soft: #e4ebf8;
+  --c-guide: #a83e4a;
+  --c-guide-soft: #f5e6e7;
+  /* トップの検索エリア（濃い背景）。ライト・ダークどちらでも同じ見た目にする */
+  --c-hero: #17302b;
+  --c-hero-ink: #eef6f3;
+  --c-hero-muted: #a9c2bb;
+  --c-lime: #d6f36b;
+  --c-lime-ink: #17302b;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,6 +43,15 @@
     --c-accent-soft: #1f3a34;
     --c-warn: #f08a5d;
     --c-ok: #7ccf80;
+    --c-tool: #6fd0a8;
+    --c-tool-soft: #1b3229;
+    --c-goods: #e2ad5f;
+    --c-goods-soft: #33291a;
+    --c-solution: #96adf0;
+    --c-solution-soft: #1f2841;
+    --c-guide: #ec8f99;
+    --c-guide-soft: #3a2226;
+    --c-hero: #0d1d19;
     color-scheme: dark;
   }
 }
@@ -44,8 +68,20 @@
   --color-accent-soft: var(--c-accent-soft);
   --color-warn: var(--c-warn);
   --color-ok: var(--c-ok);
+  --color-tool: var(--c-tool);
+  --color-tool-soft: var(--c-tool-soft);
+  --color-goods: var(--c-goods);
+  --color-goods-soft: var(--c-goods-soft);
+  --color-solution: var(--c-solution);
+  --color-solution-soft: var(--c-solution-soft);
+  --color-guide: var(--c-guide);
+  --color-guide-soft: var(--c-guide-soft);
+  --color-hero: var(--c-hero);
+  --color-hero-ink: var(--c-hero-ink);
+  --color-hero-muted: var(--c-hero-muted);
+  --color-lime: var(--c-lime);
+  --color-lime-ink: var(--c-lime-ink);
   --font-sans: var(--font-zen), "Hiragino Sans", "Yu Gothic UI", system-ui, sans-serif;
-  --font-display: var(--font-dela), var(--font-zen), system-ui, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 
