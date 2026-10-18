@@ -24,7 +24,7 @@
 
 | 名前 | 内容 |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | 本番のURL。設定するまで robots.txt は全ページを検索エンジンに登録させない（未設定でも Vercel 上ではリンクやサイトマップに本番ドメインを使う） |
+| `NEXT_PUBLIC_SITE_URL` | 本番のURL。未設定でも Vercel の本番環境では本番ドメインを使い、検索エンジンへの登録も許可する。プレビューと手元では robots.txt で登録させない |
 | `SHOW_DRAFTS` | `1` で下書きも表示（本番では設定しない） |
 
 ## 閲覧数
@@ -41,5 +41,5 @@ Vercel Web Analytics で計測する（`app/layout.tsx` の `<Analytics />`）�
 
 ## 公開前に設定するもの
 
-- `NEXT_PUBLIC_SITE_URL`（本番のURL）
+- `NEXT_PUBLIC_SITE_URL`（本番のURL。Vercel で公開する場合は不要）
 - 任意：`data/site.ts` の運営者名・問い合わせ先・プライバシーポリシーの制定日（空のままなら表示しない。問い合わせ先が空なら問い合わせページも出さない）

@@ -6,7 +6,7 @@ export const site = {
     "登録不要で使える無料Webツールと、便利グッズの選び方・比較ガイドをまとめた総合サイト。ツールはブラウザの中だけで動き、入力した内容やファイルを送信しません。",
   /**
    * 本番のURL。環境変数 NEXT_PUBLIC_SITE_URL で上書きできる。
-   * 未設定でも Vercel 上では本番ドメインを使う（検索エンジンへの登録は NEXT_PUBLIC_SITE_URL を設定するまで止めたまま）
+   * 未設定でも Vercel 上では本番ドメインを使う（独自ドメインを追加すると自動でそちらになる）
    */
   url:
     process.env.NEXT_PUBLIC_SITE_URL ??

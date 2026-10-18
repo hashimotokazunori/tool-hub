@@ -71,6 +71,6 @@ export function validateData(): string[] {
 /** 本番公開の前に埋める必要がある設定（警告として扱う） */
 export function launchChecklist(): string[] {
   const todo: string[] = [];
-  if (!process.env.NEXT_PUBLIC_SITE_URL) todo.push("環境変数 NEXT_PUBLIC_SITE_URL（本番のURL）");
+  if (!process.env.NEXT_PUBLIC_SITE_URL && process.env.VERCEL_ENV !== "production") todo.push("環境変数 NEXT_PUBLIC_SITE_URL（本番のURL）");
   return todo;
 }
