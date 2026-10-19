@@ -84,9 +84,9 @@ describe("楽天APIの呼び出し", () => {
     expect(await getMarketData(product)).toBeNull();
     expect(f).not.toHaveBeenCalled();
   });
-  it("アクセスキーはヘッダーで送り、新しいエンドポイントを使う", async () => {
+  it("アクセスキーをヘッダーとURLで送り、新しいエンドポイントを使う", async () => {
     vi.stubEnv("RAKUTEN_APPLICATION_ID", "app");
-    vi.stubEnv("RAKUTEN_ACCESS_KEY", "key");
+    vi.stubEnv("RAKUTEN_ACCESS_KEY", " key\n");
     vi.stubEnv("RAKUTEN_AFFILIATE_ID", "aff");
     const calls: { url: string; headers: Record<string, string> }[] = [];
     vi.stubGlobal("fetch", async (url: string, init: { headers: Record<string, string> }) => {
@@ -97,7 +97,7 @@ describe("楽天APIの呼び出し", () => {
     expect(d.minPrice).toBe(5980);
     expect(d.offers).toHaveLength(2);
     expect(calls.map((c) => new URL(c.url).pathname).sort()).toEqual(["/ichibams/api/IchibaItem/Search/20260701", "/ichibaproduct/api/Product/Search/20250801"]);
-    expect(calls.every((c) => c.headers.accessKey === "key" && !c.url.includes("accessKey"))).toBe(true);
+    expect(calls.every((c) => c.headers.accessKey === "key" && new URL(c.url).searchParams.get("accessKey") === "key")).toBe(true);
     expect(calls.every((c) => new URL(c.url).searchParams.get("affiliateId") === "aff")).toBe(true);
   });
 });

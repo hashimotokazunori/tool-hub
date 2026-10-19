@@ -150,10 +150,11 @@ export function parseItemResult(json: unknown, match: string[][], exclude?: stri
 }
 
 function credentials() {
-  const applicationId = process.env.RAKUTEN_APPLICATION_ID;
-  const accessKey = process.env.RAKUTEN_ACCESS_KEY;
+  // 貼り付けたときに入りがちな前後の空白・改行を除く
+  const applicationId = process.env.RAKUTEN_APPLICATION_ID?.trim();
+  const accessKey = process.env.RAKUTEN_ACCESS_KEY?.trim();
   if (!applicationId || !accessKey) return null;
-  return { applicationId, accessKey, affiliateId: process.env.RAKUTEN_AFFILIATE_ID };
+  return { applicationId, accessKey, affiliateId: process.env.RAKUTEN_AFFILIATE_ID?.trim() || undefined };
 }
 export const marketEnabled = () => credentials() !== null;
 
@@ -168,7 +169,8 @@ function throttled<T>(fn: () => Promise<T>): Promise<T> {
 async function call(base: string, params: Record<string, string>): Promise<unknown | null> {
   const c = credentials();
   if (!c) return null;
-  const q = new URLSearchParams({ format: "json", formatVersion: "2", applicationId: c.applicationId, ...(c.affiliateId ? { affiliateId: c.affiliateId } : {}), ...params });
+  // アクセスキーはヘッダーとURLの両方で送る（説明ではどちらでもよいが、URLで送る例が多いため）。ログにはURLを残さない
+  const q = new URLSearchParams({ format: "json", formatVersion: "2", applicationId: c.applicationId, accessKey: c.accessKey, ...(c.affiliateId ? { affiliateId: c.affiliateId } : {}), ...params });
   for (let attempt = 0; attempt < 3; attempt++) {
     const res = await throttled(() =>
       fetch(`${base}?${q}`, {
