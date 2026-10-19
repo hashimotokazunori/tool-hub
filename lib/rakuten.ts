@@ -74,12 +74,13 @@ const EXCLUDE_ALWAYS = ["中古", "互換", "ジャンク", "訳あり", "レン
 /** 「×24」「24個セット」「3個組」のような、複数個のまとめ売り */
 const EXCLUDE_PATTERNS = [/[×✕]\s*\d+/, /\d+\s*(個|点|本|枚|台|箱)\s*(セット|組|入り?|パック)/];
 
-/** 中央値から大きく外れた価格（部品・まとめ売りの取りこぼし）を除く */
+/** 中央値から極端に外れた価格（部品・まとめ売りの取りこぼし）を除く */
 export function dropOutliers<T extends { price: number }>(list: T[]): T[] {
   if (list.length < 3) return list;
   const sorted = [...list].map((o) => o.price).sort((a, b) => a - b);
   const median = sorted[Math.floor(sorted.length / 2)];
-  return list.filter((o) => o.price >= median * 0.5 && o.price <= median * 2.5);
+  // 楽天は店によって価格の幅が大きいので、ゆるめに（中央値の3割未満・3倍超だけを除く）
+  return list.filter((o) => o.price >= median * 0.3 && o.price <= median * 3);
 }
 
 /** 楽天の画像URLを大きいサイズにする（_ex=128x128 → 400x400） */

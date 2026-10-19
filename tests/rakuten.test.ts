@@ -72,6 +72,8 @@ describe("楽天の価格データの読み取り", () => {
     expect(matchesProduct("ハリオ 耐熱ガラス製保存容器・角600 KST-60-TW", [["KST-60-TW"]])).toBe(true);
     const o = dropOutliers([{ price: 100 }, { price: 900 }, { price: 1000 }, { price: 1100 }, { price: 5000 }]);
     expect(o.map((x) => x.price)).toEqual([900, 1000, 1100]);
+    // 実際の例：627円〜2,566円の幅はそのまま残す
+    expect(dropOutliers([627, 773, 836, 1605, 2120, 2566].map((price) => ({ price }))).length).toBe(6);
   });
   it("画像URLの大きさ", () => {
     expect(largerImage("http://thumbnail.image.rakuten.co.jp/a.jpg")).toBe("https://thumbnail.image.rakuten.co.jp/a.jpg?_ex=400x400");
