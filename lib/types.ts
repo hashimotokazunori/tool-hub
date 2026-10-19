@@ -63,7 +63,7 @@ export type Product = {
    * 楽天から価格を取ってくるときの検索語と、同じ商品だと見なす条件。
    * match はどれか1組の語がすべて商品名に含まれていれば同じ商品とする（型番など）。exclude を含む商品は除く。
    */
-  market?: { keyword: string; match: string[][]; exclude?: string[] };
+  market?: { keyword: string; match: string[][]; exclude?: string[]; /** これより安い出品は取らない（消耗品・ケースが上位を埋める商品向け） */ minPrice?: number };
   /** 仕様を確認した情報源 */
   sourceUrls: string[];
   /** 仕様を確認した日（YYYY-MM-DD）と、確認した人・方法 */

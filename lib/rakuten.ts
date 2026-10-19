@@ -210,11 +210,12 @@ async function call(base: string, params: Record<string, string>): Promise<unkno
 /** 商品の価格情報。取れなかったときは null（画面は「価格は準備中」になる） */
 export async function getMarketData(p: Product): Promise<MarketData | null> {
   if (!p.market || !credentials()) return null;
-  const { keyword, match, exclude } = p.market;
+  const { keyword, match, exclude, minPrice } = p.market;
   try {
     const [productJson, itemJson] = await Promise.all([
       call(PRODUCT_API, { keyword, hits: "5" }),
-      call(ITEM_API, { keyword, hits: "30", sort: "+itemPrice", availability: "1", imageFlag: "1" }),
+      // 安い順で取ると消耗品や部品が上位30件を埋めることがあるので、関連度順で取ってからこちらで並べ替える
+      call(ITEM_API, { keyword, hits: "30", availability: "1", imageFlag: "1", ...(minPrice ? { minPrice: String(minPrice) } : {}) }),
     ]);
     const product = productJson ? parseProductResult(productJson, match, exclude) : null;
     const offers = itemJson ? parseItemResult(itemJson, match, exclude) : [];
