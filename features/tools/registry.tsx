@@ -21,6 +21,20 @@ import { Bmi, LoanSimulator } from "./calculator/finance/Tools";
 import UnitConverter from "./calculator/unit/Tool";
 import SchoolYears from "./date/school/Tool";
 import QrCode from "./generator/qr/Tool";
+import { LineParagraphCounter } from "./text/lines/Tool";
+import { TimeUnits, CronParser } from "./developer/schedule/Tools";
+import { DummyData, DummyText, SnsCharacterCount, EmailTemplates } from "./generator/content/Tools";
+import { MeetingMinutes, MeetingPlanner } from "./business/meeting/Tools";
+import { GradientMaker, ColorPalette, BoxShadowMaker, CssUnitConverter } from "./design/css/Tools";
+import { FaviconMaker } from "./design/favicon/Tool";
+import { CsvDedupe, CsvColumns, CsvDelimiter, CsvDiff } from "./data/csv/Tools";
+import { ImageColorPicker, BackgroundRemover } from "./image/color/Tools";
+import { ImageText } from "./image/text/Tool";
+import { VideoToGif, AudioConverter } from "./media/Tools";
+import { Hanko } from "./generator/hanko/Tool";
+import { PdfEditor } from "./pdf/editor/Tool";
+import { TextFileMerge, BulkRename } from "./files/Tools";
+import { ExcelCsvConverter } from "./data/excel/Tool";
 import { Countdown, TimeZone, UnixTime, BusinessDays, WeekNumber } from "./date/time/Tools";
 import { HashGenerator, ColorConverter, JwtDecoder } from "./developer/crypto/Tools";
 import { CompoundInterest, SavingsGoal, OvertimePay, StepsDistance } from "./life/plan/Tools";
@@ -113,4 +127,32 @@ export const toolComponents: Record<ToolComponentKey, ComponentType> = {
   contrastChecker: ContrastChecker,
   csvToJson: CsvToJson,
   jsonToCsv: JsonToCsv,
+  lineParagraphCounter: LineParagraphCounter,
+  timeUnits: TimeUnits,
+  cronParser: CronParser,
+  dummyData: DummyData,
+  dummyText: DummyText,
+  snsCharacterCount: SnsCharacterCount,
+  emailTemplates: EmailTemplates,
+  meetingMinutes: MeetingMinutes,
+  meetingPlanner: MeetingPlanner,
+  gradientMaker: GradientMaker,
+  colorPalette: ColorPalette,
+  boxShadowMaker: BoxShadowMaker,
+  cssUnitConverter: CssUnitConverter,
+  faviconMaker: FaviconMaker,
+  csvDedupe: CsvDedupe,
+  csvColumns: CsvColumns,
+  csvDelimiter: CsvDelimiter,
+  csvDiff: CsvDiff,
+  imageColorPicker: ImageColorPicker,
+  backgroundRemover: BackgroundRemover,
+  imageText: ImageText,
+  videoToGif: VideoToGif,
+  audioConverter: AudioConverter,
+  hanko: Hanko,
+  pdfEditor: PdfEditor,
+  textFileMerge: TextFileMerge,
+  bulkRename: BulkRename,
+  excelCsvConverter: ExcelCsvConverter,
 };

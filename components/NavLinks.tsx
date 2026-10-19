@@ -25,7 +25,7 @@ export function NavLinks({ variant }: { variant: "top" | "bar" }) {
       className={
         variant === "bar"
           ? "fixed inset-x-0 bottom-0 z-30 flex border-t border-line/70 bg-panel/85 px-2 pt-1.5 pb-[calc(0.375rem+env(safe-area-inset-bottom))] backdrop-blur-xl md:hidden"
-          : "hidden shrink-0 gap-0.5 rounded-full border border-line bg-panel/70 p-1 shadow-card md:flex"
+          : "ml-auto hidden shrink-0 gap-0.5 rounded-full border border-line bg-panel/70 p-1 shadow-card md:flex"
       }
     >
       {NAV.map((n) => {
