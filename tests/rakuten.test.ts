@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { getMarketData, largerImage, matchesProduct, normalizeName, parseItemResult, parseProductResult } from "@/lib/rakuten";
+import { dropOutliers, getMarketData, largerImage, matchesProduct, normalizeName, parseItemResult, parseProductResult } from "@/lib/rakuten";
 import type { Product } from "@/lib/types";
 
 // 楽天ウェブサービスの説明ページにある項目名どおりの、形だけの試験データ（formatVersion=2）
@@ -64,6 +64,14 @@ describe("楽天の価格データの読み取り", () => {
     expect(p.specs).toEqual([{ name: "素材", value: "アルミ" }]);
     expect(p.imageUrl).toContain("_ex=400x400");
     expect(parseProductResult({ Products: [] }, match)).toBeNull();
+  });
+  it("部品・まとめ売り・相場から大きく外れた価格は除く", () => {
+    expect(matchesProduct("部品HARIO 保存容器・角型600ml用蓋 対応製品：KST-60-TW", [["KST-60-TW"]])).toBe(false);
+    expect(matchesProduct("HARIO 保存容器 KST60TW(2366714)×24[法人限定]", [["KST-60-TW"]])).toBe(false);
+    expect(matchesProduct("ハリオ 保存容器 KST-60-TW 【24個セット】", [["KST-60-TW"]])).toBe(false);
+    expect(matchesProduct("ハリオ 耐熱ガラス製保存容器・角600 KST-60-TW", [["KST-60-TW"]])).toBe(true);
+    const o = dropOutliers([{ price: 100 }, { price: 900 }, { price: 1000 }, { price: 1100 }, { price: 5000 }]);
+    expect(o.map((x) => x.price)).toEqual([900, 1000, 1100]);
   });
   it("画像URLの大きさ", () => {
     expect(largerImage("http://thumbnail.image.rakuten.co.jp/a.jpg")).toBe("https://thumbnail.image.rakuten.co.jp/a.jpg?_ex=400x400");

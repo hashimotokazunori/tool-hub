@@ -66,11 +66,21 @@ export function normalizeName(s: string): string {
 export function matchesProduct(name: string, match: string[][], exclude: string[] = []): boolean {
   const n = normalizeName(name);
   const raw = name.normalize("NFKC");
-  if ([...EXCLUDE_ALWAYS, ...exclude].some((w) => raw.includes(w))) return false;
+  if ([...EXCLUDE_ALWAYS, ...exclude].some((w) => raw.includes(w)) || EXCLUDE_PATTERNS.some((r) => r.test(raw))) return false;
   return match.some((group) => group.every((w) => n.includes(normalizeName(w))));
 }
-/** 中古・互換品などは別の商品なので比べない */
-const EXCLUDE_ALWAYS = ["中古", "互換", "ジャンク", "訳あり", "レンタル"];
+/** 中古・互換品・部品・まとめ売りなどは別の商品なので比べない */
+const EXCLUDE_ALWAYS = ["中古", "互換", "ジャンク", "訳あり", "レンタル", "部品", "交換用", "替え", "用蓋", "用フタ", "用ふた", "対応製品", "対応機種", "パッキン", "法人限定", "業務用", "まとめ買い", "ケース販売", "セット販売"];
+/** 「×24」「24個セット」「3個組」のような、複数個のまとめ売り */
+const EXCLUDE_PATTERNS = [/[×✕]\s*\d+/, /\d+\s*(個|点|本|枚|台|箱)\s*(セット|組|入り?|パック)/];
+
+/** 中央値から大きく外れた価格（部品・まとめ売りの取りこぼし）を除く */
+export function dropOutliers<T extends { price: number }>(list: T[]): T[] {
+  if (list.length < 3) return list;
+  const sorted = [...list].map((o) => o.price).sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)];
+  return list.filter((o) => o.price >= median * 0.5 && o.price <= median * 2.5);
+}
 
 /** 楽天の画像URLを大きいサイズにする（_ex=128x128 → 400x400） */
 export function largerImage(url: string | undefined, size = 400): string | undefined {
@@ -128,7 +138,7 @@ export function parseProductResult(json: unknown, match: string[][], exclude?: s
 /** 市場商品検索APIの結果から、型番が合う商品を安い順に（同じ店は1件だけ） */
 export function parseItemResult(json: unknown, match: string[][], exclude?: string[], limit = 10): MarketOffer[] {
   const seen = new Set<string>();
-  return listOf(json, ["Items", "items"], "Item")
+  const offers = listOf(json, ["Items", "items"], "Item")
     .map((x) => ({
       shopName: str(x.shopName) ?? "",
       itemName: str(x.itemName) ?? "",
@@ -142,7 +152,8 @@ export function parseItemResult(json: unknown, match: string[][], exclude?: stri
       imageUrl: largerImage(firstImage(x.mediumImageUrls)),
       available: num(x.availability) !== 0,
     }))
-    .filter((o) => o.available && o.price > 0 && o.url.startsWith("https://") && o.shopName && matchesProduct(o.itemName, match, exclude))
+    .filter((o) => o.available && o.price > 0 && o.url.startsWith("https://") && o.shopName && matchesProduct(o.itemName, match, exclude));
+  return dropOutliers(offers)
     .sort((a, b) => a.price - b.price)
     .filter((o) => (seen.has(o.shopName) ? false : (seen.add(o.shopName), true)))
     .slice(0, limit)
