@@ -15,7 +15,12 @@ import ManuscriptPaper from "./text/manuscript-paper/Tool";
 import TextDiff from "./text/text-diff/Tool";
 import { TravelExpenseSplit, UnitPrice, Budget, ElectricityCost, Tip, DataSize } from "./life/money/Tools";
 import { BulkImageResize, ImageCompress, ImageConvert, ImageResize } from "./image/convert/Tools";
-import { ImageToPdf, PdfCompress, PdfMerge, PdfSplit } from "./pdf/Tools";
+import { ImageToPdf, PdfCompress, PdfMerge, PdfOrganize, PdfSplit } from "./pdf/Tools";
+import { ImageCrop, ImageRotate } from "./image/edit/Tools";
+import { Bmi, LoanSimulator } from "./calculator/finance/Tools";
+import UnitConverter from "./calculator/unit/Tool";
+import SchoolYears from "./date/school/Tool";
+import QrCode from "./generator/qr/Tool";
 import CsvEncoding from "./data/charset/Tool";
 import { Bingo, Lottery } from "./generator/random/Lottery";
 import TaskPriority from "./business/priority/Tool";
@@ -71,4 +76,12 @@ export const toolComponents: Record<ToolComponentKey, ComponentType> = {
   lottery: Lottery,
   bingo: Bingo,
   taskPriority: TaskPriority,
+  qrCode: QrCode,
+  loanSimulator: LoanSimulator,
+  unitConverter: UnitConverter,
+  bmi: Bmi,
+  schoolYears: SchoolYears,
+  imageCrop: ImageCrop,
+  imageRotate: ImageRotate,
+  pdfOrganize: PdfOrganize,
 };

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, Choice, TextTransform } from "@/components/TextTransform";
+import { useStoredState } from "@/components/useStoredState";
 import { ui } from "@/components/styles";
 import {
   cleanWhitespace,
@@ -18,7 +19,7 @@ import {
 } from "./logic";
 
 export function HiraganaKatakana() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useStoredState("hiragana-katakana:input", "");
   const [mode, setMode] = useState<KanaMode>("toKatakana");
   const [half, setHalf] = useState(true);
   return (
@@ -38,7 +39,7 @@ export function HiraganaKatakana() {
 }
 
 export function ZenkakuHankaku() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useStoredState("zenkaku-hankaku:input", "");
   const [o, setO] = useState<WidthOptions>({ direction: "toHalf", alnum: true, symbol: true, space: true, kana: false });
   const set = (k: keyof WidthOptions) => (v: boolean) => setO({ ...o, [k]: v });
   return (
@@ -61,7 +62,7 @@ export function ZenkakuHankaku() {
 }
 
 export function CaseConverter() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useStoredState("case-converter:input", "");
   const [mode, setMode] = useState<CaseMode>("title");
   return (
     <TextTransform
@@ -93,7 +94,7 @@ export function CaseConverter() {
 }
 
 export function WhitespaceRemover() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useStoredState("whitespace-remover:input", "");
   const [o, setO] = useState<WhitespaceOptions>({ trimLines: true, collapseSpaces: true, fullWidthSpace: true, tabsToSpace: false, collapseBlankLines: true, removeBlankLines: false, joinParagraphLines: false, removeAllNewlines: false });
   const set = (k: keyof WhitespaceOptions) => (v: boolean) => setO({ ...o, [k]: v });
   return (
@@ -119,7 +120,7 @@ export function WhitespaceRemover() {
 }
 
 export function TextReplace() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useStoredState("text-replace:input", "");
   const [o, setO] = useState({ find: "", replace: "", regex: false, ignoreCase: false, rules: "" });
   const r = replaceText(input, o);
   return (
@@ -156,7 +157,7 @@ export function TextReplace() {
 }
 
 export function RemoveDuplicateLines() {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useStoredState("remove-duplicate-lines:input", "");
   const [o, setO] = useState<DedupeOptions>({ mode: "unique", sort: "none", trim: true, ignoreCase: false, removeBlank: true, showCount: false });
   const r = dedupeLines(input, o);
   return (

@@ -299,3 +299,139 @@ export function PdfCompress() {
     </div>
   );
 }
+
+type OrgPage = { id: number; index: number; turn: number; deleted: boolean; thumb: string };
+
+/** PDFのページ整理：サムネイルを見ながら並べ替え・回転・削除 */
+export function PdfOrganize() {
+  const [file, setFile] = useState<{ name: string; bytes: Uint8Array } | null>(null);
+  const [pages, setPages] = useState<OrgPage[]>([]);
+  const [msg, setMsg] = useState("");
+
+  const open = async (files: File[]) => {
+    const f = files.find(isPdf);
+    if (!f) return setMsg("PDFファイルを選んでください");
+    try {
+      setPages([]);
+      const bytes = new Uint8Array(await f.arrayBuffer());
+      const lib = await pdfjs();
+      // pdf.js は渡したデータを使い切るので、保存用とは別にコピーを渡す
+      const doc = await lib.getDocument({ data: bytes.slice(), isEvalSupported: false }).promise;
+      if (doc.numPages > 300) setMsg("ページ数が多いため、表示に時間がかかります…");
+      const list: OrgPage[] = [];
+      for (let i = 1; i <= doc.numPages; i++) {
+        setMsg(`ページを読み込み中… ${i} / ${doc.numPages}`);
+        const page = await doc.getPage(i);
+        const vp1 = page.getViewport({ scale: 1 });
+        const vp = page.getViewport({ scale: 180 / Math.max(vp1.width, vp1.height) });
+        const c = document.createElement("canvas");
+        c.width = Math.ceil(vp.width);
+        c.height = Math.ceil(vp.height);
+        const g = c.getContext("2d")!;
+        g.fillStyle = "#fff";
+        g.fillRect(0, 0, c.width, c.height);
+        await page.render({ canvasContext: g, viewport: vp, intent: "print" }).promise;
+        list.push({ id: nextId++, index: i - 1, turn: 0, deleted: false, thumb: c.toDataURL("image/jpeg", 0.7) });
+      }
+      setFile({ name: f.name, bytes });
+      setPages(list);
+      setMsg("");
+    } catch (e) {
+      setMsg(`読み込めませんでした（パスワード付きか、壊れている可能性があります）：${(e as Error).message}`);
+    }
+  };
+
+  const update = (id: number, patch: Partial<OrgPage>) => setPages((ps) => ps.map((p) => (p.id === id ? { ...p, ...patch } : p)));
+  const move = (i: number, d: number) =>
+    setPages((ps) => {
+      const a = [...ps];
+      [a[i], a[i + d]] = [a[i + d], a[i]];
+      return a;
+    });
+  const kept = pages.filter((p) => !p.deleted);
+  const changed = pages.some((p, i) => p.deleted || p.turn !== 0 || p.index !== i);
+
+  const save = async () => {
+    if (!file || !kept.length) return;
+    try {
+      setMsg("保存中…");
+      const { PDFDocument, degrees } = await pdfLib();
+      const src = await PDFDocument.load(file.bytes, { ignoreEncryption: true });
+      const out = await PDFDocument.create();
+      const copied = await out.copyPages(
+        src,
+        kept.map((p) => p.index),
+      );
+      copied.forEach((page, k) => {
+        const t = kept[k].turn;
+        if (t) page.setRotation(degrees((page.getRotation().angle + t) % 360));
+        out.addPage(page);
+      });
+      const bytes = await out.save();
+      saveBlob(`${baseName(file.name)}_organized.pdf`, pdfBlob(bytes));
+      setMsg(`${kept.length}ページのPDFを保存しました（${formatBytes(bytes.length)}）`);
+    } catch (e) {
+      setMsg(`保存できませんでした：${(e as Error).message}`);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-4">
+      <FileDrop label="PDF" accept="application/pdf,.pdf" onFiles={open} />
+      {pages.length > 0 && (
+        <>
+          <div className="flex flex-wrap items-center gap-2">
+            <button type="button" className={ui.button} onClick={() => setPages((ps) => ps.map((p) => ({ ...p, turn: (p.turn + 90) % 360 })))}>
+              全ページを右に90°
+            </button>
+            <button type="button" className={ui.button} onClick={() => setPages((ps) => [...ps].reverse())}>
+              順番を逆にする
+            </button>
+            <button type="button" className={ui.button} disabled={!changed} onClick={() => setPages((ps) => [...ps].sort((a, b) => a.index - b.index).map((p) => ({ ...p, turn: 0, deleted: false })))}>
+              最初の状態に戻す
+            </button>
+            <span className="text-sm text-muted">
+              {kept.length} / {pages.length} ページを残す
+            </span>
+          </div>
+          <ol className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {pages.map((p, i) => (
+              <li key={p.id} className={`flex flex-col gap-1.5 rounded-xl border p-2 ${p.deleted ? "border-warn/60 opacity-50" : "border-line"}`}>
+                <div className="flex aspect-square items-center justify-center overflow-hidden rounded-lg bg-field">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- 端末で描いたページの縮小画像 */}
+                  <img src={p.thumb} alt={`元の${p.index + 1}ページ目`} className="max-h-[85%] max-w-[85%] shadow transition-transform" style={{ transform: `rotate(${p.turn}deg)` }} />
+                </div>
+                <span className="text-center text-xs text-muted">
+                  {i + 1}番目（元の{p.index + 1}ページ）{p.deleted && "・削除"}
+                </span>
+                <div className="grid grid-cols-4 gap-1">
+                  <button type="button" className={`${ui.button} px-1 py-1`} disabled={i === 0} onClick={() => move(i, -1)} aria-label={`${i + 1}番目を前へ`}>
+                    ←
+                  </button>
+                  <button type="button" className={`${ui.button} px-1 py-1`} disabled={i === pages.length - 1} onClick={() => move(i, 1)} aria-label={`${i + 1}番目を後ろへ`}>
+                    →
+                  </button>
+                  <button type="button" className={`${ui.button} px-1 py-1`} onClick={() => update(p.id, { turn: (p.turn + 90) % 360 })} aria-label={`${i + 1}番目を右に90°回転`}>
+                    ↻
+                  </button>
+                  <button type="button" className={`${ui.button} px-1 py-1`} onClick={() => update(p.id, { deleted: !p.deleted })} aria-label={p.deleted ? `${i + 1}番目の削除を取り消す` : `${i + 1}番目を削除`}>
+                    {p.deleted ? "↩" : "×"}
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </>
+      )}
+      <div className="flex flex-wrap items-center gap-2">
+        <button type="button" className={ui.buttonPrimary} disabled={!file || !kept.length} onClick={save}>
+          この順番で保存
+        </button>
+        <span className="text-sm text-muted" aria-live="polite">
+          {msg}
+        </span>
+      </div>
+      <p className={ui.note}>← → で順番を、↻ で向きを変え、× で削除します（もう一度押すと元に戻ります）。文字やリンクはそのまま残ります。PDFはサーバーに送らず、この端末の中だけで処理します。</p>
+    </div>
+  );
+}

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { articles } from "@/data/articles";
+import { toolGuides } from "@/data/tool-guides";
 import { toolCategories } from "@/data/categories";
 import { tools } from "@/data/tools";
 import { TOOL_COMPONENT_KEYS } from "@/features/tools/keys";
@@ -21,6 +22,18 @@ describe("データの整合性", () => {
     expect(published.every(isToolPublic)).toBe(true);
     expect(new Set(published.map((t) => t.componentKey))).toEqual(new Set(TOOL_COMPONENT_KEYS));
     expect(tools.filter((t) => t.componentKey === null).every((t) => t.status === "draft")).toBe(true);
+  });
+
+  it("公開ツールにはすべて使い方とよくある質問がある", () => {
+    for (const t of getPublicTools()) {
+      const g = toolGuides[t.slug];
+      expect(g, t.slug).toBeDefined();
+      expect(g.steps.length, t.slug).toBeGreaterThanOrEqual(2);
+      expect(g.faq.length, t.slug).toBeGreaterThanOrEqual(2);
+      for (const f of g.faq) expect(f.q.length * f.a.length, t.slug).toBeGreaterThan(0);
+    }
+    // 公開していないツールの使い方は置かない（古い説明が残らないように）
+    for (const slug of Object.keys(toolGuides)) expect(getPublicTools().some((t) => t.slug === slug), slug).toBe(true);
   });
 
   it("公開ページの説明文はすべて固有", () => {

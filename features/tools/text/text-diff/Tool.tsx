@@ -2,7 +2,9 @@
 
 import { useMemo, useState, type ReactNode } from "react";
 import { Check } from "@/components/TextTransform";
+import { SavedNote } from "@/components/ToolUI";
 import { ui } from "@/components/styles";
+import { useStoredState } from "@/components/useStoredState";
 import { changedRange, diffLines, type DiffOp } from "./logic";
 
 /** 変わった部分に下線を引く */
@@ -31,8 +33,8 @@ function Line({ op, children }: { op: DiffOp["type"]; children: ReactNode }) {
 }
 
 export default function TextDiff() {
-  const [a, setA] = useState("");
-  const [b, setB] = useState("");
+  const [a, setA] = useStoredState("text-diff:a", "");
+  const [b, setB] = useStoredState("text-diff:b", "");
   const [ignoreWs, setIgnoreWs] = useState(false);
   const ops = useMemo(() => diffLines(a, b, ignoreWs), [a, b, ignoreWs]);
   const added = ops?.filter((o) => o.type === "added").length ?? 0;
@@ -91,6 +93,7 @@ export default function TextDiff() {
         </span>
       </div>
       {ops && (a || b) && <div className="max-h-[28rem] overflow-auto rounded-xl border border-line font-mono text-sm">{rows}</div>}
+      <SavedNote />
     </div>
   );
 }

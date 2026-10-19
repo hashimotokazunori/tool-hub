@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { CopyButton } from "./ToolUI";
+import { CopyButton, SavedNote } from "./ToolUI";
 import { ui } from "./styles";
 
 /**
@@ -43,6 +43,7 @@ export function TextTransform({ input, onInput, output, options, summary, placeh
           {summary ?? `${[...input].length} 文字 → ${[...output].length} 文字`}
         </span>
       </div>
+      <SavedNote />
     </div>
   );
 }

@@ -27,8 +27,8 @@ const ROWS: Row[] = [
   ["average", "calc", "平均値計算", "平均・合計・中央値・標準偏差", "P0", "平均 合計 中央値 標準偏差"],
   ["rounding", "calc", "四捨五入計算", "指定した桁で四捨五入・切り捨て・切り上げ", "P0", "四捨五入 切り捨て 切り上げ 端数"],
   ["compound-interest", "calc", "複利計算", "元本・積立・利率・期間から将来の金額", "P1", "複利 積立 投資 NISA 利息"],
-  ["loan-simulator", "calc", "ローン返済シミュレーター", "毎月の返済額と総返済額", "P1", "ローン 住宅ローン 返済 金利 元利均等"],
-  ["unit-converter", "calc", "単位変換", "長さ・重さ・面積・体積・温度、坪・畳", "P1", "単位 変換 坪 畳 インチ ポンド 尺"],
+  ["loan-simulator", "calc", "ローン返済シミュレーター", "毎月の返済額・総返済額・利息と、年ごとの残高", "P1", "ローン 住宅ローン 返済 金利 元利均等 元金均等 シミュレーション"],
+  ["unit-converter", "calc", "単位変換", "長さ・重さ・面積・体積・温度。坪・畳・尺・合などの日本の単位も", "P1", "単位 変換 換算 坪 畳 インチ ポンド 尺 合 升 華氏"],
   ["data-size", "calc", "データ容量変換", "B・KB・MB・GB・TBと転送時間", "P1", "容量 GB MB KB バイト"],
   // 日付・時間
   ["days-between", "date", "日数計算", "2つの日付の間の日数・平日・祝日を除いた営業日", "P0", "日数 何日 期間 日付 営業日 曜日"],
@@ -41,14 +41,14 @@ const ROWS: Row[] = [
   ["unix-time", "date", "Unix時間変換", "日時とUnix時間を相互変換", "P1", "Unix エポック タイムスタンプ"],
   ["time-units", "date", "時間・分・秒変換", "時間の単位を相互に変換", "P1", "時間 分 秒 換算"],
   ["week-number", "date", "週番号計算", "ISO週番号と第何週", "P2", "週番号 第何週 ISO"],
-  ["school-years", "date", "入学・卒業年早見", "履歴書の学歴の年を西暦・和暦で", "P1", "履歴書 入学 卒業 学歴 早生まれ"],
+  ["school-years", "date", "入学・卒業年早見", "生年月日から履歴書の学歴の年を西暦・和暦で。早生まれにも対応", "P1", "履歴書 入学 卒業 学歴 早生まれ 和暦 西暦"],
   // 画像
   ["image-resize", "image", "画像リサイズ", "幅・高さを指定して縮小", "P0", "リサイズ 縮小 サイズ変更"],
   ["image-compress", "image", "画像圧縮", "画質を調整してファイルを軽く", "P0", "圧縮 軽く 容量"],
   ["image-convert", "image", "画像形式変換", "HEIC・PNG・WebP・JPGを相互変換", "P0", "HEIC JPG PNG WebP 変換 iPhone"],
-  ["image-crop", "image", "画像トリミング", "SNSサイズの比率で切り抜き", "P1", "トリミング 切り抜き インスタ サムネ"],
+  ["image-crop", "image", "画像トリミング", "1:1・16:9などSNS向けの比率で、枠を動かして切り抜き", "P1", "トリミング 切り抜き クロップ インスタ サムネ アイコン 正方形"],
   ["square-image", "image", "正方形画像作成", "写真を切らずに正方形に", "P1", "正方形 インスタ 余白"],
-  ["image-rotate", "image", "画像回転・反転", "画像の向きを修正", "P1", "回転 反転 向き"],
+  ["image-rotate", "image", "画像回転・反転", "画像を90°・180°回転、左右・上下反転。複数枚まとめて", "P1", "回転 反転 向き 横向き 縦向き"],
   ["bulk-image-resize", "image", "複数画像の一括リサイズ", "まとめて同じサイズに", "P1", "一括 まとめて リサイズ"],
   ["image-color-picker", "image", "画像から色を抽出", "画像の主な色とカラーコード", "P1", "色 抽出 カラーコード スポイト"],
   ["image-text", "image", "画像に文字を入れる", "写真にタイトルや説明を入れる", "P2", "文字入れ テキスト 写真"],
@@ -61,7 +61,7 @@ const ROWS: Row[] = [
   ["pdf-split", "pdf", "PDF分割", "ページ範囲を指定して抽出", "P1", "PDF 分割 抽出"],
   ["pdf-rotate", "pdf", "PDFページ回転", "ページの向きを修正", "P1", "PDF 回転 向き"],
   ["pdf-delete-pages", "pdf", "PDFページ削除", "不要なページを除く", "P1", "PDF ページ 削除"],
-  ["pdf-organize", "pdf", "PDFページ整理", "ページを見ながら並べ替え・回転・削除", "P1", "PDF 並べ替え 整理"],
+  ["pdf-organize", "pdf", "PDFページ整理", "ページを見ながら並べ替え・回転・削除", "P1", "PDF 並べ替え 整理 回転 削除 ページ 順番"],
   ["pdf-editor", "pdf", "PDF編集", "文字の書き込み・修正テープ・押印", "P1", "PDF 編集 書き込み 押印 署名"],
   ["pdf-to-image", "pdf", "PDF画像化", "PDFのページを画像に", "P1", "PDF JPG PNG 画像"],
   ["image-to-pdf", "pdf", "画像からPDF作成", "複数の画像を1つのPDFに", "P1", "画像 PDF 写真 スキャン"],
@@ -71,7 +71,7 @@ const ROWS: Row[] = [
   ["csv-to-json", "pdf", "CSVをJSONに変換", "表データをJSONに", "P2", "CSV JSON 変換"],
   ["audio-converter", "pdf", "音声変換", "動画から音声を取り出しMP3に", "P1", "MP3 音声 MP4 M4A 変換"],
   // 生成・作成
-  ["qr-code", "gen", "QRコード作成", "URLや文字列からQRコード", "P0", "QRコード 作成"],
+  ["qr-code", "gen", "QRコード作成", "URL・文字・Wi-Fi接続用のQRコードを作成。PNG・SVGで保存", "P0", "QRコード 作成 Wi-Fi URL 無料 期限なし"],
   ["password-generator", "gen", "パスワード生成", "文字種と長さを指定して、最大20個まとめて作成", "P0", "パスワード 生成 ランダム 安全 複数 まとめて"],
   ["random-number", "gen", "乱数生成", "範囲・個数・重複なしの乱数", "P0", "乱数 ランダム くじ"],
   ["uuid", "gen", "UUID生成", "v4・v7の一意な識別子", "P0", "UUID GUID 識別子"],
@@ -102,6 +102,7 @@ const ROWS: Row[] = [
   ["unit-price", "life", "買い物単価比較", "容量あたりの価格を比べる", "P1", "単価 比較 コスパ 100gあたり"],
   ["budget", "life", "予算配分計算", "費目ごとの割合で予算を配分", "P1", "予算 家計 配分"],
   ["electricity-cost", "life", "電気料金の概算", "家電の消費電力から電気代", "P2", "電気代 消費電力 kWh"],
+  ["bmi", "life", "BMI計算", "身長と体重からBMI・肥満度の判定・標準体重", "P1", "BMI 肥満度 標準体重 体重 身長"],
   ["steps-distance", "life", "歩数・距離換算", "歩幅から歩いた距離を推定", "P2", "歩数 距離 歩幅"],
   ["tip", "life", "チップ・サービス料計算", "チップやサービス料を加えた金額", "P2", "チップ サービス料 海外旅行"],
   // 学習・ビジネス
@@ -181,6 +182,15 @@ const PUBLISHED: Record<string, string> = {
   "lottery": "lottery",
   "bingo": "bingo",
   "task-priority": "taskPriority",
+  // 第4弾：ブラッシュアップ
+  "qr-code": "qrCode",
+  "loan-simulator": "loanSimulator",
+  "unit-converter": "unitConverter",
+  bmi: "bmi",
+  "school-years": "schoolYears",
+  "image-crop": "imageCrop",
+  "image-rotate": "imageRotate",
+  "pdf-organize": "pdfOrganize",
 };
 
 const UPDATED_AT = "2026-10-19";

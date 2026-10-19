@@ -1,12 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { Field, FieldGrid, Stats, yen } from "@/components/ToolUI";
+import { Field, FieldGrid, ShareButton, Stats, yen } from "@/components/ToolUI";
+import { useShareableState } from "@/components/useShareableState";
 import { ui } from "@/components/styles";
 import { calcWarikan, type WarikanInput } from "./logic";
 
+const INITIAL: WarikanInput = { total: 23500, people: 6, unit: 100, heavyPayers: 0, ratio: 1.5 };
+const KEYS = Object.keys(INITIAL) as (keyof WarikanInput)[];
+
+/** 共有リンクの中身は数値の項目だけを受け付ける */
+function parseShared(x: unknown): WarikanInput | undefined {
+  if (!x || typeof x !== "object") return undefined;
+  const o = x as Record<string, unknown>;
+  if (!KEYS.every((k) => typeof o[k] === "number")) return undefined;
+  return Object.fromEntries(KEYS.map((k) => [k, o[k]])) as WarikanInput;
+}
+
 export default function Warikan() {
-  const [v, setV] = useState<WarikanInput>({ total: 23500, people: 6, unit: 100, heavyPayers: 0, ratio: 1.5 });
+  const { value: v, set: setV, shareUrl, fromLink } = useShareableState("warikan", INITIAL, parseShared);
   const set = (k: keyof WarikanInput, value: number) => setV((p) => ({ ...p, [k]: value }));
   const r = calcWarikan(v);
   const k = Math.min(Math.max(0, Math.floor(v.heavyPayers || 0)), Math.max(1, Math.floor(v.people || 1)));
@@ -43,6 +54,10 @@ export default function Warikan() {
           { label: "余り（幹事の手元に残る額）", value: r.surplus ? yen(r.surplus) : "ぴったり" },
         ]}
       />
+      <div className="flex flex-wrap items-center gap-2">
+        <ShareButton getUrl={shareUrl} title="割り勘の計算結果" />
+        {fromLink && <span className="text-xs text-muted">共有されたリンクの内容を表示しています</span>}
+      </div>
       <p className={ui.note}>ちょうど割ると1人 {r.exact.toLocaleString("ja-JP", { maximumFractionDigits: 1 })} 円です。集める単位に切り上げて計算しています。</p>
     </div>
   );

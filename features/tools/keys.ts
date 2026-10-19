@@ -61,6 +61,15 @@ export const TOOL_COMPONENT_KEYS = [
   "lottery",
   "bingo",
   "taskPriority",
+  // 第4弾：ブラッシュアップ
+  "qrCode",
+  "loanSimulator",
+  "unitConverter",
+  "bmi",
+  "schoolYears",
+  "imageCrop",
+  "imageRotate",
+  "pdfOrganize",
 ] as const;
 
 export type ToolComponentKey = (typeof TOOL_COMPONENT_KEYS)[number];

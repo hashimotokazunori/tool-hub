@@ -101,7 +101,9 @@ tests/                Vitest
 
 `prototype/dougubako.html`（Claude上の試作）にある112ツールは、計算部分を `features/tools/*/logic.ts` に移し、画面をReactで作り直す。
 
-- 公開中（49種）：
+- 公開中（57種）：
+  - 第4弾（2026-10-19）：QRコード、ローン返済、単位変換、BMI、入学・卒業年、画像トリミング、画像回転・反転、PDFページ整理
+  - （以下は第3弾までの49種）
   - 画像：形式変換（HEIC対応）、リサイズ、圧縮、一括リサイズ
   - PDF：結合、分割、画像からPDF、圧縮
   - データ：CSV文字コード変換
@@ -116,5 +118,7 @@ tests/                Vitest
   - お金：割り勘、時給・月給
   - ビジネス：プレゼン時間、読書時間
   - ほかはすべて `draft`。
+- すべての公開ツールに「使い方」と「よくある質問」を付ける（`data/tool-guides/`。ツールの実際の動きに合わせ、確かな一般知識だけを書く）。
+- 文章・割り勘・精算など入力が長いツールは、入力をその端末のブラウザ（localStorage）に保存する（`components/useStoredState.ts`）。割り勘と精算は、結果をURLの「#」以降に入れて共有できる（サーバーには送られない）。
 - 似た画面のツールは、1つのフォルダに `logic.ts`（複数の純粋関数）と `Tools.tsx`（複数の画面）をまとめてよい。例：`text/convert/`、`calculator/basic/`、`developer/encode/`。
 - 試作の記事・グッズ解説の文章はAIが書いた下書きなので、`content/` に `reviewStatus: "pending"` で置き、確認後に公開する。

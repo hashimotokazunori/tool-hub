@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Choice } from "@/components/TextTransform";
-import { Field, FieldGrid, Stats, yen } from "@/components/ToolUI";
+import { Field, FieldGrid, ShareButton, Stats, yen } from "@/components/ToolUI";
+import { useShareableState } from "@/components/useShareableState";
 import { ui } from "@/components/styles";
 import { allocate, convertDataSize, electricityCost, parseBudgetLines, rankUnitPrices, settle, tipTotal, transferSeconds } from "./logic";
 
@@ -63,12 +64,22 @@ function RowsEditor<T extends Record<string, string | number>>({ columns, rows, 
   );
 }
 
+type PaidRow = { name: string; paid: number };
+const TRAVEL_INITIAL: PaidRow[] = [
+  { name: "", paid: Number.NaN },
+  { name: "", paid: Number.NaN },
+  { name: "", paid: Number.NaN },
+];
+
+/** 共有リンクの中身は「名前（文字）と金額（数値）」の行だけを、50行まで受け付ける */
+function parseTravel(x: unknown): PaidRow[] | undefined {
+  if (!Array.isArray(x) || x.length === 0 || x.length > 50) return undefined;
+  if (!x.every((r) => r && typeof r === "object" && typeof r.name === "string" && typeof r.paid === "number")) return undefined;
+  return x.map((r) => ({ name: String(r.name).slice(0, 40), paid: r.paid }));
+}
+
 export function TravelExpenseSplit() {
-  const [rows, setRows] = useState([
-    { name: "", paid: Number.NaN },
-    { name: "", paid: Number.NaN },
-    { name: "", paid: Number.NaN },
-  ]);
+  const { value: rows, set: setRows, reset, shareUrl, fromLink } = useShareableState("travel-expense-split", TRAVEL_INITIAL, parseTravel);
   const r = settle(rows.map((x) => ({ name: x.name, paid: x.paid })));
   return (
     <div className="flex flex-col gap-4">
@@ -94,7 +105,14 @@ export function TravelExpenseSplit() {
           <p className={ui.note}>精算は不要です。</p>
         )}
       </section>
-      <p className={ui.note}>送金の回数ができるだけ少なくなる組み合わせです。1円未満は四捨五入するため、数円の差が出ることがあります。</p>
+      <div className="flex flex-wrap items-center gap-2">
+        <ShareButton getUrl={shareUrl} title="旅行費用の精算" />
+        <button type="button" className={ui.button} onClick={reset}>
+          全部消す
+        </button>
+        {fromLink && <span className="text-xs text-muted">共有されたリンクの内容を表示しています</span>}
+      </div>
+      <p className={ui.note}>送金の回数ができるだけ少なくなる組み合わせです。1円未満は四捨五入するため、数円の差が出ることがあります。入力はこの端末のブラウザにだけ保存されます。</p>
     </div>
   );
 }

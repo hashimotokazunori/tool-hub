@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Choice } from "@/components/TextTransform";
-import { CopyButton, Stats } from "@/components/ToolUI";
+import { CopyButton, SavedNote, Stats } from "@/components/ToolUI";
+import { useStoredState } from "@/components/useStoredState";
 import { ui } from "@/components/styles";
 import { compareLimit, countText, type LimitBasis } from "./logic";
 
@@ -13,9 +14,9 @@ const BASIS: [LimitBasis, string][] = [
 ];
 
 export default function CharacterCounter() {
-  const [text, setText] = useState("");
-  const [limit, setLimit] = useState(0);
-  const [basis, setBasis] = useState<LimitBasis>("charsNoNewline");
+  const [text, setText] = useStoredState("character-counter:text", "");
+  const [limit, setLimit] = useStoredState("character-counter:limit", 0);
+  const [basis, setBasis] = useStoredState<LimitBasis>("character-counter:basis", "charsNoNewline");
   const c = useMemo(() => countText(text), [text]);
   const lim = compareLimit(c, limit, basis);
   return (
@@ -83,6 +84,7 @@ export default function CharacterCounter() {
           消す
         </button>
       </div>
+      <SavedNote />
     </div>
   );
 }

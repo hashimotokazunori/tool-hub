@@ -82,3 +82,36 @@ export function CopyButton({ text, label = "コピー", primary }: { text: strin
 }
 
 export const yen = (n: number) => `${n.toLocaleString("ja-JP")} 円`;
+
+/** 入力をこの端末に保存していることの案内 */
+export function SavedNote() {
+  return <p className="text-xs text-muted">入力した内容は、次に開いたときのためにこの端末のブラウザにだけ保存されます（外部には送りません）。「消す」で消えます。</p>;
+}
+
+/** 今の入力内容を含むURLを共有する。スマホでは共有メニュー、パソコンではコピー */
+export function ShareButton({ getUrl, title }: { getUrl: () => string; title: string }) {
+  const [state, setState] = useState<"idle" | "done" | "fail">("idle");
+  return (
+    <button
+      type="button"
+      className={ui.button}
+      onClick={async () => {
+        const url = getUrl();
+        try {
+          if (typeof navigator.share === "function" && matchMedia("(pointer: coarse)").matches) {
+            await navigator.share({ title, url });
+            return;
+          }
+          await navigator.clipboard.writeText(url);
+          setState("done");
+        } catch (e) {
+          // 共有メニューを閉じただけのときは何も出さない
+          if ((e as Error).name !== "AbortError") setState("fail");
+        }
+        setTimeout(() => setState("idle"), 2500);
+      }}
+    >
+      {state === "done" ? "リンクをコピーしました" : state === "fail" ? "コピーできませんでした" : "結果をリンクで共有"}
+    </button>
+  );
+}
