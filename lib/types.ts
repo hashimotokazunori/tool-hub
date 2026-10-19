@@ -59,6 +59,11 @@ export type Product = {
   imageUrl?: string;
   /** 画像の出典・使用条件のメモ */
   imageLicenseNote?: string;
+  /**
+   * 楽天から価格を取ってくるときの検索語と、同じ商品だと見なす条件。
+   * match はどれか1組の語がすべて商品名に含まれていれば同じ商品とする（型番など）。exclude を含む商品は除く。
+   */
+  market?: { keyword: string; match: string[][]; exclude?: string[] };
   /** 仕様を確認した情報源 */
   sourceUrls: string[];
   /** 仕様を確認した日（YYYY-MM-DD）と、確認した人・方法 */

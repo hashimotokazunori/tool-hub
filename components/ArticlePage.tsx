@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ProductCard } from "@/components/Cards";
+import { getMarketDataMap } from "@/lib/rakuten";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Icon } from "@/components/icons";
 import { PageHeading } from "@/components/PageHeading";
@@ -10,10 +11,11 @@ import { renderMarkdownFile } from "@/lib/markdown";
 import type { Article } from "@/lib/types";
 
 /** 比較ガイド・悩み別ガイドの共通ページ */
-export function ArticlePage({ article, section }: { article: Article; section: { label: string; href: string } }) {
+export async function ArticlePage({ article, section }: { article: Article; section: { label: string; href: string } }) {
   const html = renderMarkdownFile(article.bodyFile);
   const tools = getPublicTools().filter((t) => article.toolSlugs.includes(t.slug));
   const products = getPublicProducts().filter((p) => article.productIds.includes(p.id));
+  const market = await getMarketDataMap(products);
   const goods = article.goodsCategoryIds.map(getGoodsCategory).filter((c) => c !== undefined);
   return (
     <article className="flex flex-col gap-6">
@@ -51,7 +53,7 @@ export function ArticlePage({ article, section }: { article: Article; section: {
           <h2 className={ui.h2}>紹介した商品</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} market={market.get(p.id)} />
             ))}
           </div>
         </section>

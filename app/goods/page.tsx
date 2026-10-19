@@ -6,6 +6,7 @@ import { Section } from "@/components/Section";
 import { ui } from "@/components/styles";
 import { goodsCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicProducts, sortCategories } from "@/lib/content";
+import { getMarketDataMap } from "@/lib/rakuten";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -14,8 +15,12 @@ export const metadata = pageMetadata({
   path: "/goods/",
 });
 
-export default function GoodsPage() {
+/** 楽天の価格を取り直す間隔（秒） */
+export const revalidate = 21600;
+
+export default async function GoodsPage() {
   const products = getPublicProducts();
+  const market = await getMarketDataMap(products);
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-4">
@@ -33,7 +38,7 @@ export default function GoodsPage() {
         <Section eyebrow="Items" icon="bag" tone="goods" title="掲載中の商品">
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} market={market.get(p.id)} />
             ))}
           </div>
         </Section>

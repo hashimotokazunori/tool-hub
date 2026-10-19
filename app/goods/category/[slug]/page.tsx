@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { ProductCard } from "@/components/Cards";
+import { CompareTable } from "@/components/CompareTable";
+import { RakutenCredit } from "@/components/Market";
 import { EmptyState, PageHeading } from "@/components/PageHeading";
 import { ui } from "@/components/styles";
 import { tools } from "@/data/tools";
 import { goodsCategories } from "@/data/categories";
 import { getBuyingGuides, getGoodsCategoryBySlug, getProductsByCategory, isToolPublic } from "@/lib/content";
+import { getMarketDataMap, marketEnabled } from "@/lib/rakuten";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
+/** 楽天の価格を取り直す間隔（秒） */
+export const revalidate = 21600;
 
 export function generateStaticParams() {
   return goodsCategories.map((c) => ({ slug: c.slug }));
@@ -28,6 +32,7 @@ export default async function GoodsCategoryPage({ params }: PageProps<"/goods/ca
   const c = getGoodsCategoryBySlug(slug);
   if (!c) notFound();
   const products = getProductsByCategory(c.id);
+  const market = await getMarketDataMap(products);
   const guides = getBuyingGuides(c.id);
   const toolBySlug = (s: string) => tools.find((t) => t.slug === s && isToolPublic(t));
   return (
@@ -36,13 +41,25 @@ export default async function GoodsCategoryPage({ params }: PageProps<"/goods/ca
       <PageHeading title={c.name} lead={c.description} />
 
       <section className="flex flex-col gap-3">
-        <h2 className={ui.h2}>掲載商品</h2>
+        <h2 className={ui.h2}>価格・評価で比べる</h2>
         {products.length > 0 ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </div>
+          <>
+            <CompareTable
+              rows={products.map((p) => {
+                const m = market.get(p.id);
+                return { slug: p.slug, name: p.name, brand: p.brand, imageUrl: m?.imageUrl ?? p.imageUrl, minPrice: m?.minPrice, reviewAverage: m?.reviewAverage, reviewCount: m?.reviewCount, itemCount: m?.itemCount, specs: p.specifications };
+              })}
+            />
+            <p className={ui.note}>
+              {marketEnabled() ? (
+                <>
+                  価格と評価は楽天市場のものです（数時間ごとに更新）。購入前に販売ページで確認してください。 <RakutenCredit />
+                </>
+              ) : (
+                "価格と評価は準備中です。"
+              )}
+            </p>
+          </>
         ) : (
           <EmptyState>このカテゴリの商品は、仕様と価格を確認してから掲載します。もうしばらくお待ちください。</EmptyState>
         )}

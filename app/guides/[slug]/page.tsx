@@ -4,6 +4,8 @@ import { getArticleBySlug, getPublicArticles } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
+/** 紹介している商品の楽天の価格を取り直す間隔（秒） */
+export const revalidate = 21600;
 
 export function generateStaticParams() {
   return getPublicArticles("guide").map((a) => ({ slug: a.slug }));

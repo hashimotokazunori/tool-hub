@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { priceLabel, productLink } from "@/lib/affiliate";
+import type { MarketData } from "@/lib/rakuten";
 import type { Article, Category, Product, Tool } from "@/lib/types";
+import { MinPrice, ProductImage, Stars } from "./Market";
 import { goodsCategoryIcon, Icon, toolCategoryIcon, type IconName } from "./icons";
 import { gradientFor, tone as tones, ui, type Tone } from "./styles";
 
@@ -66,35 +68,29 @@ export function GoodsCategoryCard({ category, examples, count }: { category: Cat
   );
 }
 
-/** 商品カード。画像・特徴タグ・比較ポイント・確認日つきの価格・PR表記 */
-export function ProductCard({ product }: { product: Product }) {
+/** 商品カード。写真・最安価格・評価・特徴・PR表記（価格.comの一覧のように価格を目立たせる） */
+export function ProductCard({ product, market }: { product: Product; market?: MarketData | null }) {
   const link = productLink(product);
   const price = priceLabel(product);
-  const specs = Object.entries(product.specifications).slice(0, 3);
+  const specs = Object.entries(product.specifications).slice(0, 2);
+  const href = `/goods/items/${product.slug}/`;
   return (
-    <article className="relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel shadow-card transition duration-200 hover:shadow-lift">
-      <Link href={`/goods/items/${product.slug}/`} className="relative block aspect-[4/3] bg-gradient-to-br from-goods-soft to-panel">
-        {product.imageUrl ? (
-          // 画像は使用条件を確認したものだけが入る（data/products.ts の imageLicenseNote）
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={product.imageUrl} alt={product.name} className="h-full w-full object-contain p-4" loading="lazy" />
-        ) : (
-          <span className="grid h-full place-items-center text-goods">
-            <Icon name={goodsCategoryIcon[product.categoryId] ?? "bag"} size={56} />
-          </span>
-        )}
-        {link?.sponsored && <span className="absolute top-2 right-2 rounded bg-panel/95 px-1.5 text-[11px] font-bold text-muted ring-1 ring-line">PR</span>}
+    <article className="group relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+      <Link href={href} className="relative block" tabIndex={-1} aria-hidden="true">
+        <ProductImage product={product} market={market} className="aspect-[4/3] border-b border-line" />
+        {(market || link?.sponsored) && <span className="absolute top-2 right-2 rounded bg-panel/95 px-1.5 text-[11px] font-bold text-muted ring-1 ring-line">PR</span>}
       </Link>
-      <div className="flex flex-1 flex-col gap-2.5 p-4">
+      <div className="flex flex-1 flex-col gap-2 p-4">
         {product.status !== "published" && <span className="w-fit rounded bg-warn px-1.5 text-[11px] font-bold text-white">下書き（非公開）</span>}
         {product.brand && <span className="text-xs text-muted">{product.brand}</span>}
-        <Link href={`/goods/items/${product.slug}/`} className="font-bold leading-snug text-ink hover:underline">
+        <Link href={href} className="line-clamp-2 font-bold leading-snug text-ink no-underline after:absolute after:inset-0 hover:underline">
           {product.name}
         </Link>
+        {market ? <Stars value={market.reviewAverage} count={market.reviewCount} /> : null}
         {product.features.length > 0 && (
           <div className="flex flex-wrap gap-1">
-            {product.features.slice(0, 3).map((f) => (
-              <span key={f} className="rounded-full bg-goods-soft px-2 py-0.5 text-[11px] font-medium text-goods">
+            {product.features.slice(0, 2).map((f) => (
+              <span key={f} className="line-clamp-1 rounded-full bg-goods-soft px-2 py-0.5 text-[11px] font-medium text-goods">
                 {f}
               </span>
             ))}
@@ -105,18 +101,26 @@ export function ProductCard({ product }: { product: Product }) {
             {specs.map(([k, v]) => (
               <div key={k} className="contents">
                 <dt className="text-muted">{k}</dt>
-                <dd className="font-medium">{v}</dd>
+                <dd className="truncate font-medium">{v}</dd>
               </div>
             ))}
           </dl>
         )}
-        <div className="mt-auto flex flex-col gap-2 pt-1">
-          {price && <p className="text-sm font-bold">{price}</p>}
-          {link && (
-            <a href={link.href} rel={link.rel} target="_blank" className={ui.buttonPrimary}>
-              {link.label}
-            </a>
+        <div className="mt-auto flex items-end justify-between gap-2 border-t border-line pt-3">
+          {market?.minPrice ? (
+            <span className="flex flex-col">
+              <MinPrice market={market} />
+              {market.itemCount !== undefined && <span className="text-[11px] text-muted">楽天市場 {market.itemCount}件</span>}
+            </span>
+          ) : price ? (
+            <span className="text-sm font-bold">{price}</span>
+          ) : (
+            <MinPrice market={null} />
           )}
+          <span className="relative z-10 flex items-center gap-1 text-xs font-semibold text-accent">
+            価格を比較
+            <Icon name="arrow" size={14} className="transition group-hover:translate-x-0.5" />
+          </span>
         </div>
       </div>
     </article>

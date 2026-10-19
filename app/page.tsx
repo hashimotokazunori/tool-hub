@@ -5,6 +5,7 @@ import { Section } from "@/components/Section";
 import { ui } from "@/components/styles";
 import { goodsCategories, toolCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicArticles, getPublicProducts, getPublicTools, getToolsByCategory, sortCategories } from "@/lib/content";
+import { getMarketDataMap } from "@/lib/rakuten";
 import { buildSearchIndex } from "@/lib/search-index";
 
 /** ヒーローの下に並べる「よく使う操作」（公開中のツールだけを出す） */
@@ -19,12 +20,16 @@ const QUICK: { slug: string; label: string }[] = [
 /** トップに出す人気ツールの順番（公開中のものだけ表示） */
 const POPULAR = ["character-counter", "consumption-tax", "warikan", "days-between", "password-generator"];
 
-export default function Home() {
+/** 楽天の価格を取り直す間隔（秒） */
+export const revalidate = 21600;
+
+export default async function Home() {
   const tools = getPublicTools();
   const toolBySlug = new Map(tools.map((t) => [t.slug, t]));
   const popular = [...POPULAR.map((s) => toolBySlug.get(s)).filter((t) => t !== undefined), ...tools.filter((t) => !POPULAR.includes(t.slug))].slice(0, 9);
   const quick = QUICK.filter((q) => toolBySlug.has(q.slug)).map((q) => ({ href: `/tools/${q.slug}/`, label: q.label }));
   const products = getPublicProducts().slice(0, 3);
+  const market = await getMarketDataMap(products);
   const solutions = getPublicArticles("solution").slice(0, 6);
   const [featured, ...guides] = getPublicArticles("guide");
   const toolCount = (slugs: string[]) => slugs.filter((s) => toolBySlug.has(s)).length;
@@ -68,7 +73,7 @@ export default function Home() {
         {products.length > 0 && (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} market={market.get(p.id)} />
             ))}
           </div>
         )}

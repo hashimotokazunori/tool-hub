@@ -47,6 +47,7 @@ export const products: Product[] = [
     "currency": "JPY",
     "priceCheckedAt": "2026-10-19",
     "officialUrl": "https://www.sanwa.co.jp/product/syohin?code=PDA-STN34S",
+    "market": {"keyword": "PDA-STN34S", "match": [["PDA-STN34S"]]},
     "sourceUrls": [
       "https://www.sanwa.co.jp/product/syohin?code=PDA-STN34S"
     ],
@@ -90,6 +91,7 @@ export const products: Product[] = [
     },
     "currency": "JPY",
     "officialUrl": "https://direct.sanwa.co.jp/ItemPage/200-CT010BK",
+    "market": {"keyword": "200-CT010", "match": [["200-CT010"]]},
     "sourceUrls": [
       "https://direct.sanwa.co.jp/ItemPage/200-CT010BK"
     ],
@@ -137,6 +139,7 @@ export const products: Product[] = [
     "currency": "JPY",
     "priceCheckedAt": "2026-10-19",
     "officialUrl": "https://www.ankerjapan.com/products/b2667",
+    "market": {"keyword": "Anker PowerPort III 3-Port 65W Pod", "match": [["B2667"], ["A2667"], ["PowerPort III", "3-Port", "65W", "Pod"]]},
     "sourceUrls": [
       "https://www.ankerjapan.com/products/b2667"
     ],
@@ -185,6 +188,7 @@ export const products: Product[] = [
     "currency": "JPY",
     "priceCheckedAt": "2026-10-19",
     "officialUrl": "https://www.ankerjapan.com/products/a1638",
+    "market": {"keyword": "Anker Nano Power Bank 10000mAh 45W", "match": [["A1638"], ["Nano Power Bank", "10000", "45W"]]},
     "sourceUrls": [
       "https://www.ankerjapan.com/products/a1638",
       "https://lp.ankerjapan.com/hubfs/aoos/manual/A1638Manual.pdf"
@@ -231,6 +235,7 @@ export const products: Product[] = [
     "currency": "JPY",
     "priceCheckedAt": "2026-10-19",
     "officialUrl": "https://tenmafitsworld.com/SHOP/fitscase-53.html",
+    "market": {"keyword": "フィッツケース 53 天馬", "match": [["53-39M"], ["フィッツケース", "53"]], "exclude": ["フィッツケースクローゼット", "ロング", "ワイド", "カプチーナ"]},
     "sourceUrls": [
       "https://tenmafitsworld.com/SHOP/fitscase-53.html"
     ],
@@ -275,6 +280,7 @@ export const products: Product[] = [
     },
     "currency": "JPY",
     "officialUrl": "https://shop.hariocorp.co.jp/products/kst-25-tw",
+    "market": {"keyword": "HARIO KST-60-TW", "match": [["KST-60-TW"]]},
     "sourceUrls": [
       "https://shop.hariocorp.co.jp/products/kst-25-tw",
       "https://shop.hariocorp.co.jp/products/3kst-2012-ow"
@@ -315,6 +321,7 @@ export const products: Product[] = [
     "currency": "JPY",
     "priceCheckedAt": "2026-10-19",
     "officialUrl": "https://bruno-onlineshop.com/item/07643104.html",
+    "market": {"keyword": "MILESTO MLS905", "match": [["MLS905"]]},
     "sourceUrls": [
       "https://bruno-onlineshop.com/item/07643104.html"
     ],
@@ -363,6 +370,7 @@ export const products: Product[] = [
     },
     "currency": "JPY",
     "officialUrl": "https://www.kashimura.com/product/wp113m",
+    "market": {"keyword": "カシムラ WP-113M", "match": [["WP-113M"]]},
     "sourceUrls": [
       "https://www.kashimura.com/product/wp113m"
     ],
@@ -409,6 +417,7 @@ export const products: Product[] = [
     },
     "currency": "JPY",
     "officialUrl": "https://www.kingjim.co.jp/products/tepra/sr-r2500p.html",
+    "market": {"keyword": "テプラ SR-R2500P", "match": [["SR-R2500P"]], "exclude": ["対応", "テープカートリッジ", "互換"]},
     "sourceUrls": [
       "https://www.kingjim.co.jp/products/tepra/sr-r2500p.html"
     ],
@@ -450,6 +459,7 @@ export const products: Product[] = [
     },
     "currency": "JPY",
     "officialUrl": "https://www.kingjim.co.jp/products/detail/2274.html",
+    "market": {"keyword": "キングジム ドキュメントファイル 2274", "match": [["2274", "ドキュメントファイル"]]},
     "sourceUrls": [
       "https://www.kingjim.co.jp/products/detail/2274.html"
     ],
