@@ -181,7 +181,9 @@ async function call(base: string, params: Record<string, string>): Promise<unkno
       continue;
     }
     if (!res.ok) {
-      console.warn(`楽天APIの呼び出しに失敗しました（${res.status}）`, base);
+      // 原因を調べられるよう、楽天からのエラー内容（鍵は含まれない）と、送った Origin を残す
+      const body = (await res.text().catch(() => "")).slice(0, 300);
+      console.warn(`楽天APIの呼び出しに失敗しました（${res.status}）`, base, `Origin=${site.url}`, body);
       return null;
     }
     return res.json();
