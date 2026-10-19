@@ -417,7 +417,7 @@ export const products: Product[] = [
     },
     "currency": "JPY",
     "officialUrl": "https://www.kingjim.co.jp/products/tepra/sr-r2500p.html",
-    "market": {"keyword": "テプラ SR-R2500P", "match": [["SR-R2500P"]], "exclude": ["対応", "テープカートリッジ", "互換"]},
+    "market": {"keyword": "テプラ SR-R2500P", "match": [["SR-R2500P"]], "exclude": ["テープカートリッジ", "互換", "SR-R2500P対応", "SR-R2500P 対応", "用テープ", "専用テープ", "ケースのみ", "カバー"]},
     "sourceUrls": [
       "https://www.kingjim.co.jp/products/tepra/sr-r2500p.html"
     ],
