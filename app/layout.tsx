@@ -1,12 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Zen_Kaku_Gothic_New } from "next/font/google";
+import { Inter, Noto_Sans_JP } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { NavLinks } from "@/components/NavLinks";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const zen = Zen_Kaku_Gothic_New({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-zen", display: "swap" });
+// 英数字は Inter、日本語は Noto Sans JP（どちらも可変ウェイト）
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const noto = Noto_Sans_JP({ subsets: ["latin"], variable: "--font-noto", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -19,21 +22,25 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#edf5f2" },
-    { media: "(prefers-color-scheme: dark)", color: "#121816" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f7fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0c13" },
   ],
   viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ja" className={`${zen.variable} antialiased`}>
-      <body className="min-h-dvh">
-        <div className="mx-auto flex max-w-5xl flex-col gap-6 pt-5 pb-28 pr-[max(1rem,env(safe-area-inset-right))] pl-[max(1rem,env(safe-area-inset-left))] md:pb-10">
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-        </div>
+    <html lang="ja" className={`${inter.variable} ${noto.variable} antialiased`}>
+      <body className="flex min-h-dvh flex-col">
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-panel focus:px-3 focus:py-2">
+          本文へ移動
+        </a>
+        <Header />
+        <main id="main" className="mx-auto w-full max-w-6xl flex-1 pt-6 pr-[max(1rem,env(safe-area-inset-right))] pb-10 pl-[max(1rem,env(safe-area-inset-left))] sm:pt-8">
+          {children}
+        </main>
+        <Footer />
+        <NavLinks variant="bar" />
         <Analytics />
       </body>
     </html>

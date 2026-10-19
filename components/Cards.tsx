@@ -2,21 +2,25 @@ import Link from "next/link";
 import { priceLabel, productLink } from "@/lib/affiliate";
 import type { Article, Category, Product, Tool } from "@/lib/types";
 import { goodsCategoryIcon, Icon, toolCategoryIcon, type IconName } from "./icons";
-import { tone as tones, ui, type Tone } from "./styles";
+import { gradientFor, tone as tones, ui, type Tone } from "./styles";
 
 /* ------------------------------------------------------------------
  * ツール：すぐ見つけて、すぐ開ける。アイコン＋名前＋短い説明の小さなカード
  * ------------------------------------------------------------------ */
 export function ToolCard({ tool }: { tool: Tool }) {
   return (
-    <Link href={`/tools/${tool.slug}/`} className="group flex min-w-0 items-start gap-3 rounded-xl border border-line bg-panel p-3.5 text-ink no-underline transition hover:border-tool hover:shadow-sm">
-      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-tool-soft text-tool">
-        <Icon name={toolCategoryIcon[tool.categoryId] ?? "tool"} size={20} />
+    <Link
+      href={`/tools/${tool.slug}/`}
+      className="group relative flex min-w-0 items-start gap-3.5 rounded-2xl border border-line bg-panel p-4 text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-lift"
+    >
+      <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br text-white shadow-card ${gradientFor(tool.categoryId)}`}>
+        <Icon name={toolCategoryIcon[tool.categoryId] ?? "tool"} size={21} />
       </span>
-      <span className="flex min-w-0 flex-col gap-0.5">
-        <b className="text-[15px] leading-snug group-hover:underline">{tool.name}</b>
-        <span className="text-xs leading-relaxed text-muted">{tool.summary}</span>
+      <span className="flex min-w-0 flex-1 flex-col gap-1">
+        <b className="pr-5 text-[15px] leading-snug">{tool.name}</b>
+        <span className="line-clamp-2 text-xs leading-relaxed text-muted">{tool.summary}</span>
       </span>
+      <Icon name="arrow" size={16} className="absolute top-4 right-4 text-muted opacity-0 transition group-hover:translate-x-0.5 group-hover:text-accent group-hover:opacity-100" />
     </Link>
   );
 }
@@ -25,12 +29,15 @@ export function ToolCard({ tool }: { tool: Tool }) {
 export function EntryCard({ href, icon, title, sub, tone }: { href: string; icon: IconName; title: string; sub: string; tone: Tone }) {
   const t = tones[tone];
   return (
-    <Link href={href} className={`group flex flex-col gap-2 rounded-2xl p-4 text-ink no-underline transition hover:-translate-y-0.5 hover:shadow-md sm:p-5 ${t.soft}`}>
-      <Icon name={icon} size={26} className={t.text} />
+    <Link href={href} className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-line bg-panel p-4 text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift sm:p-5">
+      <span className={`grid h-11 w-11 place-items-center rounded-xl ${t.soft} ${t.text}`}>
+        <Icon name={icon} size={22} />
+      </span>
       <span className="flex flex-col gap-0.5">
-        <b className="text-base sm:text-lg">{title}</b>
+        <b className="text-[15px] sm:text-lg">{title}</b>
         <span className="text-xs text-muted sm:text-sm">{sub}</span>
       </span>
+      <Icon name="arrow" size={18} className={`absolute top-4 right-4 opacity-40 transition group-hover:translate-x-0.5 group-hover:opacity-100 ${t.text}`} />
     </Link>
   );
 }
@@ -40,8 +47,8 @@ export function EntryCard({ href, icon, title, sub, tone }: { href: string; icon
  * ------------------------------------------------------------------ */
 export function GoodsCategoryCard({ category, examples, count }: { category: Category; examples: string[]; count: number }) {
   return (
-    <Link href={`/goods/category/${category.slug}/`} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel text-ink no-underline transition hover:border-goods hover:shadow-md">
-      <span className="relative grid aspect-[16/9] place-items-center bg-goods-soft text-goods">
+    <Link href={`/goods/category/${category.slug}/`} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+      <span className="relative grid aspect-[16/9] place-items-center bg-gradient-to-br from-goods-soft to-panel text-goods">
         <Icon name={goodsCategoryIcon[category.id] ?? "bag"} size={56} className="transition group-hover:scale-105" />
         <span className="absolute bottom-2 left-3 rounded-full bg-panel/90 px-2 py-0.5 text-[11px] font-semibold text-goods">{count > 0 ? `${count}件を掲載` : "選び方を準備中"}</span>
       </span>
@@ -65,8 +72,8 @@ export function ProductCard({ product }: { product: Product }) {
   const price = priceLabel(product);
   const specs = Object.entries(product.specifications).slice(0, 3);
   return (
-    <article className="relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel">
-      <Link href={`/goods/items/${product.slug}/`} className="relative block aspect-[4/3] bg-goods-soft">
+    <article className="relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel shadow-card transition duration-200 hover:shadow-lift">
+      <Link href={`/goods/items/${product.slug}/`} className="relative block aspect-[4/3] bg-gradient-to-br from-goods-soft to-panel">
         {product.imageUrl ? (
           // 画像は使用条件を確認したものだけが入る（data/products.ts の imageLicenseNote）
           // eslint-disable-next-line @next/next/no-img-element
@@ -121,7 +128,7 @@ export function ProductCard({ product }: { product: Product }) {
  * ------------------------------------------------------------------ */
 export function SolutionCard({ article, toolCount }: { article: Article; toolCount: number }) {
   return (
-    <Link href={`/solutions/${article.slug}/`} className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-panel p-5 text-ink no-underline transition hover:border-solution hover:shadow-md">
+    <Link href={`/solutions/${article.slug}/`} className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-panel p-5 text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
       <span className="flex items-center gap-1.5 text-xs font-semibold text-solution">
         <Icon name="bulb" size={16} />
         こんなことで困っていませんか？
@@ -159,9 +166,9 @@ function TrustMeta({ article }: { article: Article }) {
 
 export function GuideFeature({ article }: { article: Article }) {
   return (
-    <Link href={`/guides/${article.slug}/`} className="group flex min-w-0 flex-col gap-3 rounded-2xl bg-guide-soft p-6 text-ink no-underline transition hover:shadow-md sm:p-8">
+    <Link href={`/guides/${article.slug}/`} className="group relative flex min-w-0 flex-col gap-3 overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-guide-soft via-panel to-accent-soft p-6 text-ink no-underline shadow-card transition duration-200 hover:shadow-lift sm:p-8">
       <span className={`${ui.eyebrow} text-guide`}>Feature · 特集</span>
-      <b className="text-[clamp(1.25rem,3vw,1.75rem)] leading-snug group-hover:underline">{article.title}</b>
+      <b className="text-[clamp(1.3rem,3vw,1.9rem)] leading-snug font-extrabold tracking-tight">{article.title}</b>
       <span className="max-w-2xl leading-relaxed text-muted">{article.description}</span>
       <TrustMeta article={article} />
       <DraftBadge article={article} />
@@ -171,7 +178,7 @@ export function GuideFeature({ article }: { article: Article }) {
 
 export function GuideRow({ article }: { article: Article }) {
   return (
-    <Link href={`/guides/${article.slug}/`} className="group flex min-w-0 items-start gap-3 border-t border-line py-4 text-ink no-underline first:border-t-0">
+    <Link href={`/guides/${article.slug}/`} className="group flex min-w-0 items-start gap-3 rounded-2xl px-3 py-4 text-ink no-underline transition hover:bg-panel hover:shadow-card">
       <Icon name="book" size={20} className="mt-0.5 shrink-0 text-guide" />
       <span className="flex min-w-0 flex-col gap-1">
         <b className="leading-snug group-hover:underline">{article.title}</b>

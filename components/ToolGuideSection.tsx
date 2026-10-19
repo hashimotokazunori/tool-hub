@@ -20,7 +20,7 @@ export function ToolGuideSection({ name, guide }: { name: string; guide: ToolGui
       </section>
       <section className="flex flex-col gap-2">
         <h2 className={ui.h2}>よくある質問</h2>
-        <div className="flex max-w-3xl flex-col divide-y divide-line rounded-xl border border-line bg-panel">
+        <div className="flex max-w-3xl flex-col divide-y divide-line rounded-2xl border border-line bg-panel shadow-card">
           {guide.faq.map((f, i) => (
             <details key={i} className="group px-4 py-3" open={i === 0}>
               <summary className="flex cursor-pointer list-none items-start justify-between gap-3 font-semibold [&::-webkit-details-marker]:hidden">

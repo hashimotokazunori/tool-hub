@@ -33,8 +33,8 @@ export function Section({
     <section id={id} aria-labelledby={id ? `${id}-title` : undefined} className="flex flex-col gap-5">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div className="flex flex-col gap-1.5">
-          <span className={`${ui.eyebrow} flex items-center gap-1.5 ${t?.text ?? "text-accent"}`}>
-            {icon && <Icon name={icon} size={16} />}
+          <span className={`${ui.eyebrow} flex w-fit items-center gap-1.5 rounded-full bg-panel/70 px-2.5 py-1 shadow-card ${t?.text ?? "text-accent"}`}>
+            {icon && <Icon name={icon} size={14} />}
             {eyebrow}
           </span>
           <h2 id={id ? `${id}-title` : undefined} className={ui.h2}>
@@ -43,7 +43,7 @@ export function Section({
           {lead && <p className={`${ui.lead} text-sm`}>{lead}</p>}
         </div>
         {more && (
-          <Link href={more.href} className="group flex items-center gap-1 text-sm font-medium text-ink no-underline">
+          <Link href={more.href} className="group flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-semibold text-ink no-underline transition hover:bg-panel hover:shadow-card">
             {more.label}
             <Icon name="arrow" size={16} className="transition group-hover:translate-x-0.5" />
           </Link>
@@ -53,5 +53,5 @@ export function Section({
     </section>
   );
   if (!band) return body;
-  return <div className={`-mx-4 rounded-3xl px-4 py-8 sm:mx-0 sm:px-8 ${t?.soft ?? "bg-panel"}`}>{body}</div>;
+  return <div className={`-mx-4 rounded-[2rem] px-4 py-8 sm:mx-0 sm:px-8 sm:py-10 ${t?.soft ?? "bg-panel"}`}>{body}</div>;
 }

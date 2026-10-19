@@ -32,9 +32,9 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-14 sm:gap-20">
       <div className="flex flex-col gap-6">
-        <Hero items={buildSearchIndex()} quick={quick} />
+        <Hero items={buildSearchIndex()} quick={quick} toolCount={tools.length} />
         <section aria-labelledby="entry-title" className="flex flex-col gap-3">
-          <h2 id="entry-title" className="text-lg font-bold">
+          <h2 id="entry-title" className="sr-only">
             何をする？
           </h2>
           <div className="grid grid-cols-2 gap-2.5 sm:gap-3 lg:grid-cols-4">
@@ -47,7 +47,7 @@ export default function Home() {
       </div>
 
       <Section id="tools" eyebrow="Tools" icon="tool" tone="tool" title="人気の無料ツール" lead="目的別に、すぐ使える。登録もインストールもいりません。" more={{ href: "/tools/", label: "すべてのツール" }}>
-        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {popular.map((t) => (
             <ToolCard key={t.id} tool={t} />
           ))}

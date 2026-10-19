@@ -21,6 +21,13 @@ import { Bmi, LoanSimulator } from "./calculator/finance/Tools";
 import UnitConverter from "./calculator/unit/Tool";
 import SchoolYears from "./date/school/Tool";
 import QrCode from "./generator/qr/Tool";
+import { Countdown, TimeZone, UnixTime, BusinessDays, WeekNumber } from "./date/time/Tools";
+import { HashGenerator, ColorConverter, JwtDecoder } from "./developer/crypto/Tools";
+import { CompoundInterest, SavingsGoal, OvertimePay, StepsDistance } from "./life/plan/Tools";
+import { AchievementRate, ProgressRate, StudyTime } from "./business/progress/Tools";
+import { PdfToImage } from "./pdf/to-image/Tool";
+import { SquareImage, ImagePadding, ImageMosaic } from "./image/extra/Tools";
+import { ContrastChecker, CsvToJson, JsonToCsv } from "./data/convert/Tools";
 import CsvEncoding from "./data/charset/Tool";
 import { Bingo, Lottery } from "./generator/random/Lottery";
 import TaskPriority from "./business/priority/Tool";
@@ -84,4 +91,26 @@ export const toolComponents: Record<ToolComponentKey, ComponentType> = {
   imageCrop: ImageCrop,
   imageRotate: ImageRotate,
   pdfOrganize: PdfOrganize,
+  countdown: Countdown,
+  timeZone: TimeZone,
+  unixTime: UnixTime,
+  businessDays: BusinessDays,
+  weekNumber: WeekNumber,
+  hashGenerator: HashGenerator,
+  colorConverter: ColorConverter,
+  jwtDecoder: JwtDecoder,
+  compoundInterest: CompoundInterest,
+  savingsGoal: SavingsGoal,
+  overtimePay: OvertimePay,
+  stepsDistance: StepsDistance,
+  achievementRate: AchievementRate,
+  progressRate: ProgressRate,
+  studyTime: StudyTime,
+  pdfToImage: PdfToImage,
+  squareImage: SquareImage,
+  imagePadding: ImagePadding,
+  imageMosaic: ImageMosaic,
+  contrastChecker: ContrastChecker,
+  csvToJson: CsvToJson,
+  jsonToCsv: JsonToCsv,
 };

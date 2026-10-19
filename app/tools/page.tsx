@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ToolCard } from "@/components/Cards";
 import { Icon, toolCategoryIcon } from "@/components/icons";
 import { PageHeading } from "@/components/PageHeading";
-import { ui } from "@/components/styles";
+import { gradientFor, ui } from "@/components/styles";
 import { toolCategories } from "@/data/categories";
 import { getPublicTools, getToolsByCategory, sortCategories } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
@@ -18,7 +18,7 @@ export default function ToolsPage() {
   const total = getPublicTools().length;
   const cats = sortCategories(toolCategories).filter((c) => getToolsByCategory(c.id).length > 0);
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-10">
       <Breadcrumbs items={[{ label: "無料Webツール" }]} />
       <PageHeading title="無料Webツール" lead={`登録不要で使えるツールが ${total} 種類あります。順次追加しています。`}>
         <div className="flex flex-wrap gap-2">
@@ -33,14 +33,14 @@ export default function ToolsPage() {
       {cats.map((c) => (
         <section key={c.id} className="flex flex-col gap-3">
           <h2 className={`${ui.h2} flex items-center gap-2`}>
-            <span className="grid h-9 w-9 place-items-center rounded-lg bg-tool-soft text-tool">
+            <span className={`grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br text-white shadow-card ${gradientFor(c.id)}`}>
               <Icon name={toolCategoryIcon[c.id] ?? "tool"} size={20} />
             </span>
             <Link href={`/tools/category/${c.slug}/`} className="text-ink hover:underline">
               {c.name}
             </Link>
           </h2>
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {getToolsByCategory(c.id).map((t) => (
               <ToolCard key={t.id} tool={t} />
             ))}

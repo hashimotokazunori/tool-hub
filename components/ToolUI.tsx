@@ -34,13 +34,13 @@ function StatTile({ label, value, emphasis }: StatItem) {
   const [copied, setCopied] = useState(false);
   const text = typeof value === "string" || typeof value === "number" ? String(value) : null;
   return (
-    <div className={`group relative flex flex-col-reverse rounded-lg border px-3 py-2 ${emphasis ? "border-accent bg-accent-soft" : "border-line bg-panel"}`}>
+    <div className={`group relative flex flex-col-reverse gap-0.5 rounded-2xl border px-3.5 py-2.5 transition hover:shadow-card ${emphasis ? "border-accent/30 bg-gradient-to-br from-accent-soft to-panel" : "border-line bg-field/60"}`}>
       <dt className="text-xs text-muted">{copied ? "コピーしました" : label}</dt>
-      <dd className="font-mono text-xl font-semibold tabular-nums">{value}</dd>
+      <dd className={`text-xl font-bold tracking-tight tabular-nums ${emphasis ? "text-accent" : ""}`}>{value}</dd>
       {text !== null && (
         <button
           type="button"
-          className="absolute inset-0 cursor-copy rounded-lg focus-visible:outline-2 focus-visible:outline-accent"
+          className="absolute inset-0 cursor-copy rounded-2xl focus-visible:outline-2 focus-visible:outline-accent"
           aria-label={`${label}の値「${text}」をコピー`}
           title="押すとコピー"
           onClick={async () => {

@@ -12,13 +12,21 @@ const NAV: { href: string; label: string; icon: IconName; match: (p: string) => 
   { href: "/guides/", label: "ガイド", icon: "book", match: (p) => p.startsWith("/guides") },
 ];
 
-/** メインメニュー。スマホでは画面下のタブバーになる */
-export function NavLinks() {
+/**
+ * メインメニュー。パソコンではヘッダーの中（variant="top"）、スマホでは画面下のタブバー（variant="bar"）。
+ * ヘッダーはすりガラス（backdrop-filter）なので、その中に position: fixed を置くと画面ではなくヘッダー基準になる。
+ * そのためタブバーはヘッダーの外に別に置く。
+ */
+export function NavLinks({ variant }: { variant: "top" | "bar" }) {
   const path = usePathname() ?? "/";
   return (
     <nav
       aria-label="メインメニュー"
-      className="fixed inset-x-0 bottom-0 z-30 flex border-t border-line bg-panel px-2 pt-1.5 pb-[calc(0.375rem+env(safe-area-inset-bottom))] md:static md:z-auto md:gap-1 md:border-0 md:bg-transparent md:p-0"
+      className={
+        variant === "bar"
+          ? "fixed inset-x-0 bottom-0 z-30 flex border-t border-line/70 bg-panel/85 px-2 pt-1.5 pb-[calc(0.375rem+env(safe-area-inset-bottom))] backdrop-blur-xl md:hidden"
+          : "hidden shrink-0 gap-0.5 rounded-full border border-line bg-panel/70 p-1 shadow-card md:flex"
+      }
     >
       {NAV.map((n) => {
         const active = n.match(path);
@@ -27,11 +35,11 @@ export function NavLinks() {
             key={n.href}
             href={n.href}
             aria-current={active ? "page" : undefined}
-            className={`flex flex-1 flex-col items-center gap-0.5 rounded-xl px-1 py-1.5 text-[11px] no-underline md:flex-none md:flex-row md:gap-1.5 md:rounded-full md:px-3.5 md:py-2 md:text-sm md:font-medium ${
-              active ? "bg-accent-soft text-accent md:bg-accent md:text-accent-ink" : "text-ink hover:bg-accent-soft"
+            className={`flex flex-1 flex-col items-center gap-0.5 rounded-xl px-0.5 py-1.5 text-[11px] font-medium whitespace-nowrap no-underline transition md:flex-none md:flex-row md:gap-1.5 md:rounded-full md:px-3 md:py-1.5 md:text-[13px] ${
+              active ? "text-accent md:bg-gradient-to-r md:from-accent md:to-accent-2 md:text-accent-ink md:shadow-card" : "text-muted hover:text-ink md:hover:bg-field"
             }`}
           >
-            <Icon name={n.icon} />
+            <Icon name={n.icon} size={20} />
             {n.label}
           </Link>
         );
