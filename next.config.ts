@@ -7,6 +7,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   ...(process.env.STATIC_EXPORT === "1" ? { output: "export" as const } : {}),
   trailingSlash: true,
+  // 便利グッズ一覧は楽天APIを1秒に1回ずつ呼ぶので、1ページの作成に60秒以上かかることがある
+  staticPageGenerationTimeout: 300,
   // Vercel では中身を出さず、すべて Cloudflare の本番URL（toolhiroba.com）へ移す（301）。検索の評価も引き継ぐ
   ...(process.env.VERCEL === "1"
     ? {
