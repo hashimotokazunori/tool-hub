@@ -5,6 +5,7 @@ import { FURUSATO_CATEGORIES, rakutenFurusatoSearchUrl, type FurusatoCategory } 
 import type { SponsoredLink } from "@/data/sponsored";
 import { PRICE_BANDS, filterByPrice, parseMaxParam, type PriceFilter } from "@/lib/furusato-filter";
 import type { FurusatoItem, FurusatoItemsByCategory } from "@/lib/furusato-items";
+import { municipalitySearchLinks } from "@/lib/furusato-links";
 import { useClientValue } from "./useClientValue";
 
 const FIRST_ROWS = 8;
@@ -193,12 +194,18 @@ function ItemSheet({ item, others, onClose }: { item: FurusatoItem | null; other
             </div>
             <ul className="flex flex-col gap-2">
               <SiteRow href={item.url} label="楽天ふるさと納税で見る" tone="rakuten" />
-              {others.map((s) => (
-                <SiteRow key={s.id} href={s.href} label={`${s.name}で探す`} tone={s.id} pixel={s.pixel} />
-              ))}
+              {others.map((s) => {
+                // 自治体名で探すリンク（A8 の商品リンク）。作れなければトップページへの広告リンク
+                const deep = municipalitySearchLinks(item.municipality).find((d) => d.id === s.id);
+                return deep ? (
+                  <SiteRow key={s.id} href={deep.href} label={`${s.name}で${deep.keyword}の返礼品を見る`} tone={s.id} />
+                ) : (
+                  <SiteRow key={s.id} href={s.href} label={`${s.name}で探す`} tone={s.id} pixel={s.pixel} />
+                );
+              })}
             </ul>
             <p className="text-[10px] leading-relaxed text-muted">
-              楽天ふるさと納税はこの返礼品のページが、ほかのサイトはトップページが開きます（同じ返礼品がないこともあります）。「PR」は広告リンクです。寄附額・在庫は変わることがあるので、寄附の前に各サイトで確かめてください。
+              楽天ふるさと納税はこの返礼品のページが、ほかのサイトはこの自治体の返礼品の一覧が開きます（同じ返礼品がないこともあります）。「PR」は広告リンクです。寄附額・在庫は変わることがあるので、寄附の前に各サイトで確かめてください。
             </p>
           </div>
 
