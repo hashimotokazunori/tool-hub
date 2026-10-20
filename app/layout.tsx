@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   description: site.description,
   openGraph: { siteName: site.name, locale: site.locale, type: "website" },
   // Google Search Console の所有権確認
-  // Search Console の所有権の確認（Vercel の URL 用・Cloudflare の URL 用）
-  verification: { google: ["dmfHrw8nkN4c9Zjad-isZ4BnPD-d7Mn47HT1nr9mpz8", "euVRaQrtYufc_Pr6EKtRM5W3x3nHnPXpBQ6ZEDgfgNM"] },
+  // Search Console の所有権の確認（Vercel の URL 用・workers.dev 用・toolhiroba.com 用）
+  verification: { google: ["dmfHrw8nkN4c9Zjad-isZ4BnPD-d7Mn47HT1nr9mpz8", "euVRaQrtYufc_Pr6EKtRM5W3x3nHnPXpBQ6ZEDgfgNM", "zp0yn1BtCnKHXZFO7p6FKpLp8t2NH640edKOClzeeec"] },
 };
 
 export const viewport: Viewport = {
