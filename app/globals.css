@@ -173,6 +173,70 @@ h3 {
   text-decoration: underline;
 }
 
+/* 記事の中の手順の図（Markdown に <figure class="flow"> で書く） */
+.article-body .flow {
+  margin: 0.4rem 0;
+  border: 1px solid var(--c-line);
+  border-radius: 1rem;
+  background: var(--c-panel);
+  padding: 1rem;
+  box-shadow: var(--sh-card);
+}
+.article-body .flow figcaption {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--c-muted);
+  margin-bottom: 0.8rem;
+}
+.article-body .flow ol {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+  counter-reset: flow;
+}
+.article-body .flow li {
+  counter-increment: flow;
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  align-items: center;
+  gap: 0.75rem;
+  line-height: 1.5;
+}
+.article-body .flow li::before {
+  content: counter(flow);
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--c-accent), var(--c-accent-2));
+  color: #fff;
+  font-weight: 700;
+}
+.article-body .flow li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(1.1rem - 1px);
+  top: calc(50% + 1.15rem);
+  width: 2px;
+  height: calc(100% - 2.3rem + 1.1rem);
+  background: var(--c-line);
+}
+.article-body .flow li b {
+  display: block;
+  font-size: 0.95rem;
+}
+.article-body .flow li small {
+  display: block;
+  color: var(--c-muted);
+  font-size: 0.78rem;
+}
+.article-body .flow .flow-goal::before {
+  background: var(--c-furu);
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;

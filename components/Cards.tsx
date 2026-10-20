@@ -5,24 +5,36 @@ import type { Article, Category, Product, Tool } from "@/lib/types";
 import { MinPrice, ProductImage, Stars } from "./Market";
 import { goodsCategoryIcon, Icon, toolCategoryIcon, type IconName } from "./icons";
 import { gradientFor, tone as tones, ui, type Tone } from "./styles";
+import toolShots from "@/data/tool-shots.json";
+
+/** 使用例の画面写真があるツール */
+const SHOTS = new Set<string>(toolShots);
 
 /* ------------------------------------------------------------------
- * ツール：すぐ見つけて、すぐ開ける。アイコン＋名前＋短い説明の小さなカード
+ * ツール：すぐ見つけて、すぐ開ける。アイコン＋名前＋短い説明の小さなカード（使用例の写真があれば上に出す）
  * ------------------------------------------------------------------ */
 export function ToolCard({ tool }: { tool: Tool }) {
+  const shot = SHOTS.has(tool.slug);
   return (
     <Link
       href={`/tools/${tool.slug}/`}
-      className="group relative flex min-w-0 items-start gap-3.5 rounded-2xl border border-line bg-panel p-4 text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-lift"
+      className="group relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-lift"
     >
-      <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br text-white shadow-card ${gradientFor(tool.categoryId)}`}>
-        <Icon name={toolCategoryIcon[tool.categoryId] ?? "tool"} size={21} />
+      {shot && (
+        // 例を入れて使ったときの画面（scripts/tool-shots.mjs で撮影）。結果が写っている下側を見せる
+        // eslint-disable-next-line @next/next/no-img-element -- 静的書き出しなので next/image の最適化は使えない
+        <img src={`/shots/${tool.slug}.webp`} alt={`${tool.name}を使ったときの画面の例`} width={720} height={540} loading="lazy" decoding="async" className="aspect-[2/1] w-full border-b border-line bg-field object-cover object-bottom" />
+      )}
+      <span className="flex min-w-0 items-start gap-3.5 p-4">
+        <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br text-white shadow-card ${gradientFor(tool.categoryId)}`}>
+          <Icon name={toolCategoryIcon[tool.categoryId] ?? "tool"} size={21} />
+        </span>
+        <span className="flex min-w-0 flex-1 flex-col gap-1">
+          <b className="pr-5 text-[15px] leading-snug">{tool.name}</b>
+          <span className="line-clamp-2 text-xs leading-relaxed text-muted">{tool.summary}</span>
+        </span>
       </span>
-      <span className="flex min-w-0 flex-1 flex-col gap-1">
-        <b className="pr-5 text-[15px] leading-snug">{tool.name}</b>
-        <span className="line-clamp-2 text-xs leading-relaxed text-muted">{tool.summary}</span>
-      </span>
-      <Icon name="arrow" size={16} className="absolute top-4 right-4 text-muted opacity-0 transition group-hover:translate-x-0.5 group-hover:text-accent group-hover:opacity-100" />
+      <Icon name="arrow" size={16} className={`absolute right-4 text-muted opacity-0 transition group-hover:translate-x-0.5 group-hover:text-accent group-hover:opacity-100 ${shot ? "bottom-4" : "top-4"}`} />
     </Link>
   );
 }
