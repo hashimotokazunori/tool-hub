@@ -44,6 +44,8 @@ describe("楽天の価格データの読み取り", () => {
     expect(matchesProduct("Anker Nano Power Bank (10000mAh, 45W)", [["A1638"], ["Nano Power Bank", "10000", "45W"]])).toBe(true);
     expect(matchesProduct("Anker Nano Charger 45W", [["A1638"], ["Nano Power Bank", "10000", "45W"]])).toBe(false);
     expect(matchesProduct("SR-R2500P対応 テープ", [["SR-R2500P"]], ["対応"])).toBe(false);
+    // 実際の例：本体と同じ名前を並べた別売りケース
+    expect(matchesProduct("【送料無料】For Anker Nano Power Bank (10000mAh, 45W, 巻取り式 USB-Cケーブル) ケース", [["A1638"], ["Nano Power Bank", "10000", "45W"]], ["For Anker", "ケース"])).toBe(false);
   });
   it("店舗ごとの価格：型番が合う商品だけを安い順に、同じ店は1件、中古は除く", () => {
     const o = parseItemResult(itemJson, match);

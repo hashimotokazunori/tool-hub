@@ -384,7 +384,16 @@ export const products: Product[] = [
           "10000",
           "45W"
         ]
-      ]
+      ],
+      "exclude": [
+        "For Anker",
+        "for Anker",
+        "FOR Anker",
+        "ケース",
+        "カバー",
+        "保護"
+      ],
+      "minPrice": 3000
     },
     "sourceUrls": [
       "https://www.ankerjapan.com/products/a1638",
