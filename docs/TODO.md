@@ -8,19 +8,22 @@
   - 広告を置くページを増やしたら、掲載URLも届け出る：`https://media-console.a8.net/common/oauth-login?service=media_site_url_manager&programId=<プログラムID>` を開いて入力
   - 審査中3件（Bandicam・MiriCanvas・Adobe）が通ったら、data/sponsored.ts に足す（A8 の「通常広告用」をそのまま使う。1ページ2件まで）
   - Adobe は月額プランのみ対象（年額一括・アプリからの申込は対象外）。Movavi はクレカ・PayPal 決済のみ対象
-- [ ] **Vercel の Pro プラン（月20ドル）への切り替え**：今は Hobby（無料）のままでよい。次のどれかに当てはまったら切り替える（または Cloudflare Pages など無料で商用OKのサービスに移す）
-  - AdSense などの広告を載せる前（広告は Vercel の規約上はっきり「商用」）
-  - 楽天アフィリエイトの報酬が月3,000円を超えたとき
-  - 便利グッズや比較記事がサイトの中心になり、「アフィリエイトが主な目的」に近づいたとき
-  - 根拠：Vercel Fair Use Guidelines の Commercial usage（2026-10-20 確認）
-- [ ] **Search Console と Analytics を見る**（2026-10-27ごろ）：検索に載り始めたか、どのページが見られているか
+- [ ] **A8 のサイト情報の URL を新しい URL に変える**：登録情報 → サイト情報の登録・修正 →「ツールひろば」の URL を https://tool.hiroba.workers.dev/ に（A8 の再ログインが要るので本人と一緒に）
+- [ ] **独自ドメインを決める**（おすすめアニメサイトのチャットと相談中）。買うなら anime.〇〇.com / tool.〇〇.com のように1つにまとめる案あり。変えたら Search Console・A8 の掲載URL・楽天の許可サイト・GitHub の変数 NEXT_PUBLIC_SITE_URL・next.config の転送先を直す
+- [ ] **Search Console と閲覧数を見る**（2026-10-27ごろ）：新しい URL（https://tool.hiroba.workers.dev/）のプロパティでサイトマップが読み込まれたか。閲覧数は Cloudflare の Web Analytics（Gmail の方のアカウント）
 
 ## 余裕があれば
-- [ ] 独自ドメイン（例：toolhiroba.jp）を取る。取るなら早いほうが検索の評価を引き継ぎやすい
 - [ ] 広告（Google AdSense）を申し込む。審査では運営者情報・問い合わせ先があるほうが通りやすい
 - [ ] 楽天の価格取得が失敗したときだけ、ビルドログに「アプリIDの先頭・キーの文字数・アプリIDと同じか」を出している（`lib/rakuten.ts`）。安定したら消してよい
 
 ## 済み
+- [x] Cloudflare に引っ越し（2026-10-20）：https://tool.hiroba.workers.dev
+  - Cloudflare は Gmail の方のアカウント（iCloud の方は別アカウント）。workers.dev の名前は「hiroba」
+  - 全ページを書き出して Workers の静的ファイル置き場に置く。GitHub Actions（.github/workflows/deploy.yml）が push 時と6時間ごとに公開（楽天の価格もこのとき取り直す）
+  - GitHub の Secrets：CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID / RAKUTEN_*、Variables：NEXT_PUBLIC_SITE_URL / NEXT_PUBLIC_CF_BEACON_TOKEN
+  - 古い Vercel の URL は新しい URL へ 301 転送（next.config.ts）。Vercel では中身を出さないので、Vercel の商用利用の心配はなくなった
+  - Search Console に新 URL を登録・サイトマップ送信。A8 の掲載URLも新 URL で出し直した。楽天アプリの許可サイトに追加
+  - GitHub の定期実行は、リポジトリに60日動きがないと止まる。止まったら Actions の画面で有効にし直す
 - [x] ツールひろば専用の楽天アプリを作成し、Vercel のIDとアクセスキーを入れ替え。アニメの窓口の許可サイトは元に戻した（2026-10-20）
   - 設定の控えは `tool-hub/.env.local`（GitHub には送られない）。アニメの窓口は `anime/rakuten.env`
   - 楽天のアクセスキー欄のコピーボタンはうまく動かないことがある。手で選んでコピーし、貼った値が「436cf6db」（アプリID）で始まらないことを確かめる
