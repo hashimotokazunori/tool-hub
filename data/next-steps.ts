@@ -45,6 +45,11 @@ export const nextSteps: Record<string, { slug: string; why: string }[]> = {
   "wage-converter": [
     { slug: "overtime-pay", why: "残業代を計算する" },
     { slug: "budget", why: "手取りから予算を配分する" },
+    { slug: "furusato-limit", why: "ふるさと納税の控除上限の目安を出す" },
+  ],
+  "furusato-limit": [
+    { slug: "countdown", why: "12月31日の締め切りまでのカウントダウンを作る" },
+    { slug: "budget", why: "寄附に回す額を家計の予算に入れる" },
   ],
   "overtime-pay": [{ slug: "wage-converter", why: "時給・月給・年収に換算する" }],
   warikan: [{ slug: "travel-expense-split", why: "立て替えが多いときの精算をする" }],

@@ -122,6 +122,8 @@ export const TOOL_COMPONENT_KEYS = [
   "textFileMerge",
   "bulkRename",
   "excelCsvConverter",
+  // 第7弾
+  "furusatoLimit",
 ] as const;
 
 export type ToolComponentKey = (typeof TOOL_COMPONENT_KEYS)[number];

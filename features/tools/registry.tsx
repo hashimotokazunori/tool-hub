@@ -45,6 +45,7 @@ import { ContrastChecker, CsvToJson, JsonToCsv } from "./data/convert/Tools";
 import CsvEncoding from "./data/charset/Tool";
 import { Bingo, Lottery } from "./generator/random/Lottery";
 import TaskPriority from "./business/priority/Tool";
+import FurusatoLimit from "./life/furusato/Tool";
 
 /** 画面キー → ツールの画面。keys.ts のキーがすべてそろっていないと型エラーになる */
 export const toolComponents: Record<ToolComponentKey, ComponentType> = {
@@ -155,4 +156,5 @@ export const toolComponents: Record<ToolComponentKey, ComponentType> = {
   textFileMerge: TextFileMerge,
   bulkRename: BulkRename,
   excelCsvConverter: ExcelCsvConverter,
+  furusatoLimit: FurusatoLimit,
 };

@@ -103,6 +103,7 @@ const ROWS: Row[] = [
   ["electricity-cost", "life", "電気料金の概算", "家電の消費電力から電気代", "P2", "電気代 消費電力 kWh"],
   ["bmi", "life", "BMI計算", "身長と体重からBMI・肥満度の判定・標準体重", "P1", "BMI 肥満度 標準体重 体重 身長"],
   ["steps-distance", "life", "歩数・距離換算", "歩数と距離を相互に換算。身長から歩幅を推定、歩く時間も", "P2", "歩数 距離 歩幅 身長 km 1万歩 ウォーキング 徒歩 時間"],
+  ["furusato-limit", "life", "ふるさと納税の控除上限 計算", "住民税の所得割額と所得税の税率から、自己負担2,000円で収まる寄附額の目安と控除の内訳", "P1", "ふるさと納税 控除上限 上限額 限度額 シミュレーション 所得割額 住民税 寄附金控除 ワンストップ特例 2000円"],
   ["tip", "life", "チップ・サービス料計算", "チップやサービス料を加えた金額", "P2", "チップ サービス料 海外旅行"],
   // 学習・ビジネス
   ["presentation-time", "biz", "プレゼン時間計算", "原稿の文字数から話す時間", "P0", "プレゼン スピーチ 原稿 時間"],
@@ -244,6 +245,8 @@ const PUBLISHED: Record<string, string> = {
   "excel-csv-converter": "excelCsvConverter",
   "pdf-rotate": "pdfOrganize",
   "pdf-delete-pages": "pdfOrganize",
+  // 第7弾
+  "furusato-limit": "furusatoLimit",
 };
 
 const UPDATED_AT = "2026-10-19";

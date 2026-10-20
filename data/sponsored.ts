@@ -92,6 +92,26 @@ export const sponsoredLinks: SponsoredLink[] = [
     note: "イラスト・デザイン・文章作成などのスキルを出品して販売できるサイト。",
     tools: ["color-palette", "gradient", "image-text"],
   },
+  {
+    id: "aupay-furusato",
+    programId: "s00000023934001",
+    name: "au PAY ふるさと納税",
+    text: "au PAY ふるさと納税",
+    href: "https://px.a8.net/svt/ejp?a8mat=4BEL1P+3NKU8Q+54OC+5YJRM",
+    pixel: "https://www16.a8.net/0.gif?a8mat=4BEL1P+3NKU8Q+54OC+5YJRM",
+    note: "KDDIグループのふるさと納税サイト。au PAY などで寄附できます。",
+    tools: ["furusato-limit"],
+  },
+  {
+    id: "furusato-honpo",
+    programId: "s00000025743001",
+    name: "ふるさと本舗",
+    text: "全国の美味しい特産品に特化したふるさと納税サイト【ふるさと本舗】",
+    href: "https://px.a8.net/svt/ejp?a8mat=4BEL1P+3O69UI+5IMU+5YJRM",
+    pixel: "https://www12.a8.net/0.gif?a8mat=4BEL1P+3O69UI+5IMU+5YJRM",
+    note: "食べ物など各地の特産品の返礼品を中心に扱うふるさと納税サイト。",
+    tools: ["furusato-limit"],
+  },
 ];
 
 /** そのツールのページに出す広告（2件まで） */
