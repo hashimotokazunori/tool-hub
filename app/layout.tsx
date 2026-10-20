@@ -32,6 +32,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ja" className={`${inter.variable} ${noto.variable} antialiased`}>
+      <head>
+        {/* Google AdSense（審査と自動広告用）。広告の表示位置は AdSense の管理画面で決める */}
+        {site.adsenseClient && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.adsenseClient}`} crossOrigin="anonymous" />}
+      </head>
       <body className="flex min-h-dvh flex-col">
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-panel focus:px-3 focus:py-2">
           本文へ移動

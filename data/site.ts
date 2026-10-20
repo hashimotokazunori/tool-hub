@@ -27,6 +27,8 @@ export const site = {
   },
   /** プライバシーポリシーの制定日（例: "2026年11月1日"）。空なら表示しない */
   privacyPolicyDate: "" as string,
+  /** Google AdSense のパブリッシャーID（公開してよい値）。全ページの head にコードを入れる。ads.txt は public/ads.txt */
+  adsenseClient: "ca-pub-8509241257297550",
   ads: {
     /** 広告を出すかどうか。審査・規約の確認が終わるまで false */
     enabled: false,

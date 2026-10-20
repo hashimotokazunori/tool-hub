@@ -44,7 +44,26 @@ export default function PrivacyPage() {
         </a>
         をご覧ください。
       </p>
-      <p>このほかの広告配信サービスは使用していません。今後導入する場合は、利用するサービス名、Cookieなどで取得する情報、その目的と、無効にする方法を、このページに記載してから導入します。</p>
+      <h2>広告の配信について（Google AdSense）</h2>
+      <p>
+        当サイトは、第三者配信の広告サービス「Google AdSense」を利用しています。Google などの広告配信事業者は、Cookie を使って、当サイトやほかのサイトへの過去のアクセス情報にもとづいた広告（パーソナライズ広告）を表示することがあります。Cookie で集める情報に、名前や住所、メールアドレスなど個人を特定できる情報は含まれません。
+      </p>
+      <p>
+        パーソナライズ広告は、
+        <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer">
+          Google の広告設定
+        </a>
+        で無効にできます。また、
+        <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">
+          www.aboutads.info
+        </a>
+        で、第三者配信事業者の Cookie を無効にすることもできます。Google による情報の使われ方は、
+        <a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener noreferrer">
+          Google のポリシーと規約
+        </a>
+        をご覧ください。
+      </p>
+      <p>このほかの広告配信サービスを導入する場合は、利用するサービス名、Cookieなどで取得する情報、その目的と、無効にする方法を、このページに記載してから導入します。</p>
       {site.operator.contact && (
         <>
           <h2>お問い合わせでいただいた情報</h2>
