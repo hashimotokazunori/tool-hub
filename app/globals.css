@@ -23,6 +23,11 @@
   --c-solution-soft: #e3f6fa;
   --c-guide: #be185d;
   --c-guide-soft: #fdebf3;
+  /* ふるさと納税のページだけで使う色（エンジ色と深緑） */
+  --c-furu: #9b2c3a;
+  --c-furu-soft: #faf0ef;
+  --c-furu-2: #2f5e4f;
+  --c-furu-2-soft: #edf4f0;
   /* 影：ふだんは薄く、持ち上げたときだけ濃く */
   --sh-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 1px 3px rgb(15 23 42 / 0.06);
   --sh-lift: 0 10px 30px -12px rgb(15 23 42 / 0.25), 0 4px 10px -6px rgb(15 23 42 / 0.12);
@@ -53,6 +58,10 @@
     --c-solution-soft: #0f2a31;
     --c-guide: #f9a8d4;
     --c-guide-soft: #2f1424;
+    --c-furu: #f0939d;
+    --c-furu-soft: #2a1619;
+    --c-furu-2: #8fd1b5;
+    --c-furu-2-soft: #13251f;
     --sh-card: 0 1px 2px rgb(0 0 0 / 0.4);
     --sh-lift: 0 12px 34px -12px rgb(0 0 0 / 0.7);
     --hero-glow-1: rgb(99 102 241 / 0.35);
@@ -83,6 +92,10 @@
   --color-guide: var(--c-guide);
   --color-guide-soft: var(--c-guide-soft);
   --color-accent-2: var(--c-accent-2);
+  --color-furu: var(--c-furu);
+  --color-furu-soft: var(--c-furu-soft);
+  --color-furu-2: var(--c-furu-2);
+  --color-furu-2-soft: var(--c-furu-2-soft);
   --shadow-card: var(--sh-card);
   --shadow-lift: var(--sh-lift);
   --font-sans: var(--font-inter), var(--font-noto), "Hiragino Sans", "Yu Gothic UI", system-ui, sans-serif;

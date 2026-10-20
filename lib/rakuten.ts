@@ -16,7 +16,7 @@ import type { Product } from "./types";
 /** 接続先。手元で画面を確かめるときだけ RAKUTEN_API_BASE で試験用のサーバーに向けられる */
 const API_BASE = process.env.RAKUTEN_API_BASE || "https://openapi.rakuten.co.jp";
 const PRODUCT_API = `${API_BASE}/ichibaproduct/api/Product/Search/20250801`;
-const ITEM_API = `${API_BASE}/ichibams/api/IchibaItem/Search/20260701`;
+export const ITEM_API = `${API_BASE}/ichibams/api/IchibaItem/Search/20260701`;
 /** 価格を取り直す間隔（秒）。ページは静的に作り、この間隔で裏で作り直す */
 export const MARKET_REVALIDATE = 6 * 60 * 60;
 
@@ -180,7 +180,7 @@ function throttled<T>(fn: () => Promise<T>): Promise<T> {
   return run;
 }
 
-async function call(base: string, params: Record<string, string>): Promise<unknown | null> {
+export async function call(base: string, params: Record<string, string>): Promise<unknown | null> {
   const c = credentials();
   if (!c) return null;
   // アクセスキーはヘッダーとURLの両方で送る（説明ではどちらでもよいが、URLで送る例が多いため）。ログにはURLを残さない

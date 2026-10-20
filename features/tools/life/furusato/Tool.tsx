@@ -148,6 +148,10 @@ export default function FurusatoLimit() {
             </table>
           </div>
           {b.donation > limit && <p className={ui.note}>この寄附額は上限の目安を超えるため、自己負担が2,000円より多くなります。</p>}
+          <a href={`/furusato/?max=${Math.floor(limit)}`} className={`${ui.card} max-w-md`}>
+            <b className="text-[15px]">上限額（{yen(limit)}）以内の返礼品を見る →</b>
+            <span className="text-xs text-muted">お肉・お米・海鮮など、寄附額が上限の目安までの返礼品</span>
+          </a>
           <p className={ui.note}>
             ワンストップ特例を使うと所得税からの控除はなくなり、同じ額が翌年度の住民税から差し引かれます。控除の合計は変わりません。各金額は1円未満を切り捨てた目安で、実際の端数処理は自治体によって異なります。
           </p>
@@ -164,8 +168,8 @@ export default function FurusatoLimit() {
       <SavedNote />
 
       <a href="/furusato/" className={`${ui.card} max-w-md`}>
-        <b className="text-[15px]">ふるさと納税サイトを比べる →</b>
-        <span className="text-xs text-muted">12サイトの支払い方法・ワンストップのネット申請などを比較</span>
+        <b className="text-[15px]">ふるさと納税の返礼品をさがす →</b>
+        <span className="text-xs text-muted">カテゴリと寄附額で絞り込み。ふるさと納税サイトの特徴も</span>
       </a>
       <h3 className={ui.h3}>所得割額はどこに書いてある？</h3>
       <ul className={`${ui.note} list-disc space-y-1 pl-5`}>
