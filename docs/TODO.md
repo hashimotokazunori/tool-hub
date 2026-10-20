@@ -9,7 +9,7 @@
   - 審査中3件（Bandicam・MiriCanvas・Adobe）が通ったら、data/sponsored.ts に足す（A8 の「通常広告用」をそのまま使う。1ページ2件まで）
   - Adobe は月額プランのみ対象（年額一括・アプリからの申込は対象外）。Movavi はクレカ・PayPal 決済のみ対象
 - [ ] **A8 のサイト情報の URL を https://toolhiroba.com/ に変える**（登録情報 → サイト情報の登録・修正。A8 の再ログインが要る）。掲載URLは toolhiroba.com で出し直し済み
-- [ ] **Google AdSense に申し込む**（本人が adsense.google.com で「サイト」→ toolhiroba.com を追加 →「審査をリクエスト」）。コード・ads.txt・プライバシーポリシー・運営者情報・問い合わせフォームは準備済み
+- [ ] **Google AdSense の審査待ち**（2026-10-20 に toolhiroba.com で審査をリクエスト）。通ったら AdSense の管理画面で自動広告の置き場所を決め、data/site.ts の ads.enabled を見直す。落ちたら理由を見て直す
 - [ ] **もしもアフィリエイト**：ツールひろばはメディア審査中。Yahoo!ショッピングは提携済み、Amazon は審査中。提携できたら便利グッズに Yahoo! の価格（Yahoo! の商品検索 API・開発者登録が必要）と Amazon・Yahoo! のボタンを足す
 - [ ] **ふるさと納税**：控除上限の計算ツールを公開済み（au PAY ふるさと納税・ふるさと本舗の広告つき）。審査中の さとふる・ふるさとチョイス・dショッピング・ポケマル が通ったら data/sponsored.ts に足す。ポータル比較データ（data/furusato-portals.ts）を作成中 → 比較ページにする
 - [ ] **Search Console と閲覧数を見る**（2026-10-27ごろ）：https://toolhiroba.com/ のプロパティでサイトマップが読み込まれたか。閲覧数は Cloudflare の Web Analytics（Gmail の方のアカウント）
