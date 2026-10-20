@@ -1,14 +1,17 @@
 import type { ReactNode } from "react";
+import { sponsoredFor } from "@/data/sponsored";
 import type { ToolGuide } from "@/data/tool-guides/types";
 import type { Category, Tool } from "@/lib/types";
 import { AdSlot } from "./AdSlot";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { Icon, toolCategoryIcon } from "./icons";
+import { SponsoredLinks } from "./SponsoredLinks";
 import { ToolGuideSection } from "./ToolGuideSection";
 import { gradientFor, ui } from "./styles";
 
 /** 個別ツールページの共通の枠。ツール本体を先に、解説と広告はその下に置く */
 export function ToolLayout({ tool, category, children, related, guide }: { tool: Tool; category: Category; children: ReactNode; related?: ReactNode; guide?: ToolGuide }) {
+  const sponsored = sponsoredFor(tool.slug);
   return (
     <div className="flex flex-col gap-5">
       <Breadcrumbs items={[{ label: "無料Webツール", href: "/tools/" }, { label: category.name, href: `/tools/category/${category.slug}/` }, { label: tool.name }]} />
@@ -23,6 +26,8 @@ export function ToolLayout({ tool, category, children, related, guide }: { tool:
             <span className="rounded-full bg-accent-soft px-2.5 py-1 text-accent">{category.name}</span>
             <span className="rounded-full bg-field px-2.5 py-1 text-muted ring-1 ring-line">無料・登録不要</span>
             <span className="rounded-full bg-field px-2.5 py-1 text-muted ring-1 ring-line">端末の中で処理</span>
+            {/* 広告リンクがあるページは、最初に見える位置で知らせる（ステマ規制） */}
+            {sponsored.length > 0 && <span className="rounded-full bg-field px-2.5 py-1 text-muted ring-1 ring-line">PR・このページには広告が含まれます</span>}
           </div>
         </div>
       </div>
@@ -35,6 +40,7 @@ export function ToolLayout({ tool, category, children, related, guide }: { tool:
         <p className="max-w-3xl leading-relaxed">{tool.description}</p>
         <p className={ui.note}>最終更新：{tool.updatedAt.replaceAll("-", "/")}</p>
       </section>
+      <SponsoredLinks items={sponsored} />
       <AdSlot id={`tool-${tool.slug}`} />
       {related}
     </div>
