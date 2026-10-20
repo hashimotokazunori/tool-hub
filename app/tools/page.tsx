@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ToolCard } from "@/components/Cards";
 import { Icon, toolCategoryIcon } from "@/components/icons";
 import { PageHeading } from "@/components/PageHeading";
+import { MyTools } from "@/components/ToolMemory";
 import { gradientFor, ui } from "@/components/styles";
 import { toolCategories } from "@/data/categories";
 import { getPublicTools, getToolsByCategory, sortCategories } from "@/lib/content";
@@ -15,7 +16,8 @@ export const metadata = pageMetadata({
 });
 
 export default function ToolsPage() {
-  const total = getPublicTools().length;
+  const tools = getPublicTools();
+  const total = tools.length;
   const cats = sortCategories(toolCategories).filter((c) => getToolsByCategory(c.id).length > 0);
   return (
     <div className="flex flex-col gap-10">
@@ -30,6 +32,7 @@ export default function ToolsPage() {
           ))}
         </div>
       </PageHeading>
+      <MyTools tools={tools} />
       {cats.map((c) => (
         <section key={c.id} className="flex flex-col gap-3">
           <h2 className={`${ui.h2} flex items-center gap-2`}>

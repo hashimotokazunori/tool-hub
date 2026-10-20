@@ -2,6 +2,7 @@ import Link from "next/link";
 import { EntryCard, GoodsCategoryCard, GuideFeature, GuideRow, ProductCard, SolutionCard, ToolCard } from "@/components/Cards";
 import { Hero } from "@/components/Hero";
 import { Section } from "@/components/Section";
+import { MyTools } from "@/components/ToolMemory";
 import { ui } from "@/components/styles";
 import { goodsCategories, toolCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicArticles, getPublicProducts, getPublicTools, getToolsByCategory, sortCategories } from "@/lib/content";
@@ -50,6 +51,8 @@ export default async function Home() {
           </div>
         </section>
       </div>
+
+      <MyTools tools={tools} />
 
       <Section id="tools" eyebrow="Tools" icon="tool" tone="tool" title="人気の無料ツール" lead="目的別に、すぐ使える。登録もインストールもいりません。" more={{ href: "/tools/", label: "すべてのツール" }}>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
