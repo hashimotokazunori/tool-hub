@@ -5,6 +5,13 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tool",
   "compatibility_date": "2026-10-01",
+  // 独自ドメイン（Cloudflare が DNS と証明書を自動で用意する）。workers.dev の URL もそのまま使える
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "toolhiroba.com", "custom_domain": true },
+    { "pattern": "www.toolhiroba.com", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./out",
     // /tools/abc → /tools/abc/ のように、末尾のスラッシュをそろえる（next.config の trailingSlash と同じ）
