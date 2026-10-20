@@ -12,7 +12,7 @@
 - [ ] **Google AdSense の審査待ち**（2026-10-20 に toolhiroba.com で審査をリクエスト）。通ったら AdSense の管理画面で自動広告の置き場所を決め、data/site.ts の ads.enabled を見直す。落ちたら理由を見て直す
 - [ ] **もしもアフィリエイト**：ツールひろばはメディア審査中。Yahoo!ショッピングは提携済み、Amazon は審査中。提携できたら便利グッズに Yahoo! の価格（Yahoo! の商品検索 API・開発者登録が必要）と Amazon・Yahoo! のボタンを足す
 - [ ] **ふるさと納税**：控除上限の計算ツールを公開済み（au PAY ふるさと納税・ふるさと本舗の広告つき）。審査中の さとふる・ふるさとチョイス・dショッピング・ポケマル が通ったら data/sponsored.ts に足す。ポータル比較データ（data/furusato-portals.ts）を作成中 → 比較ページにする
-- [ ] **Search Console と閲覧数を見る**（2026-10-27ごろ）：https://toolhiroba.com/ のプロパティでサイトマップが読み込まれたか。閲覧数は Cloudflare の Web Analytics（Gmail の方のアカウント）
+- [ ] **Search Console と閲覧数を見る**（2026-10-27ごろ）：https://toolhiroba.com/ のプロパティでサイトマップが読み込まれたか。閲覧数は Cloudflare の Web Analytics（Gmail の方のアカウント）。Bing Webmaster Tools（Google の KAZ chaos アカウントでログイン）も同じ日に確認
 
 ## 余裕があれば
 - [ ] 広告（Google AdSense）を申し込む。審査では運営者情報・問い合わせ先があるほうが通りやすい
@@ -20,6 +20,7 @@
 
 ## 済み
 - [x] 独自ドメイン toolhiroba.com に切り替え（2026-10-20）：エックスサーバーで購入 → ネームサーバーを Cloudflare に → Workers のカスタムドメイン。楽天アプリのURL・許可サイト、Search Console（サイトマップ174ページ成功）、A8 の掲載URL、Vercel からの転送先を変更。workers.dev も残し canonical は toolhiroba.com
+- [x] 見つけてもらう登録（2026-10-21）：Search Console の「アドレス変更」で Vercel の URL → toolhiroba.com を届け出（移行中）。Bing Webmaster Tools に toolhiroba.com を追加（メタタグ msvalidate.01 で確認）、サイトマップ送信。トップページにも canonical
 - [x] AdSense の準備：全ページにコード、ads.txt、広告と Cookie の説明、運営者名「ツールひろば編集部」、問い合わせは Google フォーム（2026-10-20）
 - [x] 次はこちら・お気に入り・最近使ったツール、悩み別記事9本の補強（2026-10-20）
 - [x] Cloudflare に引っ越し（2026-10-20）：https://tool.hiroba.workers.dev
