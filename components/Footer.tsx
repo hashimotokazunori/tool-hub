@@ -14,6 +14,7 @@ const SECTIONS = [
   { href: "/goods/", label: "便利グッズ" },
   { href: "/solutions/", label: "悩みから探す" },
   { href: "/guides/", label: "比較・活用ガイド" },
+  { href: "/furusato/", label: "ふるさと納税サイト比較" },
 ];
 
 export function Footer() {

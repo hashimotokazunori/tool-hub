@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/goods/"),
     page("/guides/"),
     page("/solutions/"),
+    page("/furusato/"),
     page("/about/"),
     page("/disclosure/"),
     page("/privacy/"),

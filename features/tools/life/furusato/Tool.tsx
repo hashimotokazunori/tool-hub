@@ -163,6 +163,10 @@ export default function FurusatoLimit() {
       </div>
       <SavedNote />
 
+      <a href="/furusato/" className={`${ui.card} max-w-md`}>
+        <b className="text-[15px]">ふるさと納税サイトを比べる →</b>
+        <span className="text-xs text-muted">12サイトの支払い方法・ワンストップのネット申請などを比較</span>
+      </a>
       <h3 className={ui.h3}>所得割額はどこに書いてある？</h3>
       <ul className={`${ui.note} list-disc space-y-1 pl-5`}>
         <li>会社員など給与から住民税が引かれている人は、毎年5〜6月ごろ勤務先から渡される「特別徴収税額の決定通知書」の税額の欄にある「所得割額」です。市町村民税と道府県民税（都民税）の2つに分かれているので、合計して入れてください。</li>
