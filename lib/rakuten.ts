@@ -198,7 +198,7 @@ async function call(base: string, params: Record<string, string>): Promise<unkno
       // 原因を調べられるよう、楽天からのエラー内容（鍵は含まれない）と、送った Origin を残す
       const body = (await res.text().catch(() => "")).slice(0, 300);
       // 設定の取り違えを見つけるため、アプリIDの先頭8文字とアクセスキーの文字数だけを残す（鍵そのものは残さない）
-      const shape = `appId=${c.applicationId.slice(0, 8)}…(${c.applicationId.length}文字) accessKey=${c.accessKey.length}文字 affiliateId=${c.affiliateId ? `${c.affiliateId.slice(0, 8)}…` : "なし"}`;
+      const shape = `appId=${c.applicationId.slice(0, 8)}…(${c.applicationId.length}文字) accessKey=${c.accessKey.length}文字(アプリIDと${c.accessKey === c.applicationId ? "同じ" : "違う"}) affiliateId=${c.affiliateId ? `${c.affiliateId.slice(0, 8)}…` : "なし"}`;
       console.warn(`楽天APIの呼び出しに失敗しました（${res.status}）`, base, `Origin=${site.url}`, shape, body);
       return null;
     }
