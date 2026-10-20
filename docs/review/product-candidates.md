@@ -598,3 +598,30 @@
 - PSEマークは、充電器・モバイルバッテリーとも公式ページで確認できなかった。記事で「PSE対応」と書く前に、本体表示か届出情報で確認する
 - 画像は使用条件を確認してから `imageUrl` と `imageLicenseNote` を入れる（メーカーのプレス画像の利用条件など）
 - `affiliateUrl` と `merchantName` は、実際に提携登録した販売先だけを入れる
+
+---
+
+## 追加（2026-10-21）：身軽に出かけるときの小物（travel）
+
+ガイド「身軽に出かけるときに持っていく小物の選び方」（content/guides/pack-small-bag.md）で紹介する7商品。商品は編集部で選び、メーカー公式ページ（直営ストアを含む）で仕様を確認した。データ本体は `data/products.ts`（すべて verified / published）。モバイルバッテリーは既存の `anker-nano-power-bank-10000-45w` を記事から参照している。
+
+| id | 種類 | 確認した公式ページ | 価格 |
+|---|---|---|---|
+| abrasus-small-wallet | ミニ財布 | https://superclassic.jp/products/31812710 | 16,200円（税込・公式ストア） |
+| marna-shupatto-compact-bag-s | 折りたたみエコバッグ | https://marna.jp/shop/g/gS514PU/ | 1,280円（税込・公式ストア） |
+| thermos-joj-151 | 小さい水筒 | https://www.thermos.jp/product/detail/joj-151.html ／ https://www.thermos.jp/product/series/joj-01.html | オープン価格のため入れていない |
+| muji-light-folding-umbrella-50cm | 折りたたみ傘 | https://www.muji.com/jp/ja/store/cmdty/detail/4550723156158 | 1,990円（税込・ネットストア。黒は再入荷待ち） |
+| niteize-s-biner-2-stainless | カラビナ | https://niteize.com/s-biner-stainless-steel-dual-carabiner ／ https://niteize.com/s-biner-microlock-stainless-steel | 米ドル表示のみのため入れていない |
+| elecom-p-sthzero | スマホのハンドストラップ | https://www.elecom.co.jp/products/P-STHZEROBK.html | オープン価格のため入れていない |
+| loop-quiet-2 | 耳栓 | https://www.loopearplugs.com/products/quiet | ユーロ表示のみのため入れていない |
+
+**見送ったもの**
+- エレコム P-STHSI2・P-STHSID（シリコンリングのハンドストラップ）：公式ページで「販売終了」だったため、販売中の ZEROSHOCK P-STHZERO にした
+- マーナ Shupatto アンブレラ：公式ページの寸法（閉じた状態 約11×87.5cm）から長傘と分かったため、折りたたみ傘としては採らなかった
+- MOLDEX 耳栓（メテオ等）：日本向けのメーカー公式商品ページを確認できなかった（業務用の大箱の販売店情報のみ）
+- ETYMOTIC ER20XS：公式サイトの商品URLがトップページに転送され、販売状況を確認できなかった
+- mabu の軽量傘：公式サイトに接続できなかった（SSLエラー）
+
+**人が確認すること**
+- NITE IZE・Loop は公式ページが英語のみ。日本の正規販売店での型番・価格表記
+- エスビナー #2 の公式ページの警告文（「Instructions + Warnings」）は本文を読めなかった

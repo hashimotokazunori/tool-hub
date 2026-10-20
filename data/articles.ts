@@ -7,7 +7,7 @@ import type { Article } from "@/lib/types";
  */
 const AUTHOR = "ツールひろば編集部";
 
-const article = (a: Omit<Article, "author" | "reviewStatus" | "status" | "productIds" | "sources" | "reviewedAt" | "reviewedBy" | "publishedAt"> & Partial<Pick<Article, "sources" | "reviewedAt">>): Article => ({
+const article = (a: Omit<Article, "author" | "reviewStatus" | "status" | "productIds" | "sources" | "reviewedAt" | "reviewedBy" | "publishedAt"> & Partial<Pick<Article, "productIds" | "sources" | "reviewedAt" | "publishedAt">>): Article => ({
   author: AUTHOR,
   reviewStatus: "verified",
   status: "published",
@@ -36,6 +36,21 @@ export const articles: Article[] = [
     ] }),
   article({ id: "csv-mojibake", slug: "csv-mojibake", type: "guide", title: "CSVが文字化けする理由と直し方", description: "Shift_JISとUTF-8の違い、Excelで開くときのBOM、古いシステムに渡すときの注意点。", bodyFile: "guides/csv-mojibake.md", toolSlugs: ["csv-encoding", "excel-csv-converter", "csv-delimiter"], goodsCategoryIds: [], sources: [{ title: "Microsoft サポート「Excel で CSV UTF-8 ファイルを正しく開くには」", url: "https://support.microsoft.com/ja-jp/office/8a935af5-3416-4edd-ba7e-3dfd2bc4a032" }, { title: "Unicode.org「cp932 to Unicode table」（Microsoft）", url: "https://www.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP932.TXT" }] }),
   article({ id: "desk-organizing-steps", slug: "desk-organizing-steps", type: "guide", title: "デスクを片付ける3ステップ", description: "使う頻度で分ける、置き場所を決める、配線をまとめる。収納用品を買う前の予算の決め方も。", bodyFile: "guides/desk-organizing-steps.md", toolSlugs: ["task-priority", "budget", "unit-price"], goodsCategoryIds: ["desk"] }),
+  article({ reviewedAt: "2026-10-21", publishedAt: "2026-10-21", id: "pack-small-bag", slug: "pack-small-bag", type: "guide", title: "身軽に出かけるときに持っていく小物の選び方", description: "小さいバッグひとつで出かけるときの財布・エコバッグ・水筒・傘・カラビナ・スマホストラップ・耳栓・モバイルバッテリーの選び方と、確認したい数字。", bodyFile: "guides/pack-small-bag.md", toolSlugs: ["unit-converter", "unit-price"], goodsCategoryIds: ["travel"],
+    productIds: ["abrasus-small-wallet", "marna-shupatto-compact-bag-s", "thermos-joj-151", "muji-light-folding-umbrella-50cm", "niteize-s-biner-2-stainless", "elecom-p-sthzero", "loop-quiet-2", "anker-nano-power-bank-10000-45w"],
+    sources: [
+      { title: "SUPER CLASSIC「小さい財布 メンズ abrAsus」", url: "https://superclassic.jp/products/31812710" },
+      { title: "マーナ「Shupatto コンパクトバッグ S」", url: "https://marna.jp/shop/g/gS514PU/" },
+      { title: "サーモス「真空断熱ポケットマグ／JOJ-151」", url: "https://www.thermos.jp/product/detail/joj-151.html" },
+      { title: "サーモス「真空断熱ポケットマグ/JOJ-151･181」", url: "https://www.thermos.jp/product/series/joj-01.html" },
+      { title: "無印良品「晴雨兼用 軽量 折りたたみ傘」", url: "https://www.muji.com/jp/ja/store/cmdty/detail/4550723156158" },
+      { title: "Nite Ize「S-Biner Stainless Steel Dual Carabiner」（英語）", url: "https://niteize.com/s-biner-stainless-steel-dual-carabiner" },
+      { title: "Nite Ize「S-Biner MicroLock Stainless Steel」（英語）", url: "https://niteize.com/s-biner-microlock-stainless-steel" },
+      { title: "エレコム「ZEROSHOCK ハンドストラップ P-STHZEROBK」", url: "https://www.elecom.co.jp/products/P-STHZEROBK.html" },
+      { title: "Loop「Loop Quiet 2」（英語）", url: "https://www.loopearplugs.com/products/quiet" },
+      { title: "Anker Japan「Anker Nano Power Bank (10000mAh, 45W, 巻取り式 USB-Cケーブル)」", url: "https://www.ankerjapan.com/products/a1638" },
+      { title: "国土交通省「モバイルバッテリーの機内持込みの新たなルールについて」（2026年4月14日）", url: "https://www.mlit.go.jp/report/press/kouku10_hh_000310.html" },
+    ] }),
   // 悩み別
   article({ reviewedAt: "2026-10-20", id: "desk-cable-clutter", slug: "desk-cable-clutter", type: "solution", title: "デスクを片付けたい", description: "物や配線が散らかって作業に集中できないときの解決のヒントと、使えるツール・便利グッズ。", bodyFile: "solutions/desk-cable-clutter.md", toolSlugs: ["task-priority", "budget", "unit-price"], goodsCategoryIds: ["desk"], sources: [{ title: "東京消防庁「コンセントの掃除を心掛けましょう。」", url: "https://www.tfd.metro.tokyo.lg.jp/lfe/kasai/10_kokoroe/chapter06.html" }, { title: "厚生労働省「情報機器作業における労働衛生管理のためのガイドラインについて」の一部改正について（令和3年12月1日）", url: "https://www.mhlw.go.jp/web/t_doc?dataId=00tc6314&dataType=1&pageNo=1" }] }),
   article({ reviewedAt: "2026-10-20", id: "easier-charging", slug: "easier-charging", type: "solution", title: "充電を楽にしたい", description: "充電器やケーブルが多くて面倒なときに、まとめ方と選び方のヒント。", bodyFile: "solutions/easier-charging.md", toolSlugs: ["electricity-cost"], goodsCategoryIds: ["gadgets"], sources: [{ title: "Apple サポート「iPhoneを高速充電する」", url: "https://support.apple.com/ja-jp/102574" }, { title: "Apple サポート「iPhoneのUSB-Cコネクタで充電および接続する」", url: "https://support.apple.com/ja-jp/105099" }, { title: "NITE 製品安全情報マガジン Vol.506「リチウムイオン電池搭載製品の事故」（2026年8月7日）", url: "https://www.nite.go.jp/jiko/chuikanki/mailmagazin/2026fy/vol506_260807.html" }, { title: "全国家庭電気製品公正取引協議会「よくある質問 Q&A」（電力料金の目安単価）", url: "https://www.eftc.or.jp/qa/" }] }),

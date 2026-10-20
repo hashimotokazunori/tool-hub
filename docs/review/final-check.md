@@ -342,3 +342,17 @@ Part 2
 - https://www.kashimura.com/product/wp113m
 - https://www.kingjim.co.jp/products/tepra/sr-r2500p.html
 - https://www.kingjim.co.jp/products/detail/2274.html
+
+---
+
+## 追加分の確認（2026-10-21）：身軽に出かけるときの小物
+
+- 方法：メーカー公式ページをブラウザで開き、本文と仕様表を読んで確認（ログイン・購入・送信なし）。エレコムは WebFetch が 403 のためブラウザで確認
+- 対象：abrasus-small-wallet、marna-shupatto-compact-bag-s、thermos-joj-151、muji-light-folding-umbrella-50cm、niteize-s-biner-2-stainless、elecom-p-sthzero、loop-quiet-2（URLは product-candidates.md の追加分の表）
+- 記事：guides/pack-small-bag（productIds に上の7件と anker-nano-power-bank-10000-45w）
+- 判定：7件とも公式ページの記載だけで features・pros・cons・specifications を作成。価格は公式ストアに税込表示があるもの（abrAsus・マーナ・無印良品）だけ入れ、priceCheckedAt を 2026-10-21 にした
+- 注意点：
+  - S-Biner の寸法・耐荷重は公式ページのmm・lbs表記。kg（約4.5kg）は10lbsからの換算
+  - 無印良品の傘は 2026-10-21 時点でネットストアの黒が再入荷待ち（cons に記載）
+  - サーモス JOJ-151 の保温・保冷効力は公式ページの試験条件（室温20℃±2℃、6時間）での値
+  - 記事内の飛行機のモバイルバッテリーのルールは、Part 1 で確認した国土交通省の資料と同じ内容

@@ -10,7 +10,7 @@ import type { Product } from "@/lib/types";
  * - imageUrl は使用条件を確認した画像だけ。条件は imageLicenseNote に書く。
  * - 下書きは reviewStatus: "pending"。公式ページで事実確認したら reviewedAt・reviewedBy を入れて "verified"。
  *
- * 2026-10-19・2026-10-20 にメーカー公式ページで仕様・販売状況を確認し、公開している（確認：AI（Claude））。
+ * 2026-10-19・2026-10-20・2026-10-21 にメーカー公式ページで仕様・販売状況を確認し、公開している（確認：AI（Claude））。
  * 調査の記録は docs/review/product-candidates.md と docs/review/final-check.md にある。
  */
 export const products: Product[] = [
@@ -1380,6 +1380,425 @@ export const products: Product[] = [
     "status": "published",
     "updatedAt": "2026-10-20",
     "reviewedAt": "2026-10-20",
+    "reviewedBy": "AI（Claude）が公式ページで確認"
+  },
+  {
+    "id": "niteize-s-biner-2-stainless",
+    "slug": "niteize-s-biner-2-stainless",
+    "name": "S-Biner（エスビナー）ステンレス #2",
+    "brand": "NITE IZE（ナイトアイズ）",
+    "categoryId": "travel",
+    "summary": "S字の両側にゲートがある、ステンレス製の小さめのカラビナ。#2は22×49×8mm。",
+    "features": [
+      "S字型の両側にそれぞれゲート（ステンレスワイヤー）があり、2つの物をつなげられる",
+      "本体はステンレス製で、天候に強いと案内されている",
+      "#1〜#5の5サイズがあり、サイズごとに耐荷重が決められている"
+    ],
+    "pros": [
+      "小さいサイズは、バッグやリュックのストラップに小物を吊るしたり、鍵を1本だけ付けたりするのに向くと公式に案内されている",
+      "両側のゲートで、鍵とバッグのように2つの物を別々に付け外しできる",
+      "#2は22×49×8mmで、鍵と一緒に付けてもかさばりにくい大きさ"
+    ],
+    "cons": [
+      "#2の耐荷重は10lbs（約4.5kg）。重い物を吊るすなら大きいサイズを選ぶ",
+      "ゲートを固定するロックはない（ひねって固定するレバー付きは同社の別製品「S-Biner MicroLock」）",
+      "公式ページは英語（米国向け）で、重さや日本での価格の記載がない"
+    ],
+    "specifications": {
+      "サイズ": "#2",
+      "寸法": "22×49×8mm（0.8×1.9×0.3インチ）",
+      "耐荷重": "10lbs（約4.5kg）",
+      "材質": "ステンレス（ゲートもステンレスワイヤー）",
+      "仕上げ": "Black / Stainless",
+      "公式ストアのSKU": "SB2-03-01、SB2-03-11 など"
+    },
+    "currency": "JPY",
+    "officialUrl": "https://niteize.com/s-biner-stainless-steel-dual-carabiner",
+    "market": {
+      "keyword": "ナイトアイズ エスビナー ステンレス #2",
+      "match": [
+        [
+          "SB2-03"
+        ],
+        [
+          "エスビナー",
+          "#2",
+          "ステンレス"
+        ],
+        [
+          "S-Biner",
+          "#2",
+          "ステンレス"
+        ]
+      ],
+      "exclude": [
+        "アルミ",
+        "プラスチック",
+        "マイクロロック",
+        "MicroLock"
+      ]
+    },
+    "sourceUrls": [
+      "https://niteize.com/s-biner-stainless-steel-dual-carabiner",
+      "https://niteize.com/s-biner-microlock-stainless-steel"
+    ],
+    "reviewStatus": "verified",
+    "status": "published",
+    "updatedAt": "2026-10-21",
+    "reviewedAt": "2026-10-21",
+    "reviewedBy": "AI（Claude）が公式ページで確認"
+  },
+  {
+    "id": "abrasus-small-wallet",
+    "slug": "abrasus-small-wallet",
+    "name": "小さい財布 abrAsus（メンズ）",
+    "brand": "SUPER CLASSIC（abrAsus）",
+    "categoryId": "travel",
+    "summary": "縦約60×横約90mm・重さ32gの、お札を折らずに入れられる、カードに近い大きさの革財布。",
+    "features": [
+      "お札を折らずに収納するタイプで、出し入れの手間が少ない",
+      "カードは約5枚が入る設計（よく使うカードを選んで持つ前提）",
+      "小銭入れに専用の蓋をつけず、本体を蓋と兼用してワンアクションで開けられる"
+    ],
+    "pros": [
+      "縦約60mm×横約90mm・厚さ約10mm（未収納時）・重さ32gで、手のひらやポケットに収まる大きさ",
+      "グッドデザイン賞と特許を取得した構造と案内されている",
+      "日本の職人が革の裁断から縫製まで一つずつ作っていると案内されている"
+    ],
+    "cons": [
+      "カードは約5枚までの設計で、たくさん持ち歩く人には向かない",
+      "16,200円（税込）で、ミニ財布の中では高めの価格帯",
+      "カード収納部は、未収納時や使い始めに表面にわずかなたわみやふくらみが見られる場合があると公式に注記されている"
+    ],
+    "specifications": {
+      "サイズ": "縦 約60mm×横 約90mm",
+      "厚さ": "約10mm（未収納時）",
+      "重さ": "32g",
+      "素材": "牛革エンボス加工（内装：コットン基布ウレタン加工）",
+      "収納": "札入れ×1、小銭入れ×1、カードケース×1、ハトメ×1（リング径2mm）",
+      "カラー": "ブラック、キャメル、ネイビー、ダークブラウン、ダークグリーン、ライトグレー、モスグレー、チョコ×ターコイズ、レッド"
+    },
+    "price": 16200,
+    "currency": "JPY",
+    "priceCheckedAt": "2026-10-21",
+    "officialUrl": "https://superclassic.jp/products/31812710",
+    "market": {
+      "keyword": "abrAsus 小さい財布",
+      "match": [
+        [
+          "abrAsus",
+          "小さい財布"
+        ],
+        [
+          "アブラサス",
+          "小さい財布"
+        ]
+      ],
+      "exclude": [
+        "いっぱい入る",
+        "ブッテーロ",
+        "プエブロ",
+        "アドバン",
+        "左利き",
+        "AirTag",
+        "レディース",
+        "ダンボー",
+        "ウルトラマン",
+        "ダダ",
+        "Orobianco",
+        "KURASHINA",
+        "Sugar",
+        "ローランド"
+      ],
+      "minPrice": 10000
+    },
+    "sourceUrls": [
+      "https://superclassic.jp/products/31812710"
+    ],
+    "reviewStatus": "verified",
+    "status": "published",
+    "updatedAt": "2026-10-21",
+    "reviewedAt": "2026-10-21",
+    "reviewedBy": "AI（Claude）が公式ページで確認"
+  },
+  {
+    "id": "marna-shupatto-compact-bag-s",
+    "slug": "marna-shupatto-compact-bag-s",
+    "name": "Shupatto コンパクトバッグ S",
+    "brand": "マーナ",
+    "categoryId": "travel",
+    "summary": "両端を引っ張ると一気に帯状になり、巻いて留めるだけでたためる、ポケットにも入る小さめのエコバッグ。",
+    "features": [
+      "両側のテープを持って引っ張ると帯状になり、2回半分に折ってから巻いてバンドで留めるだけでまとまる",
+      "容量約7.5L・耐荷重3kg。500mLのペットボトルが6本入る",
+      "底マチフリー構造で、底面が広いお弁当も入れられる"
+    ],
+    "pros": [
+      "たたむと約4×6×4cmで、ポケットや小さいバッグにも入る",
+      "薄く丈夫なリップストップのポリエステル生地を使用",
+      "洗濯できる（洗濯ネットに入れ、弱水流で単独洗い）"
+    ],
+    "cons": [
+      "耐荷重は3kgで、まとめ買いには小さい（M・Lサイズもある）",
+      "重い荷物を入れたまま長時間吊り下げて放置しない、鋭利なものを入れない・引きずらないよう注意書きがある",
+      "公式ページに重さの記載がない。使い始めや濡れたものを直接入れたときに色落ちすることがある"
+    ],
+    "specifications": {
+      "品番": "S514（クリアスカイ、カシューナッツ、ブリックブラウン、フォギーレイク、エバーグリーン、ジェットブラック、ピオニーペタル）ほか、S466・S519の色柄あり",
+      "材質": "ポリエステル",
+      "容量": "約7.5L",
+      "耐荷重": "3kg",
+      "サイズ": "使用時 約30×26cm／折りたたみ時 約4×6×4cm",
+      "原産国": "中国"
+    },
+    "price": 1280,
+    "currency": "JPY",
+    "priceCheckedAt": "2026-10-21",
+    "officialUrl": "https://marna.jp/shop/g/gS514PU/",
+    "market": {
+      "keyword": "マーナ シュパット コンパクトバッグ S",
+      "match": [
+        [
+          "S514"
+        ],
+        [
+          "S519"
+        ],
+        [
+          "S466"
+        ]
+      ]
+    },
+    "sourceUrls": [
+      "https://marna.jp/shop/g/gS514PU/"
+    ],
+    "reviewStatus": "verified",
+    "status": "published",
+    "updatedAt": "2026-10-21",
+    "reviewedAt": "2026-10-21",
+    "reviewedBy": "AI（Claude）が公式ページで確認"
+  },
+  {
+    "id": "loop-quiet-2",
+    "slug": "loop-quiet-2",
+    "name": "Loop Quiet 2",
+    "brand": "Loop",
+    "categoryId": "travel",
+    "summary": "柔らかいシリコン製の、繰り返し使える耳栓。キーホルダー型の収納ケースが付く。",
+    "features": [
+      "騒音を24dB（SNR）下げると案内されている。周りの音を完全には遮らない設計",
+      "柔らかく曲がるソフトタッチのシリコン製で、長時間着けやすいと案内されている",
+      "イヤーチップはXS・S・M・Lの4サイズが付属"
+    ],
+    "pros": [
+      "キーホルダー型のケースが付属し、鍵やバッグに付けて持ち歩ける",
+      "電池も充電も要らない",
+      "通勤や飛行機、混んだ場所での雑音を和らげる用途が案内されている"
+    ],
+    "cons": [
+      "遮音は24dB（SNR）で、騒音を完全に消すものではない",
+      "横向きで一晩中使う用途には、同社の別製品（Loop Dream）が向くと公式に案内されている",
+      "公式ページは英語（ヨーロッパ向け・価格はユーロ表示）で、日本での価格や重さの記載がない"
+    ],
+    "specifications": {
+      "遮音性能": "24dB（SNR）",
+      "素材": "シリコン",
+      "内容物": "イヤープラグ1ペア、キーホルダー型ケース1個、シリコン製イヤーチップ4組（XS・S・M・L）",
+      "カラー": "White / Violet / Black / Mint",
+      "電源": "不要"
+    },
+    "currency": "JPY",
+    "officialUrl": "https://www.loopearplugs.com/products/quiet",
+    "market": {
+      "keyword": "Loop Quiet 2 耳栓",
+      "match": [
+        [
+          "Loop Quiet 2"
+        ],
+        [
+          "ループ",
+          "クワイエット",
+          "2"
+        ]
+      ],
+      "exclude": [
+        "Dream",
+        "Engage",
+        "Experience",
+        "Switch",
+        "イヤーチップ"
+      ]
+    },
+    "sourceUrls": [
+      "https://www.loopearplugs.com/products/quiet"
+    ],
+    "reviewStatus": "verified",
+    "status": "published",
+    "updatedAt": "2026-10-21",
+    "reviewedAt": "2026-10-21",
+    "reviewedBy": "AI（Claude）が公式ページで確認"
+  },
+  {
+    "id": "thermos-joj-151",
+    "slug": "thermos-joj-151",
+    "name": "真空断熱ポケットマグ 0.15L JOJ-151",
+    "brand": "サーモス",
+    "categoryId": "travel",
+    "summary": "容量0.15L・本体重量約0.1kgの、小さなカバンにも入れやすいステンレス製魔法びん構造のマグ。",
+    "features": [
+      "ステンレス製魔法びん構造で、保温効力55℃以上・保冷効力11℃以下（6時間）",
+      "しっかり閉まるスクリュータイプ。フタを外せばそのまま飲める",
+      "パッキンが着脱しやすく、丸洗いできる（本体は水中に放置しないよう注意書きあり）"
+    ],
+    "pros": [
+      "本体寸法は約4.5×4.5×14.5cmとスリムで、小さなカバンにも入れやすいと案内されている",
+      "結露せず、もれないと案内されている",
+      "スポーツ飲料も入れられる（温めたスポーツ飲料は不可）"
+    ],
+    "cons": [
+      "容量は0.15Lで、たくさん飲む日には足りない（同じシリーズに0.18LのJOJ-181がある）",
+      "メーカー希望小売価格はオープン価格",
+      "公式ページに本体・フタ・パッキンの素材や、食器洗い乾燥機への対応の記載がない"
+    ],
+    "specifications": {
+      "品番": "JOJ-151",
+      "カラー": "アイボリー（IV）、ペールパープル（PAPL）、アイスブルー（ICB）、オリーブブラウン（OBW）、スモークブラック（SMB）",
+      "実容量": "0.15L（せんユニット下端まで）",
+      "保温効力（6時間）": "55℃以上",
+      "保冷効力（6時間）": "11℃以下",
+      "口径": "約3.0cm",
+      "本体寸法": "約4.5×4.5×14.5cm（幅×奥行×高さ）",
+      "本体重量": "約0.1kg"
+    },
+    "currency": "JPY",
+    "officialUrl": "https://www.thermos.jp/product/detail/joj-151.html",
+    "market": {
+      "keyword": "サーモス JOJ-151",
+      "match": [
+        [
+          "JOJ-151"
+        ]
+      ],
+      "exclude": [
+        "パッキン",
+        "せんユニット"
+      ]
+    },
+    "sourceUrls": [
+      "https://www.thermos.jp/product/detail/joj-151.html",
+      "https://www.thermos.jp/product/series/joj-01.html"
+    ],
+    "reviewStatus": "verified",
+    "status": "published",
+    "updatedAt": "2026-10-21",
+    "reviewedAt": "2026-10-21",
+    "reviewedBy": "AI（Claude）が公式ページで確認"
+  },
+  {
+    "id": "elecom-p-sthzero",
+    "slug": "elecom-p-sthzero",
+    "name": "ZEROSHOCK ハンドストラップ P-STHZERO",
+    "brand": "エレコム",
+    "categoryId": "travel",
+    "summary": "直径7mmの丸紐に360度回転するカラビナを付けた、手首や腕に掛けて使うスマホ用ハンドストラップ。",
+    "features": [
+      "手首や腕から提げて持ち歩け、落下・盗難・紛失の防止にもなると案内されている",
+      "2カ所のアジャスターで長さを調節できる。カラビナは360度回転式で、ストラップが絡みにくい",
+      "約0.3mmのステンレス製ストラップホールシートが付属し、ケースにストラップホールがなくても使える（挟んだまま充電できる）"
+    ],
+    "pros": [
+      "両手が空くので、スマホをバッグから出し入れする回数を減らせる",
+      "耐荷重は約10kgまで（ただし250g以上の機器本体には使えない）",
+      "ストラップホールシートはステンレス製で、同社のPVC製シートと比べて約4倍の耐久性と案内されている"
+    ],
+    "cons": [
+      "250g以上の機器本体には使用できない",
+      "シリコン製のケースには使えない。ケーブル穴が大きく開いたケースも推奨されていない（推奨サイズは縦6mm×横12mm）",
+      "公式ページはオープン価格で、重さの記載がない"
+    ],
+    "specifications": {
+      "型番": "P-STHZEROBK（ブラック）/ P-STHZEROGY（グレー）/ P-STHZERORD（レッド）",
+      "内容物": "ハンドストラップ×1、ストラップホールシート（1口）×1",
+      "サイズ": "ハンドストラップ：全長約405mm、ストラップホールシート：幅約45mm×厚み約0.3mm×高さ約32mm",
+      "材質": "ハンドストラップ：ポリエステル・ポリカーボネート・亜鉛合金、ストラップホールシート：ステンレス・亜鉛合金",
+      "耐荷重": "約10kgまで（250g以上の機器本体には使用不可）",
+      "推奨ケース": "ハイブリッドケース・ソフトケース（シリコン製は不可）"
+    },
+    "currency": "JPY",
+    "officialUrl": "https://www.elecom.co.jp/products/P-STHZEROBK.html",
+    "market": {
+      "keyword": "エレコム P-STHZERO",
+      "match": [
+        [
+          "P-STHZERO"
+        ]
+      ]
+    },
+    "sourceUrls": [
+      "https://www.elecom.co.jp/products/P-STHZEROBK.html"
+    ],
+    "reviewStatus": "verified",
+    "status": "published",
+    "updatedAt": "2026-10-21",
+    "reviewedAt": "2026-10-21",
+    "reviewedBy": "AI（Claude）が公式ページで確認"
+  },
+  {
+    "id": "muji-light-folding-umbrella-50cm",
+    "slug": "muji-light-folding-umbrella-50cm",
+    "name": "晴雨兼用 軽量 折りたたみ傘 50cm",
+    "brand": "無印良品",
+    "categoryId": "travel",
+    "summary": "約137gの晴雨兼用の折りたたみ傘。たたむと全長約21.5cmで、鞄に入れたままにしやすい。",
+    "features": [
+      "UVカット率90％以上の生地を使った晴雨兼用傘",
+      "重さ約137g",
+      "親骨50cm・開いたときの直径約80cm。たたむと全長約21.5cm・直径約4cm"
+    ],
+    "pros": [
+      "常に鞄に入れたままでも重さを感じにくいと案内されている",
+      "たたむと約21.5cmで、小さいバッグにも入れやすい長さ",
+      "税込1,990円で、店舗受け取り・コンビニ受け取りもできる"
+    ],
+    "cons": [
+      "開いたときの直径は約80cm（親骨50cm）で、大きめの折りたたみ傘より覆える範囲が狭い",
+      "公式ページに骨・生地の素材や耐風性の記載がない",
+      "2026-10-21時点で、ネットストアの黒は再入荷待ち（再入荷の通知を受け付けている）"
+    ],
+    "specifications": {
+      "商品番号": "23156158（黒）",
+      "重さ": "約137g",
+      "親骨": "50cm",
+      "開いたとき": "全長 約49cm・直径 約80cm",
+      "たたんだとき": "全長 約21.5cm・直径 約4cm",
+      "ストラップの長さ": "約14.5cm",
+      "生地": "UVカット率90％以上"
+    },
+    "price": 1990,
+    "currency": "JPY",
+    "priceCheckedAt": "2026-10-21",
+    "officialUrl": "https://www.muji.com/jp/ja/store/cmdty/detail/4550723156158",
+    "market": {
+      "keyword": "無印良品 晴雨兼用 軽量 折りたたみ傘",
+      "match": [
+        [
+          "無印良品",
+          "晴雨兼用",
+          "軽量",
+          "折りたたみ傘"
+        ]
+      ],
+      "exclude": [
+        "傘袋"
+      ]
+    },
+    "sourceUrls": [
+      "https://www.muji.com/jp/ja/store/cmdty/detail/4550723156158"
+    ],
+    "reviewStatus": "verified",
+    "status": "published",
+    "updatedAt": "2026-10-21",
+    "reviewedAt": "2026-10-21",
     "reviewedBy": "AI（Claude）が公式ページで確認"
   }
 ];
