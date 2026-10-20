@@ -21,9 +21,9 @@ export const site = {
   locale: "ja_JP",
   operator: {
     /** 運営者名。空なら運営者名は表示しない */
-    name: "" as string,
+    name: "ツールひろば編集部" as string,
     /** 問い合わせ先のメールアドレスまたはフォームのURL。空なら問い合わせページとリンクを出さない */
-    contact: "" as string,
+    contact: "https://docs.google.com/forms/d/e/1FAIpQLScaKvsmdpYHfeC6CWrEQscGRQhEvA9hqr14y0NbzPhiS-nyBA/viewform" as string,
   },
   /** プライバシーポリシーの制定日（例: "2026年11月1日"）。空なら表示しない */
   privacyPolicyDate: "" as string,
