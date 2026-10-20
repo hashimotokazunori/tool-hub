@@ -3,7 +3,7 @@
 // 作り方：STATIC_EXPORT=1 npm run build:static → npx wrangler deploy（.github/workflows/deploy.yml が自動でやる）
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tool-hub",
+  "name": "tool",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./out",
