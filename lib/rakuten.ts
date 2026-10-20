@@ -70,9 +70,10 @@ export function matchesProduct(name: string, match: string[][], exclude: string[
   return match.some((group) => group.every((w) => n.includes(normalizeName(w))));
 }
 /** 中古・互換品・部品・まとめ売りなどは別の商品なので比べない */
-const EXCLUDE_ALWAYS = ["中古", "互換", "ジャンク", "訳あり", "レンタル", "部品", "交換用", "替え", "用蓋", "用フタ", "用ふた", "対応製品", "対応機種", "パッキン", "法人限定", "業務用", "まとめ買い", "ケース販売", "セット販売"];
+const EXCLUDE_ALWAYS = ["中古", "互換", "ジャンク", "訳あり", "レンタル", "部品", "交換用", "替え", "用蓋", "用フタ", "用ふた", "対応製品", "対応機種", "用パッキン", "法人限定", "業務用", "まとめ買い", "ケース販売", "セット販売"];
 /** 「×24」「24個セット」「3個組」のような、複数個のまとめ売り */
-const EXCLUDE_PATTERNS = [/[×✕]\s*\d+/, /\d+\s*(個|点|本|枚|台|箱)\s*(セット|組|入り?|パック)/];
+// 「4L×2」のように単位や英字のすぐ後の × は商品の仕様なので除かない
+const EXCLUDE_PATTERNS = [/(?<![0-9A-Za-zＡ-Ｚａ-ｚ])[×✕]\s*\d+/, /\d+\s*(個|点|本|枚|台|箱)\s*(セット|組|入り?|パック)/];
 
 /** 中央値から極端に外れた価格（部品・まとめ売りの取りこぼし）を除く */
 export function dropOutliers<T extends { price: number }>(list: T[]): T[] {
