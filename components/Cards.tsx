@@ -199,6 +199,11 @@ function TrustMeta({ article }: { article: Article }) {
 export function GuideFeature({ article }: { article: Article }) {
   return (
     <Link href={`/guides/${article.slug}/`} className="group relative flex min-w-0 flex-col gap-3 overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-guide-soft via-panel to-accent-soft p-6 text-ink no-underline shadow-card transition duration-200 hover:shadow-lift sm:p-8">
+      {ARTICLE_IMAGES.has(article.slug) && (
+        <span className="-mx-6 -mt-6 mb-1 block overflow-hidden border-b border-line sm:-mx-8 sm:-mt-8">
+          <ArticleImage slug={article.slug} />
+        </span>
+      )}
       <span className={`${ui.eyebrow} text-guide`}>Feature · 特集</span>
       <b className="text-[clamp(1.3rem,3vw,1.9rem)] leading-snug font-extrabold tracking-tight">{article.title}</b>
       <span className="max-w-2xl leading-relaxed text-muted">{article.description}</span>
@@ -211,7 +216,13 @@ export function GuideFeature({ article }: { article: Article }) {
 export function GuideRow({ article }: { article: Article }) {
   return (
     <Link href={`/guides/${article.slug}/`} className="group flex min-w-0 items-start gap-3 rounded-2xl px-3 py-4 text-ink no-underline transition hover:bg-panel hover:shadow-card">
-      <Icon name="book" size={20} className="mt-0.5 shrink-0 text-guide" />
+      {ARTICLE_IMAGES.has(article.slug) ? (
+        <span className="w-28 shrink-0 overflow-hidden rounded-lg border border-line sm:w-36">
+          <ArticleImage slug={article.slug} />
+        </span>
+      ) : (
+        <Icon name="book" size={20} className="mt-0.5 shrink-0 text-guide" />
+      )}
       <span className="flex min-w-0 flex-col gap-1">
         <b className="leading-snug group-hover:underline">{article.title}</b>
         <span className="text-sm text-muted">{article.description}</span>

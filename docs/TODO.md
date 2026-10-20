@@ -14,7 +14,6 @@
 - [ ] **ふるさと納税**：控除上限の計算ツールを公開済み（au PAY ふるさと納税・ふるさと本舗の広告つき）。審査中の さとふる・ふるさとチョイス・dショッピング・ポケマル が通ったら data/sponsored.ts に足す。ポータル比較データ（data/furusato-portals.ts）を作成中 → 比較ページにする
 - [ ] **Search Console と閲覧数を見る**（2026-10-27ごろ）：https://toolhiroba.com/ のプロパティでサイトマップが読み込まれたか。閲覧数は Cloudflare の Web Analytics（Gmail の方のアカウント）。Bing Webmaster Tools（Google の KAZ chaos アカウントでログイン）も同じ日に確認
 
-- [ ] **記事イラストの残り12枚**（Gemini の画像作成の上限で止まった）：mojibake-files・manage-deadlines・review-monthly-spending・pack-light・furusato-one-stop・furusato-deadline・ガイド6本（heic-to-jpg・compress-pdf-for-email・warikan-tips・choose-charger-mobile-battery・csv-mojibake・desk-organizing-steps）。Gemini の同じチャット（ふるさと納税記事用イラストの作成依頼）で「同じタッチ・同じ条件で次の1枚」と頼み、画面から切り出して `node scripts/crop-illustration.mjs <png> <slug>`
 - [ ] **使用例の写真を残りのツールにも**：`scripts/tool-shots.mjs` の SHOTS に足して撮る（今は人気20ツール。画像・PDF系はファイルを入れる手順が要る）
 
 ## 余裕があれば
@@ -22,6 +21,7 @@
 - [ ] 楽天の価格取得が失敗したときだけ、ビルドログに「アプリIDの先頭・キーの文字数・アプリIDと同じか」を出している（`lib/rakuten.ts`）。安定したら消してよい
 
 ## 済み
+- [x] 記事の冒頭イラスト（2026-10-21）：記事19本すべてに Gemini で作ったイラスト（見本と同じタッチ）。記事ページ・悩み別/ガイドの一覧・関連記事のカードに表示。新しい記事を足したら、Gemini の同じチャットで1枚作り `node scripts/crop-illustration.mjs <png> <slug>`
 - [x] 独自ドメイン toolhiroba.com に切り替え（2026-10-20）：エックスサーバーで購入 → ネームサーバーを Cloudflare に → Workers のカスタムドメイン。楽天アプリのURL・許可サイト、Search Console（サイトマップ174ページ成功）、A8 の掲載URL、Vercel からの転送先を変更。workers.dev も残し canonical は toolhiroba.com
 - [x] 見つけてもらう登録（2026-10-21）：Search Console の「アドレス変更」で Vercel の URL → toolhiroba.com を届け出（移行中）。Bing Webmaster Tools に toolhiroba.com を追加（メタタグ msvalidate.01 で確認）、サイトマップ送信。トップページにも canonical
 - [x] AdSense の準備：全ページにコード、ads.txt、広告と Cookie の説明、運営者名「ツールひろば編集部」、問い合わせは Google フォーム（2026-10-20）
