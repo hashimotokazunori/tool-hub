@@ -173,7 +173,8 @@ export const marketEnabled = () => credentials() !== null;
 /** 楽天APIは短い間隔で同じ呼び出しを続けると止められるので、1件ずつ間をあけて呼ぶ */
 let queue: Promise<unknown> = Promise.resolve();
 function throttled<T>(fn: () => Promise<T>): Promise<T> {
-  const run = queue.then(() => new Promise((r) => setTimeout(r, 400))).then(fn);
+  // アプリの登録は「1秒に1回」なので、1.1秒ずつあける
+  const run = queue.then(() => new Promise((r) => setTimeout(r, 1100))).then(fn);
   queue = run.catch(() => undefined);
   return run;
 }
@@ -191,7 +192,7 @@ async function call(base: string, params: Record<string, string>): Promise<unkno
       }),
     );
     if (res.status === 429) {
-      await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
+      await new Promise((r) => setTimeout(r, 3000 * (attempt + 1)));
       continue;
     }
     if (!res.ok) {
