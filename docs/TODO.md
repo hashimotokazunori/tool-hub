@@ -3,8 +3,9 @@
 最終更新：2026-10-20（午後）
 
 ## 近いうちに
-- [ ] **A8.net：広告を置いたページのURLを届け出る**（A8「参加中プログラム」→各プログラムの「広告掲載URL管理」。別ウィンドウで開くので本人が操作）
-  - 2026-10-20 に提携済み7件の文字リンクを22ツールのページに設置済み（data/sponsored.ts）。ページ上部に「PR」表示あり
+- [ ] **A8.net：審査中の広告が通ったら置く**
+  - 2026-10-20 に提携済み7件の文字リンクを22ツールのページに設置し、A8 に掲載URL（計24件）も届け出た（data/sponsored.ts）。ページ上部に「PR」表示あり
+  - 広告を置くページを増やしたら、掲載URLも届け出る：`https://media-console.a8.net/common/oauth-login?service=media_site_url_manager&programId=<プログラムID>` を開いて入力
   - 審査中3件（Bandicam・MiriCanvas・Adobe）が通ったら、data/sponsored.ts に足す（A8 の「通常広告用」をそのまま使う。1ページ2件まで）
   - Adobe は月額プランのみ対象（年額一括・アプリからの申込は対象外）。Movavi はクレカ・PayPal 決済のみ対象
 - [ ] **Vercel の Pro プラン（月20ドル）への切り替え**：今は Hobby（無料）のままでよい。次のどれかに当てはまったら切り替える（または Cloudflare Pages など無料で商用OKのサービスに移す）
