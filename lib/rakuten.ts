@@ -59,7 +59,7 @@ export function normalizeName(s: string): string {
   return s
     .normalize("NFKC")
     .toUpperCase()
-    .replace(/[\s\-‐－―ー_/／・()（）[\]【】「」『』.,、。]/g, "");
+    .replace(/[\s\-‐－―ー−–—_/／・()（）[\]【】「」『』.,、。]/g, "");
 }
 
 /** 商品名が、登録した型番などの条件に合うか。match はどれか1組の語がすべて含まれていれば合格 */

@@ -40,6 +40,7 @@ const match = [["PDA-STN34S"]];
 describe("楽天の価格データの読み取り", () => {
   it("名前の比べ方（全角・記号・大文字小文字をそろえる）", () => {
     expect(normalizeName("ＰＤＡ－ｓｔｎ３４Ｓ（ブラック）")).toBe("PDASTN34Sブラック");
+    expect(normalizeName("PDA−STN79GY")).toBe("PDASTN79GY");
     expect(matchesProduct("Anker Nano Power Bank (10000mAh, 45W)", [["A1638"], ["Nano Power Bank", "10000", "45W"]])).toBe(true);
     expect(matchesProduct("Anker Nano Charger 45W", [["A1638"], ["Nano Power Bank", "10000", "45W"]])).toBe(false);
     expect(matchesProduct("SR-R2500P対応 テープ", [["SR-R2500P"]], ["対応"])).toBe(false);
