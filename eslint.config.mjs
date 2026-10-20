@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // npm install でコピーされる pdf.js のワーカー（外部ライブラリ）
     "public/pdf.worker.min.mjs",
+    // wrangler dev の作業用ファイル
+    ".wrangler/**",
   ]),
 ]);
 

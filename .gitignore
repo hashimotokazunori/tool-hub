@@ -45,3 +45,6 @@ next-env.d.ts
 
 # npm install でコピーされる
 public/pdf.worker.min.mjs
+
+# cloudflare
+/.wrangler/

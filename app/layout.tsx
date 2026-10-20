@@ -41,7 +41,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <NavLinks variant="bar" />
-        <Analytics />
+        {site.cloudflareBeacon ? (
+          <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: site.cloudflareBeacon })} />
+        ) : (
+          <Analytics />
+        )}
       </body>
     </html>
   );

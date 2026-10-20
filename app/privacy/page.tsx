@@ -18,13 +18,23 @@ export default function PrivacyPage() {
       </p>
       <p>「結果をリンクで共有」を使うと、入力内容がリンク（URLの「#」より後ろ）に含まれます。この部分はサーバーに送られませんが、リンクを受け取った人は内容を見られるため、共有する相手にご注意ください。</p>
       <h2>アクセス解析・広告</h2>
-      <p>
-        当サイトは、閲覧数の把握とサイトの改善のために、Vercel Inc. の「Vercel Web Analytics」を使っています。取得するのは、見られたページのURL、参照元、国・地域、ブラウザやOS・端末の種類などで、Cookieは使わず、個人を特定できる情報は集めません。訪問者の識別に使う値は、日ごとに破棄されます。詳しくは
-        <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">
-          Vercel のプライバシーに関する説明
-        </a>
-        をご覧ください。
-      </p>
+      {site.cloudflareBeacon ? (
+        <p>
+          当サイトは、閲覧数の把握とサイトの改善のために、Cloudflare, Inc. の「Cloudflare Web Analytics」を使っています。取得するのは、見られたページのURL、参照元、国・地域、ブラウザやOS・端末の種類、表示の速さなどで、Cookieは使わず、個人を特定できる情報は集めません。詳しくは
+          <a href="https://www.cloudflare.com/web-analytics/" target="_blank" rel="noopener noreferrer">
+            Cloudflare Web Analytics の説明
+          </a>
+          をご覧ください。
+        </p>
+      ) : (
+        <p>
+          当サイトは、閲覧数の把握とサイトの改善のために、Vercel Inc. の「Vercel Web Analytics」を使っています。取得するのは、見られたページのURL、参照元、国・地域、ブラウザやOS・端末の種類などで、Cookieは使わず、個人を特定できる情報は集めません。訪問者の識別に使う値は、日ごとに破棄されます。詳しくは
+          <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">
+            Vercel のプライバシーに関する説明
+          </a>
+          をご覧ください。
+        </p>
+      )}
       <p>便利グッズのページでは、楽天市場の商品写真を楽天のサーバーから読み込んで表示します。このとき、お使いのブラウザから楽天のサーバーに通信が発生します。楽天市場へのリンクから移動した先での情報の取り扱いは、楽天グループのプライバシーポリシーに従います。</p>
       <p>
         当サイトは、アフィリエイトサービス「A8.net」（株式会社ファンコミュニケーションズ）を利用しています。A8.netの広告を表示すると、表示回数の計測のためにA8.netのサーバーへ通信が発生します。リンクを押すと、成果の計測のためにCookieなどが使われることがあります。詳しくは

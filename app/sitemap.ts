@@ -5,6 +5,9 @@ import { site } from "@/data/site";
 import { absoluteUrl } from "@/lib/seo";
 
 /** 公開済みのページだけを載せる（下書き・中身のないカテゴリは載せない） */
+// ビルド時に1回だけ作る（静的書き出しでも使えるように）
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const page = (path: string, lastModified?: string): MetadataRoute.Sitemap[number] => ({ url: absoluteUrl(path), ...(lastModified ? { lastModified } : {}) });
   return [

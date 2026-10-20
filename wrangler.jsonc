@@ -1,0 +1,15 @@
+// Cloudflare Workers に、書き出した静的ファイル（out/）だけを置く設定。
+// サーバーの処理は使わないので、無料プランの処理時間などの制限にかからない。
+// 作り方：STATIC_EXPORT=1 npm run build:static → npx wrangler deploy（.github/workflows/deploy.yml が自動でやる）
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tool-hub",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    // /tools/abc → /tools/abc/ のように、末尾のスラッシュをそろえる（next.config の trailingSlash と同じ）
+    "html_handling": "auto-trailing-slash",
+    // ないページは out/404.html を 404 で返す
+    "not_found_handling": "404-page"
+  }
+}

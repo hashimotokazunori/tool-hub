@@ -1,0 +1,53 @@
+# 全ページを書き出して Cloudflare に置く。
+# main に push したときと、6時間ごと（楽天の価格を取り直すため）に動く。
+# 必要な Secrets（GitHub のリポジトリ → Settings → Secrets and variables → Actions）：
+#   CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID,
+#   RAKUTEN_APPLICATION_ID, RAKUTEN_ACCESS_KEY, RAKUTEN_AFFILIATE_ID
+# 必要な Variables：NEXT_PUBLIC_SITE_URL（本番のURL）、NEXT_PUBLIC_CF_BEACON_TOKEN（Cloudflare Web Analytics、任意）
+name: Cloudflare に公開
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # 日本時間の 3時・9時・15時・21時ごろ
+    - cron: "0 0,6,12,18 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Cloudflare の鍵を登録するまでは何もしない（失敗の通知を出さない）
+    env:
+      READY: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.READY == 'true'
+      - uses: actions/setup-node@v4
+        if: env.READY == 'true'
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+        if: env.READY == 'true'
+      - name: 全ページを書き出す
+        if: env.READY == 'true'
+        run: npm run build:static
+        env:
+          STATIC_EXPORT: "1"
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          NEXT_PUBLIC_CF_BEACON_TOKEN: ${{ vars.NEXT_PUBLIC_CF_BEACON_TOKEN }}
+          RAKUTEN_APPLICATION_ID: ${{ secrets.RAKUTEN_APPLICATION_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          RAKUTEN_AFFILIATE_ID: ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+      - name: Cloudflare に置く
+        if: env.READY == 'true'
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
