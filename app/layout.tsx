@@ -46,8 +46,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <NavLinks variant="bar" />
+        {/* 運営者の端末（/nocount.html で設定）は数えない。それ以外は今までどおり Cloudflare の計測を読み込む */}
         {site.cloudflareBeacon ? (
-          <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: site.cloudflareBeacon })} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{if(localStorage.getItem("no_count")==="1")return}catch(e){}var s=document.createElement("script");s.defer=true;s.src="https://static.cloudflareinsights.com/beacon.min.js";s.setAttribute("data-cf-beacon",${JSON.stringify(JSON.stringify({ token: site.cloudflareBeacon }))});document.body.appendChild(s)})();`,
+            }}
+          />
         ) : (
           <Analytics />
         )}
