@@ -5,10 +5,21 @@ import type { Article, Category, Product, Tool } from "@/lib/types";
 import { MinPrice, ProductImage, Stars } from "./Market";
 import { goodsCategoryIcon, Icon, toolCategoryIcon, type IconName } from "./icons";
 import { gradientFor, tone as tones, ui, type Tone } from "./styles";
+import articleImages from "@/data/article-images.json";
 import toolShots from "@/data/tool-shots.json";
 
 /** 使用例の画面写真があるツール */
 const SHOTS = new Set<string>(toolShots);
+
+/** 冒頭イラスト（Gemini で作成）がある記事 */
+export const ARTICLE_IMAGES = new Set<string>(articleImages);
+
+/** 記事のイラスト。なければ何も出さない */
+export function ArticleImage({ slug, className = "" }: { slug: string; className?: string }) {
+  if (!ARTICLE_IMAGES.has(slug)) return null;
+  // eslint-disable-next-line @next/next/no-img-element -- 静的書き出しなので next/image の最適化は使えない
+  return <img src={`/articles/${slug}.webp`} alt="" width={1200} height={675} loading="lazy" decoding="async" className={`block aspect-video w-full bg-field object-cover ${className}`} />;
+}
 
 /* ------------------------------------------------------------------
  * ツール：すぐ見つけて、すぐ開ける。アイコン＋名前＋短い説明の小さなカード（使用例の写真があれば上に出す）
@@ -144,7 +155,12 @@ export function ProductCard({ product, market }: { product: Product; market?: Ma
  * ------------------------------------------------------------------ */
 export function SolutionCard({ article, toolCount }: { article: Article; toolCount: number }) {
   return (
-    <Link href={`/solutions/${article.slug}/`} className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-panel p-5 text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+    <Link href={`/solutions/${article.slug}/`} className="group flex min-w-0 flex-col gap-3 overflow-hidden rounded-2xl border border-line bg-panel p-5 text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
+      {ARTICLE_IMAGES.has(article.slug) && (
+        <span className="-mx-5 -mt-5 mb-1 block border-b border-line">
+          <ArticleImage slug={article.slug} />
+        </span>
+      )}
       <span className="flex items-center gap-1.5 text-xs font-semibold text-solution">
         <Icon name="bulb" size={16} />
         こんなことで困っていませんか？
@@ -211,7 +227,8 @@ export function ArticleCard({ article }: { article: Article }) {
   const guide = article.type === "guide";
   const t = tones[guide ? "guide" : "solution"];
   return (
-    <Link href={`/${guide ? "guides" : "solutions"}/${article.slug}/`} className={`${ui.card} ${t.border}`}>
+    <Link href={`/${guide ? "guides" : "solutions"}/${article.slug}/`} className={`${ui.card} ${t.border} overflow-hidden`}>
+      <ArticleImage slug={article.slug} className="rounded-lg" />
       <span className={`flex items-center gap-1 text-[11px] font-semibold ${t.text}`}>
         <Icon name={guide ? "book" : "bulb"} size={14} />
         {guide ? "ガイド" : "悩み別"}

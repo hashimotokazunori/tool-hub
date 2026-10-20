@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProductCard } from "@/components/Cards";
+import { ArticleImage, ProductCard } from "@/components/Cards";
 import { getMarketDataMap } from "@/lib/rakuten";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Icon } from "@/components/icons";
@@ -46,6 +46,7 @@ export async function ArticlePage({ article, section }: { article: Article; sect
           </div>
         </dl>
       </div>
+      <ArticleImage slug={article.slug} className="max-w-[44rem] rounded-2xl border border-line" />
       {products.length > 0 && <p className="w-fit rounded border border-muted px-2 text-xs font-bold text-muted">PR　この記事には広告（アフィリエイトリンク）が含まれます</p>}
       <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />
       {products.length > 0 && (
