@@ -1,0 +1,5 @@
+# OGP画像（opengraph-image）は拡張子なしで書き出されるので、PNG として返す
+/opengraph-image
+  Content-Type: image/png
+/*/opengraph-image
+  Content-Type: image/png

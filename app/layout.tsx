@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { NavLinks } from "@/components/NavLinks";
+import { ServiceWorker } from "@/components/ServiceWorker";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -16,6 +17,9 @@ export const metadata: Metadata = {
   title: { template: `%s | ${site.name}`, default: `${site.name}｜無料Webツールと便利グッズの選び方` },
   description: site.description,
   openGraph: { siteName: site.name, locale: site.locale, type: "website" },
+  // iPhone の「ホーム画面に追加」用（Android などは app/manifest.ts）
+  appleWebApp: { capable: true, title: site.name, statusBarStyle: "default" },
+  icons: { apple: "/apple-touch-icon.png" },
   // Google Search Console の所有権確認
   // Search Console の所有権の確認（Vercel の URL 用・workers.dev 用・toolhiroba.com 用）
   verification: { google: ["dmfHrw8nkN4c9Zjad-isZ4BnPD-d7Mn47HT1nr9mpz8", "euVRaQrtYufc_Pr6EKtRM5W3x3nHnPXpBQ6ZEDgfgNM", "zp0yn1BtCnKHXZFO7p6FKpLp8t2NH640edKOClzeeec"], other: { "msvalidate.01": "A2CB0C28D230878F409EEF1D1E83D7C1" } },
@@ -56,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         ) : (
           <Analytics />
         )}
+        <ServiceWorker />
       </body>
     </html>
   );

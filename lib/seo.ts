@@ -14,6 +14,8 @@ export function pageMetadata({ title, description, path, noindex }: { title: str
       siteName: site.name,
       locale: site.locale,
       type: "website",
+      // ページ専用の opengraph-image.tsx があるページでは、そちらが優先される。ないページはサイト共通の画像
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: site.name }],
     },
     robots: noindex ? { index: false, follow: true } : undefined,
   };

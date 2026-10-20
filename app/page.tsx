@@ -7,7 +7,6 @@ import { ui } from "@/components/styles";
 import { goodsCategories, toolCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicArticles, getPublicProducts, getPublicTools, getToolsByCategory, sortCategories } from "@/lib/content";
 import { getMarketDataMap } from "@/lib/rakuten";
-import { buildSearchIndex } from "@/lib/search-index";
 
 /** ヒーローの下に並べる「よく使う操作」（公開中のツールだけを出す） */
 const QUICK: { slug: string; label: string }[] = [
@@ -41,7 +40,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-14 sm:gap-20">
       <div className="flex flex-col gap-6">
-        <Hero items={buildSearchIndex()} quick={quick} toolCount={tools.length} />
+        <Hero quick={quick} toolCount={tools.length} />
         <section aria-labelledby="entry-title" className="flex flex-col gap-3">
           <h2 id="entry-title" className="sr-only">
             何をする？

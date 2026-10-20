@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { SearchItem } from "@/lib/search";
 import { GlobalSearch } from "./GlobalSearch";
 import { Icon, type IconName } from "./icons";
 
@@ -35,7 +34,7 @@ function HeroVisual() {
 }
 
 /** トップの検索エリア。検索を主役にし、よく使う操作をすぐ下に置く */
-export function Hero({ items, quick, toolCount }: { items: SearchItem[]; quick: { href: string; label: string }[]; toolCount: number }) {
+export function Hero({ quick, toolCount }: { quick: { href: string; label: string }[]; toolCount: number }) {
   return (
     <section aria-labelledby="hero-title" className="hero-mesh relative isolate overflow-hidden rounded-[2rem] border border-line px-5 pt-10 pb-8 shadow-card sm:px-12 sm:pt-16 sm:pb-12">
       <div className="hero-grid pointer-events-none absolute inset-0 -z-10" aria-hidden="true" />
@@ -54,7 +53,7 @@ export function Hero({ items, quick, toolCount }: { items: SearchItem[]; quick: 
         計算・文章・画像・PDFの無料ツールと、便利グッズの選び方、悩み別の解決策をひとつの場所に。入力した内容はブラウザの中だけで処理します。
       </p>
       <div className="mt-7 max-w-2xl xl:max-w-xl">
-        <GlobalSearch items={items} variant="hero" />
+        <GlobalSearch variant="hero" />
       </div>
       <nav aria-label="よく使う操作" className="mt-4 flex flex-wrap gap-2">
         {quick.map((q) => (

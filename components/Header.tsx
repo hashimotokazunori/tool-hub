@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { site } from "@/data/site";
-import { buildSearchIndex } from "@/lib/search-index";
 import { HeaderSearch } from "./GlobalSearch";
 import { Icon } from "./icons";
 import { NavLinks } from "./NavLinks";
@@ -20,7 +19,7 @@ export function Header() {
           </span>
         </Link>
         <div className="order-last w-full empty:hidden sm:order-none sm:w-auto sm:min-w-0 sm:flex-1">
-          <HeaderSearch items={buildSearchIndex()} />
+          <HeaderSearch />
         </div>
         <NavLinks variant="top" />
       </div>

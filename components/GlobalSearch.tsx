@@ -13,16 +13,32 @@ const KIND_STYLE: Record<SearchItem["kind"], string> = {
   ガイド: "border-guide text-guide",
 };
 
+/** 索引（ビルド時に /search-index.json として書き出したもの）。最初に検索窓を触ったときに1回だけ読み込む */
+let indexPromise: Promise<SearchItem[]> | null = null;
+function loadIndex(): Promise<SearchItem[]> {
+  indexPromise ??= fetch("/search-index.json")
+    .then((r) => (r.ok ? (r.json() as Promise<SearchItem[]>) : []))
+    .catch(() => {
+      indexPromise = null;
+      return [];
+    });
+  return indexPromise;
+}
+
 /**
- * ツール・グッズ・記事をまとめて探す検索窓。索引はビルド時に作ってpropsで受け取る。
+ * ツール・グッズ・記事をまとめて探す検索窓。
  * variant="hero" はトップの濃い背景用の大きな検索窓。
  */
-export function GlobalSearch({ items, variant = "default" }: { items: SearchItem[]; variant?: "default" | "hero" }) {
+export function GlobalSearch({ variant = "default" }: { variant?: "default" | "hero" }) {
   const [q, setQ] = useState("");
   const [open, setOpen] = useState(false);
+  const [items, setItems] = useState<SearchItem[] | null>(null);
+  const prepare = () => {
+    if (!items) loadIndex().then(setItems);
+  };
   const listId = useId();
   const wrap = useRef<HTMLDivElement>(null);
-  const results = useMemo(() => search(items, q), [items, q]);
+  const results = useMemo(() => search(items ?? [], q), [items, q]);
   const office = /word|ワード|excel|エクセル|パワポ|powerpoint|docx|xlsx/i.test(q) && /pdf/i.test(q);
   const hero = variant === "hero";
 
@@ -45,10 +61,15 @@ export function GlobalSearch({ items, variant = "default" }: { items: SearchItem
           type="search"
           value={q}
           onChange={(e) => {
+            prepare();
             setQ(e.target.value);
             setOpen(true);
           }}
-          onFocus={() => setOpen(true)}
+          onFocus={() => {
+            prepare();
+            setOpen(true);
+          }}
+          onPointerEnter={prepare}
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
           placeholder={hero ? "やりたいことから検索（例：割り勘、消費税、文字数）" : "ツール・便利グッズを検索"}
           className={`w-full bg-transparent text-ink outline-none placeholder:text-muted/80 ${hero ? "py-4 text-base sm:text-lg" : "py-2 text-[15px]"}`}
@@ -71,6 +92,8 @@ export function GlobalSearch({ items, variant = "default" }: { items: SearchItem
                 <small className="text-xs text-muted">{r.summary}</small>
               </Link>
             ))
+          ) : items === null ? (
+            <p className="px-3 py-2 text-xs text-muted">読み込み中…</p>
           ) : (
             !office && <p className="px-3 py-2 text-xs text-muted">見つかりませんでした。ほかの言葉で試してください。</p>
           )}
@@ -81,8 +104,8 @@ export function GlobalSearch({ items, variant = "default" }: { items: SearchItem
 }
 
 /** ヘッダーの検索窓。トップページでは大きな検索窓があるので出さない */
-export function HeaderSearch({ items }: { items: SearchItem[] }) {
+export function HeaderSearch() {
   const path = usePathname();
   if (path === "/") return null;
-  return <GlobalSearch items={items} />;
+  return <GlobalSearch />;
 }
