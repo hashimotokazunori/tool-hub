@@ -76,7 +76,8 @@ const badge = (n, x, y, r) =>
 
 async function shoot(page, slug, spec) {
   await page.goto(url(`/tools/${slug}/`), { waitUntil: "load" });
-  await page.waitForTimeout(600);
+  // 画面が動き出す（ハイドレーション）前に入力すると消えるので、少し待つ
+  await page.waitForTimeout(1500);
   await page.addStyleTag({ content: "header, nav[aria-label], .fixed { display: none !important; } *:focus { outline: none !important; }" });
   for (const [label, value] of spec.fill ?? []) {
     const field = page.getByLabel(label, { exact: false }).first();
@@ -86,6 +87,7 @@ async function shoot(page, slug, spec) {
   }
   const areas = page.locator("section[aria-label$='の操作'] textarea:not([readonly])");
   for (const [i, value] of (spec.text ?? []).entries()) await areas.nth(i).fill(value);
+  for (const name of spec.click ?? []) await page.getByRole("button", { name }).first().click();
   await page.evaluate(() => document.activeElement instanceof HTMLElement && document.activeElement.blur());
   await page.waitForTimeout(400);
 

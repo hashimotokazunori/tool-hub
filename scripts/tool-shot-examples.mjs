@@ -35,7 +35,7 @@ export const SHOTS = {
   "text-diff": { text: ["今日は晴れです。\n散歩に行きます。", "今日は雨です。\n散歩に行きます。\n傘を持ちます。"] },
   "line-paragraph-counter": { text: ["今日は晴れ。明日は雨の予報です。\n散歩は朝のうちに済ませよう。\n今日は晴れ。明日は雨の予報です。"] },
   ratio: {},
-  average: {},
+  average: { text: ["12\n15\n9\n20\n15"] },
   rounding: {},
   "data-size": {},
   "date-add": {},
@@ -76,4 +76,7 @@ export const SHOTS = {
   "contrast-checker": {},
   "box-shadow": {},
   "css-unit": {},
+  // 使い方の画像（tool-howto-shots.mjs）で、結果が出るように例を入れるもの。click はボタンの名前
+  "jwt-decoder": { click: ["サンプルを入れる"] },
+  "csv-columns": { text: ["商品,価格,在庫\nりんご,120,5\nみかん,80,12\nぶどう,300,3"] },
 };
