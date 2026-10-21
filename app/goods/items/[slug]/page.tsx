@@ -148,8 +148,7 @@ export default async function ProductPage({ params }: PageProps<"/goods/items/[s
       <section className="flex flex-col gap-1 text-xs text-muted">
         {p.reviewedAt && (
           <p>
-            仕様の確認：{p.reviewedAt.replaceAll("-", "/")}
-            {p.reviewedBy && `（${p.reviewedBy}）`}
+            仕様を調べた日：{p.reviewedAt.replaceAll("-", "/")}（最新の仕様・価格は、購入前に公式ページで確かめてください）
           </p>
         )}
         <p>仕様の出典：</p>

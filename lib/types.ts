@@ -94,7 +94,7 @@ export type Article = {
   author: string;
   /** 内容を確認した日（YYYY-MM-DD） */
   reviewedAt?: string;
-  /** 内容を確認した人・方法（例：「AI（Claude）による事実確認」）。読者に表示する */
+  /** 内容を確認した人・方法（記録用。読者には出さない。AIの確認は誤りがありうるため） */
   reviewedBy?: string;
   publishedAt?: string;
   reviewStatus: ReviewStatus;

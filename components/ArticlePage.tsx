@@ -29,16 +29,16 @@ export async function ArticlePage({ article, section }: { article: Article; sect
           {article.type === "guide" ? "Guide · ガイド" : "Solution · 悩み別"}
         </span>
         <PageHeading title={article.type === "solution" ? `「${article.title}」ときは` : article.title} lead={article.description} />
-        {/* 信頼性の手がかり：だれが書き、いつ確認し、何を参考にしたか */}
+        {/* 信頼性の手がかり：だれが書き、いつ更新し、何を参考にしたか（AIの確認は誤りがありうるので「確認済み」とは書かない） */}
         <dl className="flex flex-wrap gap-x-5 gap-y-1 rounded-xl border border-line bg-panel px-4 py-2.5 text-xs text-muted">
           <div className="flex gap-1">
             <dt>執筆</dt>
             <dd className="font-medium text-ink">{article.author}</dd>
           </div>
           <div className="flex items-center gap-1">
-            <Icon name="shield" size={14} />
-            <dt>内容確認</dt>
-            <dd className="font-medium text-ink">{article.reviewedAt ? `${article.reviewedAt.replaceAll("-", "/")}${article.reviewedBy ? `（${article.reviewedBy}）` : ""}` : "確認前"}</dd>
+            <Icon name="date" size={14} />
+            <dt>最終更新</dt>
+            <dd className="font-medium text-ink">{(article.reviewedAt ?? article.publishedAt ?? "").replaceAll("-", "/")}</dd>
           </div>
           <div className="flex gap-1">
             <dt>参考にした情報</dt>
@@ -74,6 +74,7 @@ export async function ArticlePage({ article, section }: { article: Article; sect
       <RelatedContent tools={tools} title="この記事で使うツール" />
       {article.sources.length > 0 && (
         <section className="flex flex-col gap-1 text-xs text-muted">
+          <p>この記事は公式情報をもとにまとめていますが、誤りがあったり、制度が変わったりしている場合があります。手続きの前に、下の公式ページや、お住まいの市区町村・税務署などで確かめてください。誤りに気づいたらお知らせください。</p>
           <p>参考にした情報：</p>
           <ul className="list-disc pl-5">
             {article.sources.map((s) => (

@@ -11,7 +11,7 @@ export default function GuidesPage() {
   return (
     <div className="flex flex-col gap-6">
       <Breadcrumbs items={[{ label: "特集・比較ガイド" }]} />
-      <PageHeading title="特集・比較ガイド" lead="ツールの使い方、商品の選び方と比較、活用のアイデアをまとめています。記事は公式情報と照らし合わせて事実確認してから公開し、確認日・確認方法・出典を載せています。" />
+      <PageHeading title="特集・比較ガイド" lead="ツールの使い方、商品の選び方と比較、活用のアイデアをまとめています。記事は公式情報をもとにまとめ、更新日と出典を載せています。誤りが含まれる場合もあるため、大切なことは出典の公式情報で確かめてください。" />
       {featured ? (
         <>
           <GuideFeature article={featured} />

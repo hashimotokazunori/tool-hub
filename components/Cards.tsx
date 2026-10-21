@@ -187,8 +187,8 @@ function TrustMeta({ article }: { article: Article }) {
   return (
     <span className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
       <span className="flex items-center gap-1">
-        <Icon name="shield" size={14} />
-        {article.reviewedAt ? `${article.reviewedAt.replaceAll("-", "/")} 内容確認` : "内容確認前"}
+        <Icon name="date" size={14} />
+        {article.reviewedAt ? `${article.reviewedAt.replaceAll("-", "/")} 更新` : "下書き"}
       </span>
       {article.sources.length > 0 && <span>出典 {article.sources.length}件</span>}
       <span>{article.author}</span>
