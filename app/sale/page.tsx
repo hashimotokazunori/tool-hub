@@ -8,7 +8,7 @@ import { ui } from "@/components/styles";
 import { goodsCategories } from "@/data/categories";
 import { BUDGETS, inBudget, salePhase, sales } from "@/data/sales";
 import { getProductsByCategory, getPublicProducts, sortCategories } from "@/lib/content";
-import { getMarketDataMap } from "@/lib/rakuten";
+import { withImages } from "@/lib/rakuten";
 import { pageMetadata } from "@/lib/seo";
 import type { Product } from "@/lib/types";
 
@@ -33,8 +33,7 @@ function rakutenLink(url: string): string {
 const pill = "rounded-full border border-line bg-panel px-3 py-1.5 text-sm font-semibold text-ink no-underline shadow-card";
 
 export default async function SalePage() {
-  const products = getPublicProducts();
-  const market = await getMarketDataMap(products);
+  const { products, market } = await withImages(getPublicProducts());
   const now = new Date();
   // 楽天の今の最安値（取れなければ公式で確認した価格）で予算に分ける
   const priceOf = (p: Product) => market.get(p.id)?.minPrice ?? p.price;

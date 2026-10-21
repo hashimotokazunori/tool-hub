@@ -6,7 +6,7 @@ import { Section } from "@/components/Section";
 import { ui } from "@/components/styles";
 import { goodsCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicProducts, sortCategories } from "@/lib/content";
-import { getMarketDataMap } from "@/lib/rakuten";
+import { withImages } from "@/lib/rakuten";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -19,8 +19,8 @@ export const metadata = pageMetadata({
 export const revalidate = 21600;
 
 export default async function GoodsPage() {
-  const products = getPublicProducts();
-  const market = await getMarketDataMap(products);
+  // 画像のない商品は載せない
+  const { products, market } = await withImages(getPublicProducts());
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-4">

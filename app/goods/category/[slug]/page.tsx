@@ -8,7 +8,7 @@ import { ui } from "@/components/styles";
 import { tools } from "@/data/tools";
 import { goodsCategories } from "@/data/categories";
 import { getBuyingGuides, getGoodsCategoryBySlug, getProductsByCategory, isToolPublic } from "@/lib/content";
-import { getMarketDataMap, marketEnabled } from "@/lib/rakuten";
+import { marketEnabled, withImages } from "@/lib/rakuten";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -31,8 +31,7 @@ export default async function GoodsCategoryPage({ params }: PageProps<"/goods/ca
   const { slug } = await params;
   const c = getGoodsCategoryBySlug(slug);
   if (!c) notFound();
-  const products = getProductsByCategory(c.id);
-  const market = await getMarketDataMap(products);
+  const { products, market } = await withImages(getProductsByCategory(c.id));
   const guides = getBuyingGuides(c.id);
   const toolBySlug = (s: string) => tools.find((t) => t.slug === s && isToolPublic(t));
   return (

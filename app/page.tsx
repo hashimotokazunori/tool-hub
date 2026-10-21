@@ -6,7 +6,7 @@ import { MyTools } from "@/components/ToolMemory";
 import { ui } from "@/components/styles";
 import { goodsCategories, toolCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicArticles, getPublicProducts, getPublicTools, getToolsByCategory, sortCategories } from "@/lib/content";
-import { getMarketDataMap } from "@/lib/rakuten";
+import { withImages } from "@/lib/rakuten";
 
 /** ヒーローの下に並べる「よく使う操作」（公開中のツールだけを出す） */
 const QUICK: { slug: string; label: string }[] = [
@@ -31,8 +31,9 @@ export default async function Home() {
   const toolBySlug = new Map(tools.map((t) => [t.slug, t]));
   const popular = [...POPULAR.map((s) => toolBySlug.get(s)).filter((t) => t !== undefined), ...tools.filter((t) => !POPULAR.includes(t.slug))].slice(0, 9);
   const quick = QUICK.filter((q) => toolBySlug.has(q.slug)).map((q) => ({ href: `/tools/${q.slug}/`, label: q.label }));
-  const products = getPublicProducts().slice(0, 3);
-  const market = await getMarketDataMap(products);
+  const shown = await withImages(getPublicProducts());
+  const products = shown.products.slice(0, 3);
+  const market = shown.market;
   const solutions = getPublicArticles("solution").slice(0, 6);
   const [featured, ...guides] = getPublicArticles("guide");
   const toolCount = (slugs: string[]) => slugs.filter((s) => toolBySlug.has(s)).length;

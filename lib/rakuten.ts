@@ -209,8 +209,21 @@ export async function call(base: string, params: Record<string, string>): Promis
   return null;
 }
 
+/** ビルド中は同じ商品を何度も問い合わせないよう、1商品1回だけ取る */
+const marketCache = new Map<string, Promise<MarketData | null>>();
+
 /** 商品の価格情報。取れなかったときは null（画面は「価格は準備中」になる） */
-export async function getMarketData(p: Product): Promise<MarketData | null> {
+export function getMarketData(p: Product): Promise<MarketData | null> {
+  if (!p.market || !credentials()) return Promise.resolve(null);
+  let d = marketCache.get(p.id);
+  if (!d) {
+    d = fetchMarketData(p);
+    marketCache.set(p.id, d);
+  }
+  return d;
+}
+
+async function fetchMarketData(p: Product): Promise<MarketData | null> {
   if (!p.market || !credentials()) return null;
   const { keyword, match, exclude, minPrice } = p.market;
   try {
@@ -246,4 +259,17 @@ export async function getMarketDataMap(products: Product[]): Promise<Map<string,
     if (d) map.set(p.id, d);
   }
   return map;
+}
+
+/** 商品の画像があるか（楽天の画像か、商品データの画像） */
+export const hasImage = (p: Product, m?: MarketData | null) => Boolean(m?.imageUrl ?? p.imageUrl);
+
+/**
+ * 一覧に載せる商品：画像のないものは載せない。
+ * 楽天のデータを使えないとき（ローカルのビルドなど）は画像を確かめられないので、絞らずに返す。
+ */
+export async function withImages(products: Product[]): Promise<{ products: Product[]; market: Map<string, MarketData> }> {
+  const market = await getMarketDataMap(products);
+  if (!marketEnabled()) return { products, market };
+  return { products: products.filter((p) => hasImage(p, market.get(p.id))), market };
 }

@@ -2,13 +2,14 @@ import type { MetadataRoute } from "next";
 import { goodsCategories, toolCategories } from "@/data/categories";
 import { getBuyingGuides, getProductsByCategory, getPublicArticles, getPublicProducts, getPublicTools, getToolsByCategory, isArticlePublic, isProductPublic } from "@/lib/content";
 import { site } from "@/data/site";
+import { withImages } from "@/lib/rakuten";
 import { absoluteUrl } from "@/lib/seo";
 
 /** 公開済みのページだけを載せる（下書き・中身のないカテゴリは載せない） */
 // ビルド時に1回だけ作る（静的書き出しでも使えるように）
 export const dynamic = "force-static";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const page = (path: string, lastModified?: string): MetadataRoute.Sitemap[number] => ({ url: absoluteUrl(path), ...(lastModified ? { lastModified } : {}) });
   return [
     page("/"),
@@ -26,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...toolCategories.filter((c) => getToolsByCategory(c.id).length > 0).map((c) => page(`/tools/category/${c.slug}/`)),
     ...getPublicTools().map((t) => page(`/tools/${t.slug}/`, t.updatedAt)),
     ...goodsCategories.filter((c) => getProductsByCategory(c.id).length > 0 || getBuyingGuides(c.id).length > 0).map((c) => page(`/goods/category/${c.slug}/`)),
-    ...getPublicProducts().filter(isProductPublic).map((p) => page(`/goods/items/${p.slug}/`, p.updatedAt)),
+    ...(await withImages(getPublicProducts().filter(isProductPublic))).products.map((p) => page(`/goods/items/${p.slug}/`, p.updatedAt)),
     ...getPublicArticles().filter(isArticlePublic).map((a) => page(`/${a.type === "guide" ? "guides" : "solutions"}/${a.slug}/`, a.reviewedAt)),
   ];
 }

@@ -7,7 +7,7 @@ import { Icon } from "@/components/icons";
 import { ui } from "@/components/styles";
 import { priceLabel, productLink } from "@/lib/affiliate";
 import { getGoodsCategory, getProductBySlug, getPublicArticles, getPublicProducts } from "@/lib/content";
-import { getMarketData } from "@/lib/rakuten";
+import { getMarketData, hasImage, marketEnabled } from "@/lib/rakuten";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -22,7 +22,9 @@ export async function generateMetadata({ params }: PageProps<"/goods/items/[slug
   const { slug } = await params;
   const p = getProductBySlug(slug);
   if (!p) notFound();
-  return pageMetadata({ title: `${p.name}の最安価格・特徴・仕様`, description: p.summary, path: `/goods/items/${p.slug}/` });
+  // 画像のない商品は検索に出さない（一覧にも載せない）
+  const noImage = marketEnabled() && !hasImage(p, await getMarketData(p));
+  return pageMetadata({ title: `${p.name}の最安価格・特徴・仕様`, description: p.summary, path: `/goods/items/${p.slug}/`, noindex: noImage });
 }
 
 export default async function ProductPage({ params }: PageProps<"/goods/items/[slug]">) {

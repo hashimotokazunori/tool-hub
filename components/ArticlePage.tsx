@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArticleImage, ProductCard } from "@/components/Cards";
-import { getMarketDataMap } from "@/lib/rakuten";
+import { MinPrice, ProductImage, RakutenCredit } from "@/components/Market";
+import { withImages } from "@/lib/rakuten";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Icon } from "@/components/icons";
 import { PageHeading } from "@/components/PageHeading";
@@ -14,9 +15,12 @@ import type { Article } from "@/lib/types";
 export async function ArticlePage({ article, section }: { article: Article; section: { label: string; href: string } }) {
   const html = renderMarkdownFile(article.bodyFile);
   const tools = getPublicTools().filter((t) => article.toolSlugs.includes(t.slug));
-  const products = getPublicProducts().filter((p) => article.productIds.includes(p.id));
-  const market = await getMarketDataMap(products);
+  // 画像のない商品は載せない
+  const { products, market } = await withImages(getPublicProducts().filter((p) => article.productIds.includes(p.id)));
   const goods = article.goodsCategoryIds.map(getGoodsCategory).filter((c) => c !== undefined);
+  // 関連する便利グッズのカテゴリから、本文で紹介していない商品を小さく4つまで
+  const related = await withImages(getPublicProducts().filter((p) => article.goodsCategoryIds.includes(p.categoryId) && !article.productIds.includes(p.id)));
+  const relatedProducts = related.products.slice(0, 4);
   return (
     <article className="flex flex-col gap-6">
       <Breadcrumbs items={[section, { label: article.title }]} />
@@ -62,6 +66,22 @@ export async function ArticlePage({ article, section }: { article: Article; sect
       {goods.length > 0 && (
         <section className="flex flex-col gap-2">
           <h2 className={ui.h2}>関連する便利グッズ</h2>
+          {relatedProducts.length > 0 && (
+            <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+              {relatedProducts.map((p) => (
+                <li key={p.id}>
+                  <Link href={`/goods/items/${p.slug}/`} className="flex items-center gap-3 rounded-xl border border-line bg-panel p-2 text-ink no-underline shadow-card transition hover:border-goods/50">
+                    <ProductImage product={p} market={related.market.get(p.id)} className="h-16 w-16 shrink-0 rounded-lg [&_img]:p-1" />
+                    <span className="flex min-w-0 flex-col gap-0.5">
+                      <span className="line-clamp-2 text-sm font-semibold leading-snug">{p.name}</span>
+                      <MinPrice market={related.market.get(p.id)} />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          {relatedProducts.length > 0 && related.market.size > 0 && <RakutenCredit />}
           <div className="flex flex-wrap gap-2">
             {goods.map((c) => (
               <Link key={c.id} href={`/goods/category/${c.slug}/`} className={ui.chip}>
