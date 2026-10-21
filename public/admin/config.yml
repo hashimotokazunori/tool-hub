@@ -1,0 +1,82 @@
+# ツールひろば 管理画面（Sveltia CMS）の設定
+# https://toolhiroba.com/admin/ を開き、「トークンでサインイン」で GitHub のトークンを入れる。
+# 保存すると main ブランチに記録され、GitHub Actions が自動でサイトを作り直す（5分ほど）。
+backend:
+  name: github
+  repo: hashimotokazunori/tool-hub
+  branch: main
+  commit_messages:
+    update: "管理画面：{{collection}}「{{slug}}」を更新"
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: products
+    label: 便利グッズ
+    files:
+      - name: products
+        label: 商品データ（全商品）
+        file: data/products.json
+        format: json
+        fields:
+          - name: items
+            label: 商品
+            label_singular: 商品
+            widget: list
+            summary: "{{fields.name}}（{{fields.status}}）"
+            collapsed: true
+            fields:
+              - { name: id, label: "ID（英数字とハイフン。変えると記事とのつながりが切れる）", widget: string, pattern: ['^[a-z0-9-]+$', "英小文字・数字・ハイフンだけ"] }
+              - { name: slug, label: "URL の名前（/goods/items/〇〇/。ふつうは ID と同じ）", widget: string, pattern: ['^[a-z0-9-]+$', "英小文字・数字・ハイフンだけ"] }
+              - { name: name, label: 商品名, widget: string }
+              - { name: brand, label: メーカー, widget: string, required: false }
+              - name: categoryId
+                label: カテゴリ
+                widget: select
+                options:
+                  - { label: デスク・仕事, value: desk }
+                  - { label: スマホ・PC周辺機器, value: gadgets }
+                  - { label: 家事・収納, value: home }
+                  - { label: 旅行・外出, value: travel }
+                  - { label: 文房具・アイデア雑貨, value: stationery }
+              - { name: summary, label: ひとこと説明, widget: text }
+              - { name: features, label: 特徴, widget: list, field: { name: item, label: 特徴, widget: string } }
+              - { name: pros, label: よいところ, widget: list, field: { name: item, label: よいところ, widget: string } }
+              - { name: cons, label: 気をつけるところ, widget: list, field: { name: item, label: 気をつけるところ, widget: string } }
+              - { name: specifications, label: 仕様, widget: keyvalue, key_label: 項目（例：重量）, value_label: 値（例：570g） }
+              - { name: price, label: "価格（円・税込。公式で確認したときだけ）", widget: number, value_type: int, required: false }
+              - { name: priceCheckedAt, label: "価格を確認した日（YYYY-MM-DD）", widget: string, required: false }
+              - { name: currency, label: 通貨, widget: hidden, default: JPY }
+              - { name: officialUrl, label: 公式ページのURL, widget: string, required: false }
+              - { name: affiliateUrl, label: "アフィリエイトURL（提携済みの販売先だけ）", widget: string, required: false }
+              - { name: imageUrl, label: "画像URL（使用条件を確認したものだけ）", widget: string, required: false }
+              - { name: imageLicenseNote, label: 画像の出典・使用条件, widget: string, required: false }
+              - name: market
+                label: 楽天の値段の取り方
+                widget: object
+                required: false
+                collapsed: true
+                fields:
+                  - { name: keyword, label: 楽天で検索する言葉（型番など）, widget: string }
+                  - { name: match, label: "同じ商品と見なす語（「語 + 語」のように + でつなぐと両方を含むもの）", widget: list, field: { name: item, label: 語, widget: string } }
+                  - { name: exclude, label: 除く語, widget: list, required: false, field: { name: item, label: 語, widget: string } }
+                  - { name: minPrice, label: これより安い出品は取らない（円）, widget: number, value_type: int, required: false }
+              - { name: sourceUrls, label: 仕様を確認したページ, widget: list, field: { name: item, label: URL, widget: string } }
+              - { name: reviewedAt, label: "内容を確認した日（YYYY-MM-DD）", widget: string, required: false }
+              - { name: reviewedBy, label: 確認した人・方法, widget: string, required: false }
+              - name: reviewStatus
+                label: 確認の状態
+                widget: select
+                options:
+                  - { label: 確認済み, value: verified }
+                  - { label: 確認前, value: pending }
+                  - { label: 要更新, value: needs_update }
+              - name: status
+                label: 公開
+                widget: select
+                options:
+                  - { label: 公開中, value: published }
+                  - { label: 下書き, value: draft }
+                  - { label: 販売終了など（非公開）, value: retired }
+              - { name: updatedAt, label: "更新日（YYYY-MM-DD）", widget: string }
