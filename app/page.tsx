@@ -52,6 +52,23 @@ export default async function Home() {
             <EntryCard href="/guides/" icon="book" title="比較・活用ガイド" sub="選び方を詳しく解説" tone="guide" />
           </div>
         </section>
+        {/* 季節の入口（年末）。季節が変わったらここを差し替える */}
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
+          <Link href="/nenmatsu/" className="flex items-center justify-between gap-3 rounded-2xl border border-line bg-panel px-4 py-3 text-ink no-underline shadow-card">
+            <span className="flex flex-col">
+              <b className="text-[15px]">年末にやること</b>
+              <span className="text-xs text-muted">ふるさと納税・大掃除・予定・精算に使えるツール</span>
+            </span>
+            <span aria-hidden className="text-muted">→</span>
+          </Link>
+          <Link href="/sale/" className="flex items-center justify-between gap-3 rounded-2xl border border-line bg-panel px-4 py-3 text-ink no-underline shadow-card">
+            <span className="flex flex-col">
+              <b className="text-[15px]">ブラックフライデー・年末セールで買う候補</b>
+              <span className="text-xs text-muted">便利グッズを予算別に（PR）</span>
+            </span>
+            <span aria-hidden className="text-muted">→</span>
+          </Link>
+        </div>
       </div>
 
       <MyTools tools={tools} />

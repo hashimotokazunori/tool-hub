@@ -17,6 +17,7 @@ const OUT = "public/shots";
 /**
  * 撮るツールと、撮る前に入れる例。fill は [ラベルの文字（一部でよい）, 値]。
  * target は写真に必ず入れたい結果の要素（省くと aria-live の結果表示）。
+ * text は操作パネルの中の textarea に上から順に入れる文字（ラベルが分かりにくいツール用）。
  * 例はわざと身近な値にする（実在の個人情報は入れない）。
  */
 export const SHOTS = {
@@ -40,7 +41,60 @@ export const SHOTS = {
   "wage-converter": {},
   "overtime-pay": {},
   "unit-price": {},
+  // 2026-10-21 追加分（ファイルを選ばなくても使えるツール）
+  "manuscript-paper": { text: ["今日は晴れ。明日は雨の予報です。\n散歩は朝のうちに済ませよう。\n今日は晴れ。明日は雨の予報です。"] },
+  "hiragana-katakana": { text: ["きょうは ツールひろばで ひらがなを カタカナに します"] },
+  "case-converter": { text: ["Tool Hiroba is a free web tool collection"] },
+  "whitespace-remover": { text: ["  余分な　空白が   入った   文章です。  \n\n\n  改行も  多め。 "] },
+  "remove-duplicate-lines": { text: ["りんご\nみかん\nりんご\nぶどう\nみかん"] },
+  "text-diff": { text: ["今日は晴れです。\n散歩に行きます。", "今日は雨です。\n散歩に行きます。\n傘を持ちます。"] },
+  "line-paragraph-counter": { text: ["今日は晴れ。明日は雨の予報です。\n散歩は朝のうちに済ませよう。\n今日は晴れ。明日は雨の予報です。"] },
+  ratio: {},
+  average: {},
+  rounding: {},
+  "data-size": {},
+  "date-add": {},
+  weekday: {},
+  timezone: {},
+  "unix-time": {},
+  "time-units": {},
+  "week-number": {},
+  "school-years": {},
+  "random-number": {},
+  uuid: {},
+  "dummy-data": {},
+  "dummy-text": {},
+  "sns-character-count": { text: ["年末の大掃除、今年は3日に分けてやってみる。まずは机の上から。"] },
+  "email-templates": {},
+  lottery: {},
+  bingo: {},
+  "json-formatter": { text: ['{"name":"ツールひろば","tools":110,"free":true,"tags":["計算","画像","PDF"]}'] },
+  "url-encode": { text: ["https://toolhiroba.com/?q=ふるさと納税"] },
+  base64: { text: ["ツールひろば"] },
+  "html-escape": { text: ['<a href="/">ツールひろば</a> & 無料'] },
+  "color-converter": {},
+  "hash-generator": { text: ["ツールひろば"] },
+  "cron-parser": {},
+  budget: {},
+  "electricity-cost": {},
+  bmi: {},
+  "steps-distance": {},
+  tip: {},
+  "presentation-time": { text: ["今日は晴れ。明日は雨の予報です。\n散歩は朝のうちに済ませよう。\n今日は晴れ。明日は雨の予報です。"] },
+  "achievement-rate": {},
+  "progress-rate": {},
+  "meeting-planner": {},
+  "task-priority": {},
+  "study-time": {},
+  gradient: {},
+  "color-palette": {},
+  "contrast-checker": {},
+  "box-shadow": {},
+  "css-unit": {},
 };
+
+/** 入力欄と結果欄が上下に並ぶ文字変換ツール。結果の欄を写す */
+const OUTPUT_TEXTAREA = new Set(["hiragana-katakana", "case-converter", "whitespace-remover", "text-replace", "remove-duplicate-lines", "url-encode", "base64", "html-escape", "json-formatter"]);
 
 function findChrome() {
   if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
@@ -63,12 +117,14 @@ async function shoot(page, slug, spec) {
   // 上に貼りつくヘッダー・下のナビは写真に入れない
   await page.addStyleTag({ content: "header, nav[aria-label], .fixed { display: none !important; } *:focus { outline: none !important; }" });
   for (const [label, value] of spec.fill ?? []) await fillByLabel(page, label, value);
+  const areas = page.locator("section[aria-label$='の操作'] textarea:not([readonly])");
+  for (const [i, value] of (spec.text ?? []).entries()) await areas.nth(i).fill(value);
   await page.evaluate(() => document.activeElement instanceof HTMLElement && document.activeElement.blur());
   await page.waitForTimeout(400);
   const panel = page.locator("section[aria-label$='の操作']").first();
   const box = await panel.boundingBox();
   // 結果（aria-live の表示）があれば、それが写真の下寄りに入るように切る
-  const result = page.locator(`section[aria-label$='の操作'] ${spec.target ?? "[aria-live]"}`).first();
+  const result = page.locator(`section[aria-label$='の操作'] ${spec.target ?? (OUTPUT_TEXTAREA.has(slug) ? "textarea[readonly]" : "[aria-live]")}`).first();
   const rbox = (await result.count()) ? await result.boundingBox() : null;
   const png = await panel.screenshot({ animations: "disabled" });
   const meta = await sharp(png).metadata();

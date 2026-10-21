@@ -107,7 +107,7 @@ export default function FurusatoLimit() {
 
           <h3 className={ui.h3}>寄附額ごとの内訳</h3>
           <FieldGrid>
-            <Num label="寄附する額（空欄なら上限の目安で計算・円）" value={v.donation} onChange={(x) => set("donation", x)} step="1000" />
+            <Num label="寄附する額・今年すでに寄附した合計（空欄なら上限の目安で計算・円）" value={v.donation} onChange={(x) => set("donation", x)} step="1000" />
           </FieldGrid>
           <div className="overflow-x-auto rounded-xl border border-line">
             <table className="w-full text-sm whitespace-nowrap tabular-nums">
@@ -148,10 +148,21 @@ export default function FurusatoLimit() {
             </table>
           </div>
           {b.donation > limit && <p className={ui.note}>この寄附額は上限の目安を超えるため、自己負担が2,000円より多くなります。</p>}
-          <a href={`/furusato/?max=${Math.floor(limit)}`} className={`${ui.card} max-w-md`}>
-            <b className="text-[15px]">上限額（{yen(limit)}）以内の返礼品を見る →</b>
-            <span className="text-xs text-muted">お肉・お米・海鮮など、寄附額が上限の目安までの返礼品</span>
-          </a>
+          {v.donation > 0 && b.donation < limit && (
+            <p className="text-sm">
+              上限の目安までの残り：<b className="text-base tabular-nums">{yen(Math.floor(limit - b.donation))}</b>
+            </p>
+          )}
+          {(() => {
+            // すでに寄附した額を入れたときは、残りの枠以内の返礼品へ
+            const rest = v.donation > 0 && b.donation < limit ? Math.floor(limit - b.donation) : Math.floor(limit);
+            return (
+              <a href={`/furusato/?max=${rest}`} className={`${ui.card} max-w-md`}>
+                <b className="text-[15px]">{rest === Math.floor(limit) ? `上限額（${yen(limit)}）以内` : `残りの枠（${yen(rest)}）以内`}の返礼品を見る →</b>
+                <span className="text-xs text-muted">お肉・お米・海鮮など、寄附額がこの金額までの返礼品</span>
+              </a>
+            );
+          })()}
           <p className={ui.note}>
             ワンストップ特例を使うと所得税からの控除はなくなり、同じ額が翌年度の住民税から差し引かれます。控除の合計は変わりません。各金額は1円未満を切り捨てた目安で、実際の端数処理は自治体によって異なります。
           </p>

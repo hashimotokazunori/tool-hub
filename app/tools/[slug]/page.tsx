@@ -5,7 +5,7 @@ import { getToolGuide } from "@/data/tool-guides";
 import { hasToolComponent } from "@/features/tools/keys";
 import { toolComponents } from "@/features/tools/registry";
 import { getPublicTools, getRelatedForTool, getToolBySlug, getToolCategory } from "@/lib/content";
-import { pageMetadata } from "@/lib/seo";
+import { absoluteUrl, pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -27,9 +27,26 @@ export default async function ToolPage({ params }: PageProps<"/tools/[slug]">) {
   if (!tool || !category || !tool.componentKey || !hasToolComponent(tool.componentKey)) notFound();
   const Tool = toolComponents[tool.componentKey];
   const related = getRelatedForTool(tool);
+  // Google 向けに「ブラウザで使える無料のWebアプリ」であることを伝える構造化データ
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: tool.name,
+    description: tool.description,
+    url: absoluteUrl(`/tools/${tool.slug}/`),
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Any",
+    browserRequirements: "Requires JavaScript",
+    inLanguage: "ja",
+    isAccessibleForFree: true,
+    offers: { "@type": "Offer", price: 0, priceCurrency: "JPY" },
+  };
   return (
-    <ToolLayout tool={tool} category={category} guide={getToolGuide(tool.slug)} related={<RelatedContent tools={related.tools} articles={related.articles} />}>
-      <Tool />
-    </ToolLayout>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <ToolLayout tool={tool} category={category} guide={getToolGuide(tool.slug)} related={<RelatedContent tools={related.tools} articles={related.articles} />}>
+        <Tool />
+      </ToolLayout>
+    </>
   );
 }

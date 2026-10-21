@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { NavLinks } from "@/components/NavLinks";
+import { InstallPrompt } from "@/components/InstallPrompt";
 import { ServiceWorker } from "@/components/ServiceWorker";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Analytics />
         )}
         <ServiceWorker />
+        <InstallPrompt />
       </body>
     </html>
   );
