@@ -89,6 +89,8 @@ export type Article = {
   toolSlugs: string[];
   goodsCategoryIds: string[];
   sources: { title: string; url: string }[];
+  /** 関連する便利グッズに添える「〜なら」の理由（商品ID → ひとこと）。なければ商品のひとこと説明 */
+  goodsWhy?: Record<string, string>;
   /** 検索結果に出す題名（なければ「題名＋ときの解決策」） */
   seoTitle?: string;
   author: string;

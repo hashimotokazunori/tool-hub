@@ -20,7 +20,11 @@ export async function ArticlePage({ article, section }: { article: Article; sect
   const goods = article.goodsCategoryIds.map(getGoodsCategory).filter((c) => c !== undefined);
   // 関連する便利グッズのカテゴリから、本文で紹介していない商品を小さく4つまで
   const related = await withImages(getPublicProducts().filter((p) => article.goodsCategoryIds.includes(p.categoryId) && !article.productIds.includes(p.id)));
-  const relatedProducts = related.products.slice(0, 4);
+  // 「〜なら」の理由を書いた商品を、書いた順に先に出す
+  const whyOrder = Object.keys(article.goodsWhy ?? {});
+  const rank = (id: string) => (whyOrder.includes(id) ? whyOrder.indexOf(id) : whyOrder.length);
+  const relatedProducts = [...related.products].sort((a, b) => rank(a.id) - rank(b.id)).slice(0, 4);
+  const [conclusion, rest] = splitConclusion(foldToolHowto(html));
   return (
     <article className="flex flex-col gap-6">
       <Breadcrumbs items={[section, { label: article.title }]} />
@@ -52,7 +56,10 @@ export async function ArticlePage({ article, section }: { article: Article; sect
       </div>
       <ArticleImage slug={article.slug} className="max-w-[44rem] rounded-2xl border border-line" />
       {products.length > 0 && <p className="w-fit rounded border border-muted px-2 text-xs font-bold text-muted">PR　この記事には広告（アフィリエイトリンク）が含まれます</p>}
-      <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="article-body" dangerouslySetInnerHTML={{ __html: conclusion }} />
+      {/* 結論のすぐ下で、その場で使えるツールを出す（ツールを目当てに来た人がすぐ使えるように） */}
+      <RelatedContent tools={tools} title="この記事で使うツール" />
+      {rest && <div className="article-body" dangerouslySetInnerHTML={{ __html: rest }} />}
       {products.length > 0 && (
         <section className="flex flex-col gap-3">
           <h2 className={ui.h2}>紹介した商品</h2>
@@ -73,6 +80,12 @@ export async function ArticlePage({ article, section }: { article: Article; sect
                   <Link href={`/goods/items/${p.slug}/`} className="flex items-center gap-3 rounded-xl border border-line bg-panel p-2 text-ink no-underline shadow-card transition hover:border-goods/50">
                     <ProductImage product={p} market={related.market.get(p.id)} className="h-16 w-16 shrink-0 rounded-lg [&_img]:p-1" />
                     <span className="flex min-w-0 flex-col gap-0.5">
+                      {/* なぜこの記事で勧めるのか（「〜なら」）。なければ商品のひとこと説明 */}
+                      {article.goodsWhy?.[p.id] ? (
+                        <span className="text-xs font-bold text-goods">{article.goodsWhy[p.id]} →</span>
+                      ) : (
+                        <span className="line-clamp-1 text-xs text-muted">{p.summary}</span>
+                      )}
                       <span className="line-clamp-2 text-sm font-semibold leading-snug">{p.name}</span>
                       <MinPrice market={related.market.get(p.id)} />
                     </span>
@@ -91,7 +104,6 @@ export async function ArticlePage({ article, section }: { article: Article; sect
           </div>
         </section>
       )}
-      <RelatedContent tools={tools} title="この記事で使うツール" />
       {article.sources.length > 0 && (
         <section className="flex flex-col gap-1 text-xs text-muted">
           <p>この記事は公式情報をもとにまとめていますが、誤りがあったり、制度が変わったりしている場合があります。手続きの前に、下の公式ページや、お住まいの市区町村・税務署などで確かめてください。誤りに気づいたらお知らせください。</p>
@@ -109,4 +121,16 @@ export async function ArticlePage({ article, section }: { article: Article; sect
       )}
     </article>
   );
+}
+
+/** 本文を「結論」（最初の見出しの節）とそれ以外に分ける。ツールを結論のすぐ下に出すため */
+function splitConclusion(html: string): [string, string] {
+  const first = html.indexOf("<h2");
+  const second = first < 0 ? -1 : html.indexOf("<h2", first + 3);
+  return second < 0 ? [html, ""] : [html.slice(0, second), html.slice(second)];
+}
+
+/** 「このサイトのツールの使い方」の節は長いので、開いて読めるようにたたんでおく */
+function foldToolHowto(html: string): string {
+  return html.replace(/<h2[^>]*>このサイトのツールの使い方<\/h2>([\s\S]*?)(?=<h2|$)/, (_, body: string) => `<details class="howto"><summary>このサイトのツールの使い方（くわしく）</summary>${body}</details>`);
 }
