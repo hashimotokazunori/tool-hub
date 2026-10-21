@@ -1,22 +1,37 @@
+import howtoShots from "@/data/howto-shots.json";
 import type { ToolGuide } from "@/data/tool-guides/types";
 import { ui } from "./styles";
 
+/** 使い方の画像（例を入れた画面に手順の番号を付けたもの。scripts/tool-howto-shots.mjs で撮る）があるツール */
+const HOWTO = new Set<string>(howtoShots);
+
 /** ツールページの「使い方」「計算式」「使い方の例」「よくある質問」「根拠」。質問は開閉できる */
-export function ToolGuideSection({ name, guide }: { name: string; guide: ToolGuide }) {
+export function ToolGuideSection({ slug, name, guide }: { slug: string; name: string; guide: ToolGuide }) {
+  const howto = HOWTO.has(slug);
   return (
     <>
       <section className="flex flex-col gap-2">
         <h2 className={ui.h2}>{name}の使い方</h2>
-        <ol className="flex max-w-3xl flex-col gap-2">
-          {guide.steps.map((s, i) => (
-            <li key={i} className="flex gap-3 leading-relaxed">
-              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-soft font-mono text-xs font-semibold text-accent" aria-hidden="true">
-                {i + 1}
-              </span>
-              <span>{s}</span>
-            </li>
-          ))}
-        </ol>
+        <div className={howto ? "grid max-w-4xl items-start gap-4 md:grid-cols-[1fr_300px]" : ""}>
+          <ol className="flex max-w-3xl flex-col gap-2">
+            {guide.steps.map((s, i) => (
+              <li key={i} className="flex gap-3 leading-relaxed">
+                {/* 番号は使い方の画像の番号と同じ色にする */}
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#9b2c3a] font-mono text-xs font-bold text-white" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <span>{s}</span>
+              </li>
+            ))}
+          </ol>
+          {howto && (
+            <figure className="mx-auto flex w-full max-w-[300px] flex-col gap-1">
+              {/* eslint-disable-next-line @next/next/no-img-element -- 静的書き出しなので next/image の最適化は使えない */}
+              <img src={`/howto/${slug}.webp`} alt={`${name}の使い方の例。画面の番号は上の手順の番号です`} width={640} height={1000} loading="lazy" decoding="async" className="h-auto w-full rounded-2xl border border-line shadow-card" />
+              <figcaption className="text-center text-xs text-muted">例を入れた画面。番号は手順の番号です</figcaption>
+            </figure>
+          )}
+        </div>
       </section>
       {guide.formula && (
         <section className="flex flex-col gap-2">

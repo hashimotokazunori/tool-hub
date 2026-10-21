@@ -58,7 +58,7 @@ export function ToolLayout({ tool, category, children, related, guide }: { tool:
           </div>
         </section>
       )}
-      {guide && <ToolGuideSection name={tool.name} guide={guide} />}
+      {guide && <ToolGuideSection slug={tool.slug} name={tool.name} guide={guide} />}
       <section className="flex flex-col gap-2">
         <h2 className={ui.h2}>このツールについて</h2>
         <p className="max-w-3xl leading-relaxed">{tool.description}</p>
