@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps<"/goods/items/[slug
   if (!p) notFound();
   // 画像のない商品は検索に出さない（一覧にも載せない）
   const noImage = marketEnabled() && !hasImage(p, await getMarketData(p));
-  return pageMetadata({ title: `${p.name}の最安価格・特徴・仕様`, description: p.summary, path: `/goods/items/${p.slug}/`, noindex: noImage });
+  return pageMetadata({ title: p.market ? `${p.name}の最安価格・特徴・仕様` : `${p.name}の特徴・料金・できること`, description: p.summary, path: `/goods/items/${p.slug}/`, noindex: noImage });
 }
 
 export default async function ProductPage({ params }: PageProps<"/goods/items/[slug]">) {
@@ -58,7 +58,7 @@ export default async function ProductPage({ params }: PageProps<"/goods/items/[s
               </span>
             ))}
           </div>
-          <PriceSummary market={market} />
+          {p.market && <PriceSummary market={market} />}
           {!market && (price || link) && (
             <div className="flex flex-wrap items-center gap-3">
               {price && <p className="text-sm font-bold">参考価格：{price}</p>}

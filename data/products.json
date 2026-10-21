@@ -1665,6 +1665,131 @@
       "updatedAt": "2026-10-21",
       "reviewedAt": "2026-10-21",
       "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "claude",
+      "slug": "claude",
+      "name": "Claude（クロード）",
+      "brand": "Anthropic",
+      "categoryId": "apps",
+      "summary": "文章や資料づくり、調べもの、コードの相談までできるAIアシスタント。無料プランあり。",
+      "features": [
+        "Web・デスクトップアプリ・スマホアプリで使える",
+        "無料プランでも、Web検索・ファイルの作成・コードの実行・メモリ・外部サービスとの接続（コネクタ）などが使える（公式の料金ページ）",
+        "有料のProプランから、コードを書くAI「Claude Code」も使える"
+      ],
+      "pros": [
+        "コードやシステム関係の処理が得意だと感じる（運営者の感想）",
+        "このサイトの記事の下調べや、ツールの計算の確認にも使っている（運営者の使い方）",
+        "無料プランで試してから有料にできる"
+      ],
+      "cons": [
+        "どのプランにも使用量の上限がある（公式の料金ページ）",
+        "料金はドル建て・税別で表示されている",
+        "デザインや画面の見た目づくりは苦手だと感じ、ほかのAIと組み合わせている（運営者の感想）"
+      ],
+      "specifications": {
+        "提供元": "Anthropic",
+        "料金": "Free 0ドル／Pro 月20ドル（年払いなら月17ドル相当）／Max 月100ドルから（税別・2026年10月21日時点）",
+        "使える場所": "Web・デスクトップアプリ・スマホアプリ",
+        "Claude Code": "Pro以上のプランで使える"
+      },
+      "officialUrl": "https://claude.com/pricing",
+      "imageUrl": "/goods/apps/claude.svg",
+      "imageLicenseNote": "ツールひろばで描いたイラスト（公式のロゴではありません）",
+      "sourceUrls": [
+        "https://claude.com/pricing"
+      ],
+      "currency": "JPY",
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-10-21",
+      "reviewedAt": "2026-10-21",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "claude-code",
+      "slug": "claude-code",
+      "name": "Claude Code（クロード コード）",
+      "brand": "Anthropic",
+      "categoryId": "apps",
+      "summary": "コードを読んで、ファイルの編集やコマンドの実行までしてくれるAI。サイトづくりや作業の自動化に。",
+      "features": [
+        "コード全体を読み、ファイルを編集し、コマンドを実行し、開発ツールと連携する（公式の説明）",
+        "ターミナル、VS Code・JetBrains、デスクトップアプリ、ブラウザ（claude.ai/code）で使える",
+        "CLAUDE.md に決まりごとを書いておくと、作業の始めに毎回読む",
+        "git で変更の記録（コミット）やプルリクエストの作成までできる"
+      ],
+      "pros": [
+        "このサイト（ツールひろば）の作成・更新は Claude Code で行っている（運営者の使い方）",
+        "ツールの計算やページの仕組みづくりなど、システム関係の作業が得意だと感じる（運営者の感想）",
+        "スマホから作業の進み具合を見たり、指示を出したりできる（Remote Control など）"
+      ],
+      "cons": [
+        "ほとんどの使い方で、Claudeの有料プラン（Pro以上）か Anthropic Console のアカウントが必要（公式の説明）",
+        "デスクトップアプリで使うには有料プランが必要",
+        "画面のデザインは、Geminiに相談して補っている（運営者の使い方）"
+      ],
+      "specifications": {
+        "提供元": "Anthropic",
+        "必要なもの": "Claudeの有料プラン（Pro以上）か Anthropic Console のアカウント",
+        "使える場所": "ターミナル、VS Code・JetBrains、デスクトップアプリ、ブラウザ",
+        "Windowsでの入れ方": "PowerShell で irm https://claude.ai/install.ps1 | iex（公式の手順）"
+      },
+      "officialUrl": "https://code.claude.com/docs/en/overview",
+      "imageUrl": "/goods/apps/claude-code.svg",
+      "imageLicenseNote": "ツールひろばで描いたイラスト（公式のロゴではありません）",
+      "sourceUrls": [
+        "https://code.claude.com/docs/en/overview",
+        "https://claude.com/pricing"
+      ],
+      "currency": "JPY",
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-10-21",
+      "reviewedAt": "2026-10-21",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "gemini",
+      "slug": "gemini",
+      "name": "Gemini（ジェミニ）",
+      "brand": "Google",
+      "categoryId": "apps",
+      "summary": "Googleアカウントで使えるAI。画像の作成・編集や、デザインの案出しにも。料金は日本円で月725円から。",
+      "features": [
+        "無料版でも画像の生成と編集ができる（公式のプランのページ）",
+        "Gemini Notebook で、調べものや文章づくりをまとめられる",
+        "有料プラン（Google AI Plus・Pro・Ultra）は、使用量の上限とストレージが増える"
+      ],
+      "pros": [
+        "デザインや画面（UI）の案を出してもらうのに使っている（運営者の使い方）",
+        "サイトごとにノートブックを分けて、相談の続きをしやすくしている（運営者の使い方）",
+        "料金が日本円で示されていて、月725円のプランから選べる"
+      ],
+      "cons": [
+        "混んでいるときは、選んだモデルの代わりに別のモデルで答えることがある（運営者が使ったときの表示）",
+        "長い文章を貼り付けると、答えてもらえないことがあった（運営者の経験）",
+        "使える機能や上限はプランごとに違うので、公式ページで確かめてから選ぶ必要がある"
+      ],
+      "specifications": {
+        "提供元": "Google",
+        "料金": "無料／Google AI Plus 月725円／Google AI Pro 月2,900円／Google AI Ultra 月14,500円から（2026年10月21日時点）",
+        "ストレージ": "無料 15GB／Plus 400GB／Pro 5TB／Ultra 20TBから",
+        "使うもの": "Googleアカウント"
+      },
+      "officialUrl": "https://gemini.google/subscriptions/",
+      "imageUrl": "/goods/apps/gemini.svg",
+      "imageLicenseNote": "ツールひろばで描いたイラスト（公式のロゴではありません）",
+      "sourceUrls": [
+        "https://gemini.google/subscriptions/"
+      ],
+      "currency": "JPY",
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-10-21",
+      "reviewedAt": "2026-10-21",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
     }
   ]
 }

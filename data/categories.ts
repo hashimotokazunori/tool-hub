@@ -23,6 +23,7 @@ export const goodsCategories: Category[] = [
   goods(3, "home", "home", "家事・収納の便利グッズ", "収納用品、掃除グッズ、キッチン小物、省スペース用品"),
   goods(4, "travel", "travel", "旅行・外出グッズ", "圧縮袋、旅行用ポーチ、変換プラグ、携帯用品"),
   goods(5, "stationery", "stationery", "文房具・アイデア雑貨", "ラベル、書類整理、手帳、時短文具"),
+  goods(6, "apps", "apps", "AI・仕事効率化アプリ", "AIアシスタント、コードを書くAI、画像づくり"),
 ];
 
 export const allCategories = [...toolCategories, ...goodsCategories];

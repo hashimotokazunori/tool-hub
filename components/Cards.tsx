@@ -137,11 +137,14 @@ export function ProductCard({ product, market }: { product: Product; market?: Ma
             </span>
           ) : price ? (
             <span className="text-sm font-bold">{price}</span>
+          ) : !product.market ? (
+            // アプリなど楽天で売っていないもの
+            <span className="text-xs text-muted">料金は公式サイトで</span>
           ) : (
             <MinPrice market={null} />
           )}
           <span className="relative z-10 flex items-center gap-1 text-xs font-semibold text-accent">
-            価格を比較
+            {product.market ? "価格を比較" : "特徴を見る"}
             <Icon name="arrow" size={14} className="transition group-hover:translate-x-0.5" />
           </span>
         </div>

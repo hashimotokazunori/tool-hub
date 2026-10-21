@@ -40,6 +40,7 @@ collections:
                   - { label: 家事・収納, value: home }
                   - { label: 旅行・外出, value: travel }
                   - { label: 文房具・アイデア雑貨, value: stationery }
+                  - { label: AI・仕事効率化アプリ, value: apps }
               - { name: summary, label: ひとこと説明, widget: text }
               - { name: features, label: 特徴, widget: list, field: { name: item, label: 特徴, widget: string } }
               - { name: pros, label: よいところ, widget: list, field: { name: item, label: よいところ, widget: string } }
