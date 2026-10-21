@@ -28,7 +28,7 @@ export default async function GoodsPage() {
         <PageHeading title="便利グッズ" lead="困りごと別に、暮らしと仕事を便利にするアイテムを紹介します。仕様と価格は出典と確認日を記録して掲載しています。" />
       </div>
       <Section eyebrow="Categories" icon="bag" tone="goods" title="ジャンルから探す">
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {sortCategories(goodsCategories).map((c) => (
             <GoodsCategoryCard key={c.id} category={c} examples={c.description.split("、")} count={getProductsByCategory(c.id).length + getBuyingGuides(c.id).length} />
           ))}

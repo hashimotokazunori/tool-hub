@@ -63,21 +63,23 @@ export function EntryCard({ href, icon, title, sub, tone }: { href: string; icon
  * ------------------------------------------------------------------ */
 export function GoodsCategoryCard({ category, examples, count }: { category: Category; examples: string[]; count: number }) {
   return (
-    <Link href={`/goods/category/${category.slug}/`} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-panel text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-lift">
-      <span className="relative grid aspect-[16/9] place-items-center bg-gradient-to-br from-goods-soft to-panel text-goods">
-        <Icon name={goodsCategoryIcon[category.id] ?? "bag"} size={56} className="transition group-hover:scale-105" />
-        <span className="absolute bottom-2 left-3 rounded-full bg-panel/90 px-2 py-0.5 text-[11px] font-semibold text-goods">{count > 0 ? `${count}件を掲載` : "選び方を準備中"}</span>
+    // 上の大きな空白とうすいアイコンは見づらかったので、ツールのカードと同じ横並びの形にする
+    <Link href={`/goods/category/${category.slug}/`} className="group relative flex min-w-0 items-start gap-3.5 rounded-2xl border border-line bg-panel p-4 text-ink no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-goods/40 hover:shadow-lift">
+      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-goods text-panel shadow-card">
+        <Icon name={goodsCategoryIcon[category.id] ?? "bag"} size={24} />
       </span>
-      <span className="flex flex-col gap-1.5 p-4">
-        <b className="text-base">{category.name}</b>
+      <span className="flex min-w-0 flex-1 flex-col gap-1.5">
+        <b className="pr-5 text-base leading-snug">{category.name}</b>
+        <span className="text-xs font-semibold text-goods">{count > 0 ? `${count}件を掲載` : "選び方を準備中"}</span>
         <span className="flex flex-wrap gap-1">
           {examples.map((e) => (
-            <span key={e} className="rounded-md bg-field px-1.5 py-0.5 text-[11px] text-muted">
+            <span key={e} className="rounded-md bg-field px-1.5 py-0.5 text-[11px] text-ink/75">
               {e}
             </span>
           ))}
         </span>
       </span>
+      <Icon name="arrow" size={16} className="absolute top-4 right-4 text-goods opacity-60 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
     </Link>
   );
 }

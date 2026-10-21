@@ -34,7 +34,7 @@ export type IconName = keyof typeof PATHS;
 /** ツールのカテゴリID → アイコン */
 export const toolCategoryIcon: Record<string, IconName> = { text: "text", calc: "calc", image: "image", pdf: "pdf", gen: "gen", web: "web", life: "life", date: "date", biz: "biz", design: "design", data: "data" };
 /** グッズのカテゴリID → アイコン */
-export const goodsCategoryIcon: Record<string, IconName> = { desk: "desk", gadgets: "gadgets", home: "homegoods", travel: "travel", stationery: "stationery" };
+export const goodsCategoryIcon: Record<string, IconName> = { desk: "desk", gadgets: "gadgets", home: "homegoods", travel: "travel", stationery: "stationery", apps: "bolt" };
 
 export function Icon({ name, size = 22, className }: { name: IconName; size?: number; className?: string }) {
   return (
