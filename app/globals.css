@@ -173,6 +173,25 @@ h3 {
   text-decoration: underline;
 }
 
+/* 記事の中の説明の図（Markdown に <figure class="notice-figure"><img …> で書く） */
+.article-body .notice-figure {
+  margin: 0.4rem 0;
+}
+.article-body .notice-figure img {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 1rem;
+}
+.article-body .notice-figure figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  text-align: center;
+}
+
 /* 記事の中の手順の図（Markdown に <figure class="flow"> で書く） */
 .article-body .flow {
   margin: 0.4rem 0;

@@ -89,6 +89,8 @@ export type Article = {
   toolSlugs: string[];
   goodsCategoryIds: string[];
   sources: { title: string; url: string }[];
+  /** 検索結果に出す題名（なければ「題名＋ときの解決策」） */
+  seoTitle?: string;
   author: string;
   /** 内容を確認した日（YYYY-MM-DD） */
   reviewedAt?: string;

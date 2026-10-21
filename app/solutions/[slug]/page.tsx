@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<"/solutions/[slug]"
   const { slug } = await params;
   const a = getArticleBySlug("solution", slug);
   if (!a) notFound();
-  return pageMetadata({ title: `${a.title}ときの解決策`, description: a.description, path: `/solutions/${a.slug}/`, noindex: a.status !== "published" });
+  return pageMetadata({ title: a.seoTitle ?? `${a.title}ときの解決策`, description: a.description, path: `/solutions/${a.slug}/`, noindex: a.status !== "published" });
 }
 
 export default async function SolutionPage({ params }: PageProps<"/solutions/[slug]">) {
