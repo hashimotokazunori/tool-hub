@@ -138,8 +138,8 @@ export function ProductCard({ product, market }: { product: Product; market?: Ma
           ) : price ? (
             <span className="text-sm font-bold">{price}</span>
           ) : !product.market ? (
-            // アプリなど楽天で売っていないもの
-            <span className="text-xs text-muted">料金は公式サイトで</span>
+            // アプリなど楽天で売っていないもの（料金は上の「料金」の行に出す）
+            <span />
           ) : (
             <MinPrice market={null} />
           )}

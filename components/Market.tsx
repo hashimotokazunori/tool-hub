@@ -74,7 +74,7 @@ export function ProductImage({
         <img
           src={src}
           alt={product.name}
-          className="h-full w-full object-contain p-3"
+          className="absolute inset-0 h-full w-full object-contain p-3"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />
