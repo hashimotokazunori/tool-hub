@@ -1,7 +1,7 @@
 import type { ToolGuide } from "@/data/tool-guides/types";
 import { ui } from "./styles";
 
-/** ツールページの「使い方」と「よくある質問」。質問は開閉できる */
+/** ツールページの「使い方」「計算式」「使い方の例」「よくある質問」「根拠」。質問は開閉できる */
 export function ToolGuideSection({ name, guide }: { name: string; guide: ToolGuide }) {
   return (
     <>
@@ -18,6 +18,31 @@ export function ToolGuideSection({ name, guide }: { name: string; guide: ToolGui
           ))}
         </ol>
       </section>
+      {guide.formula && (
+        <section className="flex flex-col gap-2">
+          <h2 className={ui.h2}>{guide.formula.title}</h2>
+          <ul className="flex max-w-3xl flex-col gap-1.5 rounded-2xl border border-line bg-panel px-4 py-3 shadow-card">
+            {guide.formula.lines.map((l, i) => (
+              <li key={i} className="leading-relaxed">
+                {l}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {guide.examples && guide.examples.length > 0 && (
+        <section className="flex flex-col gap-2">
+          <h2 className={ui.h2}>使い方の例</h2>
+          <div className="grid max-w-3xl gap-3 sm:grid-cols-2">
+            {guide.examples.map((e, i) => (
+              <div key={i} className="flex flex-col gap-1 rounded-2xl border border-line bg-panel px-4 py-3 shadow-card">
+                <h3 className={ui.h3}>{e.title}</h3>
+                <p className="leading-relaxed text-ink/90">{e.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
       <section className="flex flex-col gap-2">
         <h2 className={ui.h2}>よくある質問</h2>
         <div className="flex max-w-3xl flex-col divide-y divide-line rounded-2xl border border-line bg-panel shadow-card">
@@ -34,6 +59,20 @@ export function ToolGuideSection({ name, guide }: { name: string; guide: ToolGui
           ))}
         </div>
       </section>
+      {guide.sources && guide.sources.length > 0 && (
+        <section className="flex flex-col gap-1 text-xs text-muted">
+          <p>根拠にした公式の情報：</p>
+          <ul className="list-disc pl-5">
+            {guide.sources.map((s) => (
+              <li key={s.url}>
+                <a href={s.url} rel="noopener noreferrer" target="_blank" className="underline">
+                  {s.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </>
   );
 }

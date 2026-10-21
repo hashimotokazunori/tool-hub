@@ -21,7 +21,7 @@ const THEMES: { id: string; title: string; lead: string; tools: string[]; articl
     title: "ふるさと納税の駆け込み",
     lead: "12月31日までの寄附がその年の分。上限の目安を出して、残りの枠で選びます。",
     tools: ["furusato-limit"],
-    articles: ["furusato-how-much", "furusato-deadline", "furusato-one-stop"],
+    articles: ["furusato-how-much", "furusato-deadline", "furusato-one-stop", "furusato-one-stop-late", "furusato-tax-notice", "furusato-income-change"],
     extra: { href: "/furusato/", label: "返礼品を見る" },
   },
   {

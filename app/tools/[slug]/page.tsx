@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/tools/[slug]">) {
   const { slug } = await params;
   const tool = getToolBySlug(slug);
   if (!tool) notFound();
-  return pageMetadata({ title: `${tool.name}（無料・登録不要）`, description: tool.description, path: `/tools/${tool.slug}/` });
+  return pageMetadata({ title: getToolGuide(slug)?.title ?? `${tool.name}（無料・登録不要）`, description: tool.description, path: `/tools/${tool.slug}/` });
 }
 
 export default async function ToolPage({ params }: PageProps<"/tools/[slug]">) {
