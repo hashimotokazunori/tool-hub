@@ -5,8 +5,8 @@
   --c-bg: #f6f7fb;
   --c-panel: #ffffff;
   --c-ink: #0f172a;
-  --c-muted: #5b6477;
-  --c-line: #e3e6ef;
+  --c-muted: #4a5366;
+  --c-line: #d5d9e4;
   --c-field: #f3f5fa;
   --c-accent: #4f46e5;
   --c-accent-2: #7c3aed;
@@ -276,4 +276,12 @@ h3 {
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* チェックボックス・ラジオはアクセントの色で、少し大きく（うすくて押せる場所と分かりにくかったので） */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--c-accent);
+  width: 1.05rem;
+  height: 1.05rem;
 }

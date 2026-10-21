@@ -15,8 +15,6 @@ import { SHOTS } from "./tool-shot-examples.mjs";
 const BASE = process.env.HOWTO_BASE ?? "http://localhost:3100";
 const OUT = "public/howto";
 const WIDTH = 390;
-/** 写真の高さの上限（幅に対する比）。長いパネルは番号がある範囲を中心に切る */
-const MAX_RATIO = 2.2;
 
 function findChrome() {
   if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
@@ -120,24 +118,15 @@ async function shoot(page, slug, spec) {
   const scale = (meta.width ?? 1) / box.width;
   const width = meta.width ?? 0;
   const height = meta.height ?? 0;
-  // 番号のある範囲が入るように縦を切る
-  const maxH = Math.round(width * MAX_RATIO);
-  let top = 0;
-  let h = height;
-  if (height > maxH) {
-    const ys = marks.map((m) => m.y * scale);
-    const lo = Math.min(...ys) - 40 * scale;
-    let hi = Math.max(...marks.map((m) => (m.y + m.h) * scale)) + 60 * scale;
-    // 結果の表示（aria-live）も、上限の高さに収まるなら入れる（結果が途中で切れないように）
-    const result = panel.locator("[aria-live]").first();
-    const rb = (await result.count()) ? await result.boundingBox() : null;
-    if (rb) {
-      const rBottom = (rb.y + rb.height - box.y) * scale + 16 * scale;
-      if (rBottom - lo <= maxH) hi = Math.max(hi, rBottom);
-    }
-    // 番号の付いた場所はすべて入れる（上限より長くなってもよい）
-    h = Math.min(height, Math.max(hi - lo, Math.round(width * 1.35)));
-    top = Math.max(0, Math.min(height - h, Math.round(lo)));
+  // 番号の付いた欄・ボタンのある範囲だけを切り出す（全体を縮めると文字が読めないので、操作する部分を大きく見せる）
+  const lo = Math.max(0, Math.round(Math.min(...marks.map((m) => m.y * scale)) - 20 * scale));
+  // 最後の番号の下にある入力欄が入るよう、少し下まで含める
+  const hi = Math.min(height, Math.round(Math.max(...marks.map((m) => (m.y + m.h) * scale)) + 100 * scale));
+  let top = lo;
+  let h = Math.max(hi - lo, Math.round(width * 0.6));
+  if (top + h > height) {
+    h = Math.min(h, height);
+    top = height - h;
   }
   // 番号は画像の左に足した余白に、指す場所と同じ高さで置く（文字に重ならないように）
   const r = 14 * scale;

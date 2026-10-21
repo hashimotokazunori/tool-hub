@@ -21,6 +21,19 @@ export function ToolLayout({ tool, category, children, related, guide }: { tool:
     const t = published.get(n.slug);
     return t ? [{ tool: t, why: n.why }] : [];
   });
+  const nextSection = next.length > 0 && (
+    <section aria-label="次はこちら" className="flex flex-col gap-2">
+      <h2 className={ui.h3}>次はこちら</h2>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+        {next.map(({ tool: t, why }) => (
+          <Link key={t.slug} href={`/tools/${t.slug}/`} className={ui.card}>
+            <b className="text-[15px]">{t.name} →</b>
+            <span className="text-xs text-muted">{why}</span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
   return (
     <div className="flex flex-col gap-5">
       <Breadcrumbs items={[{ label: "無料Webツール", href: "/tools/" }, { label: category.name, href: `/tools/category/${category.slug}/` }, { label: tool.name }]} />
@@ -45,20 +58,11 @@ export function ToolLayout({ tool, category, children, related, guide }: { tool:
         {children}
       </section>
       <RememberTool slug={tool.slug} />
-      {next.length > 0 && (
-        <section aria-label="次はこちら" className="flex flex-col gap-2">
-          <h2 className={ui.h3}>次はこちら</h2>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-            {next.map(({ tool: t, why }) => (
-              <Link key={t.slug} href={`/tools/${t.slug}/`} className={ui.card}>
-                <b className="text-[15px]">{t.name} →</b>
-                <span className="text-xs text-muted">{why}</span>
-              </Link>
-            ))}
-          </div>
-        </section>
+      {guide ? (
+        <ToolGuideSection slug={tool.slug} name={tool.name} guide={guide} afterSteps={nextSection} />
+      ) : (
+        nextSection
       )}
-      {guide && <ToolGuideSection slug={tool.slug} name={tool.name} guide={guide} />}
       <section className="flex flex-col gap-2">
         <h2 className={ui.h2}>このツールについて</h2>
         <p className="max-w-3xl leading-relaxed">{tool.description}</p>
