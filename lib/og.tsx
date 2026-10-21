@@ -27,7 +27,7 @@ async function loadFont(text: string): Promise<ArrayBuffer> {
   const chars = [...new Set(text)].sort().join("");
   const hit = fontCache.get(chars);
   if (hit) return hit;
-  const p = (async () => {
+  const p = withRetry(async () => {
     const css = await (
       await fetch(`https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&text=${encodeURIComponent(chars)}`, {
         headers: { "User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/534.30 (KHTML, like Gecko) Safari/534.30" },
@@ -38,9 +38,23 @@ async function loadFont(text: string): Promise<ArrayBuffer> {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`OGP画像用のフォントを取得できませんでした（${res.status}）`);
     return res.arrayBuffer();
-  })();
+  });
   fontCache.set(chars, p);
+  // 失敗したものは覚えておかない（次に呼ばれたときに取り直す）
+  p.catch(() => fontCache.delete(chars));
   return p;
+}
+
+/** Google Fonts がたまに 502 やタイムアウトになり、ビルドが止まるので、間をあけて3回まで試す */
+async function withRetry<T>(fn: () => Promise<T>, tries = 3): Promise<T> {
+  for (let i = 1; ; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (i >= tries) throw e;
+      await new Promise((r) => setTimeout(r, 2000 * i));
+    }
+  }
 }
 
 /** 長い題名は2行に収まるよう文字の大きさを下げる */
