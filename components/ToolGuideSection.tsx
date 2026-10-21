@@ -11,7 +11,8 @@ export function ToolGuideSection({ slug, name, guide, afterSteps }: { slug: stri
   const howto = HOWTO.has(slug);
   return (
     <>
-      <section className="flex flex-col gap-2">
+      {/* 使い方はカードで囲み、上のツールの操作パネルと分けて見せる */}
+      <section className={`${ui.panel} flex flex-col gap-3 p-4 sm:p-6`}>
         <h2 className={ui.h2}>{name}の使い方</h2>
         <div className={howto ? "grid max-w-5xl items-start gap-5 md:grid-cols-[1fr_400px]" : ""}>
           <ol className="flex max-w-3xl flex-col gap-2">
@@ -28,7 +29,7 @@ export function ToolGuideSection({ slug, name, guide, afterSteps }: { slug: stri
           {howto && (
             <figure className="mx-auto flex w-full max-w-[400px] flex-col gap-1">
               {/* eslint-disable-next-line @next/next/no-img-element -- 静的書き出しなので next/image の最適化は使えない */}
-              <img src={`/howto/${slug}.webp`} alt={`${name}の使い方の例。画面の番号は上の手順の番号です`} width={640} height={1000} loading="lazy" decoding="async" className="h-auto w-full rounded-2xl border border-line shadow-card" />
+              <img src={`/howto/${slug}.webp`} alt={`${name}の使い方の例。画面の番号は上の手順の番号です`} width={640} height={1000} loading="lazy" decoding="async" className="h-auto w-full rounded-2xl border border-ink/15 shadow-lift" />
               <figcaption className="text-center text-xs text-muted">例を入れた画面。番号は手順の番号です</figcaption>
             </figure>
           )}
