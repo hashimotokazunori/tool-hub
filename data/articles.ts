@@ -109,7 +109,7 @@ export const articles: Article[] = [
       { title: "国税庁 タックスアンサー No.2030「還付申告」（令和8年4月1日現在法令等）", url: "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2030.htm" },
       { title: "中央区（東京都）「ふるさと納税の税額控除が適用されていないとき」", url: "https://www.city.chuo.lg.jp/a0009/kurashi/zeikin/furusato/furusatonozei_kojo/hurusatozeigakukouzilyotekiyou.html" },
     ] }),
-  article({ reviewedAt: "2026-10-21", publishedAt: "2026-10-21", id: "furusato-income-change", slug: "furusato-income-change", type: "solution", title: "年の途中で収入が変わる年のふるさと納税", description: "転職・退職・副業などで収入が変わる年の上限の考え方と、確定申告が必要になってワンストップ特例が使えなくなる場合。", bodyFile: "solutions/furusato-income-change.md", toolSlugs: ["furusato-limit"], goodsCategoryIds: [],
+  article({ reviewedAt: "2026-10-21", publishedAt: "2026-10-21", id: "furusato-income-change", slug: "furusato-income-change", type: "solution", title: "ふるさと納税をする年に転職・退職で収入が変わる", description: "転職・退職・副業などで収入が変わる年の上限の考え方と、確定申告が必要になってワンストップ特例が使えなくなる場合。", bodyFile: "solutions/furusato-income-change.md", toolSlugs: ["furusato-limit"], goodsCategoryIds: [],
     sources: [
       { title: "総務省 ふるさと納税ポータルサイト「よくある質問」", url: "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/furusato/faq/" },
       { title: "横浜市「寄附金税額控除（ふるさと納税）について」（2026年10月13日更新）", url: "https://www.city.yokohama.lg.jp/kurashi/koseki-zei-hoken/zeikin/y-shizei/kojin-shiminzei-kenminzei/kihukin.html" },
