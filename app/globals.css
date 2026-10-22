@@ -2,7 +2,7 @@
 
 /* 色は「役割」の名前で定義し、ダークモードでは値だけを差し替える */
 :root {
-  --c-bg: #f6f7fb;
+  --c-bg: #eef0f5;
   --c-panel: #ffffff;
   --c-ink: #0f172a;
   --c-muted: #4a5366;

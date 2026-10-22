@@ -7,6 +7,9 @@ export const ui = {
   label: "flex flex-col gap-1.5 text-[13px] font-medium text-muted",
   button:
     "inline-flex items-center justify-center gap-1.5 rounded-xl border border-ink/20 bg-panel px-4 py-2 text-sm font-semibold text-ink shadow-card transition hover:-translate-y-px hover:border-accent/40 hover:shadow-lift disabled:pointer-events-none disabled:opacity-55",
+  /** 消すなど、元に戻せない操作のボタン。マウスを乗せると赤くなる */
+  buttonDanger:
+    "inline-flex items-center justify-center gap-1.5 rounded-xl border border-ink/20 bg-panel px-4 py-2 text-sm font-semibold text-ink shadow-card transition hover:border-red-300 hover:bg-red-50 hover:text-red-700 disabled:pointer-events-none disabled:opacity-55",
   buttonPrimary:
     "inline-flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-accent to-accent-2 px-4 py-2 text-sm font-semibold text-accent-ink shadow-card transition hover:-translate-y-px hover:shadow-lift hover:brightness-110 disabled:pointer-events-none disabled:opacity-55",
   chip: "inline-flex items-center gap-1.5 rounded-full border border-line bg-panel px-3 py-1.5 text-[13px] font-medium text-ink no-underline shadow-card transition hover:border-accent/50 hover:text-accent",

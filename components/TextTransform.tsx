@@ -36,11 +36,11 @@ export function TextTransform({ input, onInput, output, options, summary, placeh
         >
           {copiedBack ? "入れました" : "結果を変換前に入れる"}
         </button>
-        <span className="text-xs text-muted" aria-live="polite">
+        <span className="rounded-full bg-accent-soft px-2.5 py-1 text-xs font-bold text-accent tabular-nums" aria-live="polite">
           {summary ?? `${[...input].length} 文字 → ${[...output].length} 文字`}
         </span>
         {/* 「消す」は押し間違えないよう、ほかのボタンから離して右端に置く */}
-        <button type="button" className={`${ui.button} ml-auto`} onClick={() => onInput("")} disabled={!input}>
+        <button type="button" className={`${ui.buttonDanger} ml-auto`} onClick={() => onInput("")} disabled={!input}>
           消す
         </button>
       </div>
