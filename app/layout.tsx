@@ -61,6 +61,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         ) : (
           <Analytics />
         )}
+        {/* Google アナリティクス。運営者の端末（/nocount.html で設定）は数えない */}
+        {site.ga4Id && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{if(localStorage.getItem("no_count")==="1")return}catch(e){}var id=${JSON.stringify(site.ga4Id)};var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag("js",new Date());gtag("config",id)})();`,
+            }}
+          />
+        )}
         <ServiceWorker />
         <InstallPrompt />
       </body>

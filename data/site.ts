@@ -18,6 +18,8 @@ export const site = {
    * 入っていれば Cloudflare の計測を、空なら Vercel Web Analytics を使う
    */
   cloudflareBeacon: process.env.NEXT_PUBLIC_CF_BEACON_TOKEN ?? "",
+  /** Google アナリティクス（GA4）の測定ID。ほかのサイトと同じく閲覧数を1件ずつ数えるため（Cloudflare は10件単位の見積もり） */
+  ga4Id: process.env.NEXT_PUBLIC_GA4_ID ?? "G-RNK7Q4WN7M",
   locale: "ja_JP",
   operator: {
     /** 運営者名。空なら運営者名は表示しない */

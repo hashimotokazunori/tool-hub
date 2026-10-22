@@ -19,6 +19,19 @@ export default function PrivacyPage() {
       <p>「お気に入り」に入れたツールと「最近使ったツール」の履歴も、同じようにこの端末のブラウザにだけ保存します。運営者には送られず、「履歴を消す」やブラウザのサイトデータの削除で消せます。</p>
       <p>「結果をリンクで共有」を使うと、入力内容がリンク（URLの「#」より後ろ）に含まれます。この部分はサーバーに送られませんが、リンクを受け取った人は内容を見られるため、共有する相手にご注意ください。</p>
       <h2>アクセス解析・広告</h2>
+      {site.ga4Id && (
+        <p>
+          当サイトは、閲覧数の把握とサイトの改善のために、Google LLC の「Google アナリティクス」を使っています。Google アナリティクスは Cookie を使ってデータを集めます。このデータは匿名で集められ、個人を特定するものではありません。Cookie を無効にすると、データの収集を拒否できます。お使いのブラウザの設定をご確認ください。詳しくは
+          <a href="https://marketingplatform.google.com/about/analytics/terms/jp/" target="_blank" rel="noopener noreferrer">
+            Google アナリティクス利用規約
+          </a>
+          と
+          <a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener noreferrer">
+            Google のサービスを使用するサイトやアプリから収集した情報の Google による使用
+          </a>
+          をご覧ください。
+        </p>
+      )}
       {site.cloudflareBeacon ? (
         <p>
           当サイトは、閲覧数の把握とサイトの改善のために、Cloudflare, Inc. の「Cloudflare Web Analytics」を使っています。取得するのは、見られたページのURL、参照元、国・地域、ブラウザやOS・端末の種類、表示の速さなどで、Cookieは使わず、個人を特定できる情報は集めません。詳しくは
