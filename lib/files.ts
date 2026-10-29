@@ -1,8 +1,14 @@
 /** ファイルの保存・ZIP・大きさの表示（ブラウザ専用。クライアント部品から使う） */
+import { setLastOutput } from "./handoff";
+
+const TYPE_OF_EXT: Record<string, string> = { pdf: "application/pdf", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", gif: "image/gif", csv: "text/csv", tsv: "text/tab-separated-values", json: "application/json", txt: "text/plain" };
 
 /** ファイルを保存する（ブラウザのダウンロード） */
-export function saveBlob(filename: string, data: Blob | Uint8Array | string) {
-  const blob = data instanceof Blob ? data : new Blob([data as BlobPart]);
+export function saveBlob(filename: string, data: Blob | Uint8Array | string, { remember = true }: { remember?: boolean } = {}) {
+  const ext = filename.split(".").pop()?.toLowerCase() ?? "";
+  const blob = data instanceof Blob ? data : new Blob([data as BlobPart], { type: TYPE_OF_EXT[ext] ?? "" });
+  // 「次のツールで使う」で渡せるように、保存した結果を覚えておく
+  if (remember) setLastOutput(new File([blob], filename, { type: blob.type || TYPE_OF_EXT[ext] || "" }));
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;

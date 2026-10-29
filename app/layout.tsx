@@ -1,3 +1,4 @@
+import { CommandPalette } from "@/components/CommandPalette";
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
@@ -69,6 +70,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             }}
           />
         )}
+        {/* Ctrl+K か「/」でツールを呼び出す窓 */}
+        <CommandPalette />
         <ServiceWorker />
         <InstallPrompt />
       </body>

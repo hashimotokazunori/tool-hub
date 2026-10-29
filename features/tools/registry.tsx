@@ -46,6 +46,7 @@ import CsvEncoding from "./data/charset/Tool";
 import { Bingo, Lottery } from "./generator/random/Lottery";
 import TaskPriority from "./business/priority/Tool";
 import FurusatoLimit from "./life/furusato/Tool";
+import AiCheck from "./calculator/ai-check/Tool";
 
 /** 画面キー → ツールの画面。keys.ts のキーがすべてそろっていないと型エラーになる */
 export const toolComponents: Record<ToolComponentKey, ComponentType> = {
@@ -157,4 +158,5 @@ export const toolComponents: Record<ToolComponentKey, ComponentType> = {
   bulkRename: BulkRename,
   excelCsvConverter: ExcelCsvConverter,
   furusatoLimit: FurusatoLimit,
+  aiCheck: AiCheck,
 };

@@ -20,6 +20,7 @@ const ROWS: Row[] = [
   ["text-diff", "text", "テキスト比較", "2つの文章の違いを行ごとに色分けし、書き換えた部分に下線", "P0", "比較 差分 diff 違い 変更点"],
   ["line-paragraph-counter", "text", "行数・段落数カウント", "行数・空行・段落・文の数と1行の文字数を集計", "P1", "行数 段落 改行 空行 文の数 数える 行番号 1行の文字数"],
   // 計算・単位変換
+  ["ai-check", "calc", "AIの答えの検算", "ChatGPTなどの答えを貼り付けると、割り勘・消費税・日数を計算し直して合っているか表示", "P0", "AI ChatGPT Gemini Claude 検算 答え合わせ 計算ミス 合ってる 確認 割り勘 消費税 日数 営業日"],
   ["consumption-tax", "calc", "消費税計算", "税込・税抜の計算。8%と10%が混ざった複数の品目もまとめて計算", "P0", "消費税 税込 税抜 軽減税率 10% 8% 端数 インボイス レシート 複数"],
   ["discount", "calc", "割引計算", "割引後の価格と二重割引", "P0", "割引 値引き 何割引き オフ セール"],
   ["percentage", "calc", "割合計算", "何％・増減率・〇％はいくつ", "P0", "割合 パーセント 増減率 何%"],
@@ -247,13 +248,58 @@ const PUBLISHED: Record<string, string> = {
   "pdf-delete-pages": "pdfOrganize",
   // 第7弾
   "furusato-limit": "furusatoLimit",
+  // 2026-10-29
+  "ai-check": "aiCheck",
 };
 
 const UPDATED_AT = "2026-10-19";
 
+/**
+ * 2026-10-29 に非公開にしたツール。短い質問ひとつで答えが出る計算・変換で、Google の検索結果や AI の答えにかわられたもの
+ * （検索結果に出てもクリックされない）。画面と使い方は残してあるので、戻すときはここから消す。
+ */
+export const RETIRED = new Set([
+  "percentage",
+  "ratio",
+  "rounding",
+  "unit-converter",
+  "data-size",
+  "discount",
+  "weekday",
+  "age",
+  "time-units",
+  "timezone",
+  "unix-time",
+  "week-number",
+  "date-add",
+  "case-converter",
+  "random-number",
+  "uuid",
+  "dummy-text",
+  "email-templates",
+  "meeting-minutes",
+  "base64",
+  "url-encode",
+  "html-escape",
+  "color-converter",
+  "cron-parser",
+  "css-unit",
+  "bmi",
+  "steps-distance",
+  "tip",
+  "wage-converter",
+  "savings-goal",
+  "electricity-cost",
+  "presentation-time",
+  "reading-time",
+  "achievement-rate",
+  "progress-rate",
+  "study-time",
+]);
+
 export const tools: Tool[] = ROWS.map(([slug, categoryId, name, summary, priority, keywords]) => {
   const componentKey = PUBLISHED[slug] ?? null;
-  const status: PublishStatus = componentKey ? "published" : "draft";
+  const status: PublishStatus = !componentKey ? "draft" : RETIRED.has(slug) ? "retired" : "published";
   return {
     id: slug,
     slug,

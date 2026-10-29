@@ -20,7 +20,9 @@ describe("データの整合性", () => {
   it("画面が登録されたツールだけが公開され、画面はすべて使われている", () => {
     const published = getPublicTools();
     expect(published.every(isToolPublic)).toBe(true);
-    expect(new Set(published.map((t) => t.componentKey))).toEqual(new Set(TOOL_COMPONENT_KEYS));
+    // 非公開（retired）にしたツールの画面も、戻せるように残してある
+    const kept = tools.filter((t) => t.status === "published" || t.status === "retired");
+    expect(new Set(kept.map((t) => t.componentKey))).toEqual(new Set(TOOL_COMPONENT_KEYS));
     expect(tools.filter((t) => t.componentKey === null).every((t) => t.status === "draft")).toBe(true);
   });
 
@@ -32,8 +34,8 @@ describe("データの整合性", () => {
       expect(g.faq.length, t.slug).toBeGreaterThanOrEqual(2);
       for (const f of g.faq) expect(f.q.length * f.a.length, t.slug).toBeGreaterThan(0);
     }
-    // 公開していないツールの使い方は置かない（古い説明が残らないように）
-    for (const slug of Object.keys(toolGuides)) expect(getPublicTools().some((t) => t.slug === slug), slug).toBe(true);
+    // 公開していないツールの使い方は置かない（古い説明が残らないように）。非公開（retired）にしたツールは戻せるように残す
+    for (const slug of Object.keys(toolGuides)) expect(tools.some((t) => t.slug === slug && (t.status === "published" || t.status === "retired")), slug).toBe(true);
   });
 
   it("公開ページの説明文はすべて固有", () => {

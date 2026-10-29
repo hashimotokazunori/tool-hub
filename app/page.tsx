@@ -18,7 +18,7 @@ const QUICK: { slug: string; label: string }[] = [
 ];
 
 /** トップに出す人気ツールの順番（公開中のものだけ表示） */
-const POPULAR = ["character-counter", "consumption-tax", "warikan", "days-between", "password-generator"];
+const POPULAR = ["ai-check", "character-counter", "consumption-tax", "warikan", "days-between", "password-generator"];
 
 /** トップページの正規URL（tool.hiroba.workers.dev で開かれても toolhiroba.com を正とする） */
 export const metadata = { alternates: { canonical: "/" } };

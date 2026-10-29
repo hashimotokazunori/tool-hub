@@ -124,6 +124,7 @@ export const TOOL_COMPONENT_KEYS = [
   "excelCsvConverter",
   // 第7弾
   "furusatoLimit",
+  "aiCheck",
 ] as const;
 
 export type ToolComponentKey = (typeof TOOL_COMPONENT_KEYS)[number];

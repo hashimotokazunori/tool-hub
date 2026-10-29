@@ -10,10 +10,14 @@ import { Breadcrumbs } from "./Breadcrumbs";
 import { Icon, toolCategoryIcon } from "./icons";
 import { SponsoredLinks } from "./SponsoredLinks";
 import { FavoriteButton, RememberTool } from "./ToolMemory";
+import { FileToolExtras } from "./FileToolExtras";
 import { ToolGuideSection } from "./ToolGuideSection";
 import { gradientFor, ui } from "./styles";
 
 /** 個別ツールページの共通の枠。ツール本体を先に、解説と広告はその下に置く */
+/** 結果を次のツールへ渡す・通信の記録を出す、ファイルを扱うツールのカテゴリ */
+const FILE_CATEGORIES = new Set(["image", "pdf", "data"]);
+
 export function ToolLayout({ tool, category, children, related, guide }: { tool: Tool; category: Category; children: ReactNode; related?: ReactNode; guide?: ToolGuide }) {
   const sponsored = sponsoredFor(tool.slug);
   const published = new Map(getPublicTools().map((t) => [t.slug, t]));
@@ -58,6 +62,8 @@ export function ToolLayout({ tool, category, children, related, guide }: { tool:
         {children}
       </section>
       <RememberTool slug={tool.slug} />
+      {/* ファイルを扱うツール：結果を次のツールへ渡す・通信の記録 */}
+      {FILE_CATEGORIES.has(tool.categoryId) && <FileToolExtras slug={tool.slug} name={tool.name} />}
       {guide ? (
         <ToolGuideSection slug={tool.slug} name={tool.name} guide={guide} afterSteps={nextSection} />
       ) : (

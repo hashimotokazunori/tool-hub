@@ -78,5 +78,6 @@ export const SHOTS = {
   "css-unit": {},
   // 使い方の画像（tool-howto-shots.mjs）で、結果が出るように例を入れるもの。click はボタンの名前
   "jwt-decoder": { click: ["サンプルを入れる"] },
+  "ai-check": { click: ["例を入れる"] },
   "csv-columns": { text: ["商品,価格,在庫\nりんご,120,5\nみかん,80,12\nぶどう,300,3"] },
 };
