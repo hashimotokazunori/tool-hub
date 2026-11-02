@@ -257,10 +257,10 @@ const UPDATED_AT = "2026-10-19";
 /**
  * 2026-10-29 に非公開にしたツール。短い質問ひとつで答えが出る計算・変換で、Google の検索結果や AI の答えにかわられたもの
  * （検索結果に出てもクリックされない）。画面と使い方は残してあるので、戻すときはここから消す。
+ * 2026-11-02: 検索から人が来ていた ratio・achievement-rate・study-time は戻した。
  */
 export const RETIRED = new Set([
   "percentage",
-  "ratio",
   "rounding",
   "unit-converter",
   "data-size",
@@ -292,9 +292,7 @@ export const RETIRED = new Set([
   "electricity-cost",
   "presentation-time",
   "reading-time",
-  "achievement-rate",
   "progress-rate",
-  "study-time",
 ]);
 
 export const tools: Tool[] = ROWS.map(([slug, categoryId, name, summary, priority, keywords]) => {
