@@ -1442,7 +1442,7 @@
       "priceCheckedAt": "2026-10-21",
       "officialUrl": "https://marna.jp/shop/g/gS514PU/",
       "market": {
-        "keyword": "マーナ シュパット コンパクトバッグ S",
+        "keyword": "マーナ シュパット コンパクトバッグ",
         "match": [
           "S514",
           "S519",
@@ -1490,7 +1490,7 @@
       "currency": "JPY",
       "officialUrl": "https://www.loopearplugs.com/products/quiet",
       "market": {
-        "keyword": "Loop Quiet 2 耳栓",
+        "keyword": "Loop Quiet 耳栓",
         "match": [
           "Loop Quiet 2",
           "ループ + クワイエット + 2"
@@ -2126,14 +2126,15 @@
       "currency": "JPY",
       "officialUrl": "https://www.benq.com/ja-jp/lighting/monitor-light/screenbar-halo-2.html",
       "market": {
-        "keyword": "BenQ ScreenBar Halo 2",
+        "keyword": "ScreenBar Halo2",
         "match": [
           "ScreenBar Halo 2",
           "ScreenBar + Halo2"
         ],
         "exclude": [
+          "カバー",
           "ケース",
-          "カバー"
+          "フィルム"
         ],
         "minPrice": 20000
       },
@@ -2588,9 +2589,9 @@
       "priceCheckedAt": "2026-11-07",
       "officialUrl": "https://shop.delfonics.com/c/notebooks/501493",
       "market": {
-        "keyword": "ロルバーン フリーダイアリー L",
+        "keyword": "ロルバーン フリーダイアリー",
         "match": [
-          "ロルバーン + フリーダイアリー + L"
+          "ロルバーン + フリーダイアリー L"
         ],
         "exclude": [
           "クリア",
@@ -2603,7 +2604,7 @@
           "ケース",
           "リフィル"
         ],
-        "minPrice": 1000
+        "minPrice": 1500
       },
       "sourceUrls": [
         "https://shop.delfonics.com/c/notebooks/501493",
