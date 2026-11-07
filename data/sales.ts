@@ -11,6 +11,8 @@ export type Sale = {
   end?: string;
   /** 公式の特設ページ（発表後に入れる） */
   officialUrl?: string;
+  /** 日程が出る前の公式の案内（例：11月に開催。詳細は11月19日に発表） */
+  announcement?: string;
   /** 日程を確認したページ */
   sourceUrl?: string;
   checkedAt?: string;
@@ -18,7 +20,14 @@ export type Sale = {
 
 export const sales: Sale[] = [
   { id: "rakuten-black-friday-2026", name: "楽天ブラックフライデー", store: "楽天市場" },
-  { id: "amazon-black-friday-2026", name: "Amazon ブラックフライデー", store: "Amazon" },
+  {
+    id: "amazon-black-friday-2026",
+    name: "Amazon ブラックフライデー",
+    store: "Amazon",
+    announcement: "11月に開催と発表されています。開催期間は11月19日（木）の午前中に公式で発表される予定です。",
+    sourceUrl: "https://www.aboutamazon.jp/news/retail/amazon-black-friday-2026",
+    checkedAt: "2026-11-07",
+  },
 ];
 
 export type SalePhase = "unannounced" | "before" | "during" | "after";

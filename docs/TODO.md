@@ -16,7 +16,7 @@
 
 - [ ] **使用例の写真を残りのツールにも**：`scripts/tool-shots.mjs` の SHOTS に足して撮る（今は人気20ツール。画像・PDF系はファイルを入れる手順が要る）
 
-- [ ] **ブラックフライデーの日程が発表されたら** `data/sales.ts` に start・end・officialUrl・sourceUrl・checkedAt を入れる（楽天・Amazon とも公式の発表を確認してから）。/sale/ が開催前・中・後で自動で切り替わる
+- [ ] **ブラックフライデーの日程が発表されたら** `data/sales.ts` に start・end・officialUrl・sourceUrl・checkedAt を入れる（楽天・Amazon とも公式の発表を確認してから）。Amazon は 11/7 時点で「11月開催、期間は 11/19 午前に発表」と公式にあり、/sale/ に案内を表示中。楽天は 11/7 時点で公式の発表を確認できず。/sale/ が開催前・中・後で自動で切り替わる
 
 ## 余裕があれば
 - [ ] 広告（Google AdSense）を申し込む。審査では運営者情報・問い合わせ先があるほうが通りやすい

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bag" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b54ee"/>
+      <stop offset="1" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="box" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#eceef8"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1e1b4b" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="675" fill="#f6f7fb"/>
+  <ellipse cx="600" cy="560" rx="430" ry="46" fill="#e7e9f5"/>
+
+  <!-- 紙吹雪・きらきら -->
+  <g fill="#4f46e5" opacity="0.85">
+    <path d="M190 150 l10 -24 l10 24 l24 10 l-24 10 l-10 24 l-10 -24 l-24 -10z" transform="scale(0.8) translate(40 30)"/>
+    <path d="M980 120 l8 -18 l8 18 l18 8 l-18 8 l-8 18 l-8 -18 l-18 -8z"/>
+    <path d="M1060 330 l6 -14 l6 14 l14 6 l-14 6 l-6 14 l-6 -14 l-14 -6z" opacity="0.6"/>
+  </g>
+  <g>
+    <rect x="300" y="110" width="26" height="9" rx="3" fill="#9b2c3a" transform="rotate(-25 313 114)"/>
+    <rect x="860" y="200" width="28" height="9" rx="3" fill="#4f46e5" transform="rotate(30 874 204)"/>
+    <rect x="160" y="380" width="24" height="8" rx="3" fill="#4f46e5" transform="rotate(15 172 384)" opacity="0.7"/>
+    <rect x="1010" y="460" width="26" height="9" rx="3" fill="#9b2c3a" transform="rotate(-35 1023 464)"/>
+    <circle cx="420" cy="90" r="6" fill="#c7cbf3"/>
+    <circle cx="760" cy="80" r="5" fill="#f2c6cb"/>
+    <circle cx="120" cy="250" r="5" fill="#f2c6cb"/>
+    <circle cx="1100" cy="220" r="6" fill="#c7cbf3"/>
+  </g>
+
+  <!-- カレンダー（文字なし。11月下旬に印） -->
+  <g filter="url(#soft)" transform="translate(150 220) rotate(-6)">
+    <rect width="230" height="230" rx="22" fill="#ffffff" stroke="#1f2350" stroke-width="5"/>
+    <rect width="230" height="58" rx="22" fill="#9b2c3a"/>
+    <rect y="36" width="230" height="22" fill="#9b2c3a"/>
+    <rect x="52" y="-16" width="14" height="36" rx="7" fill="#1f2350"/>
+    <rect x="164" y="-16" width="14" height="36" rx="7" fill="#1f2350"/>
+    <g fill="#e3e6f3">
+      <rect x="24" y="80" width="30" height="24" rx="5"/><rect x="66" y="80" width="30" height="24" rx="5"/><rect x="108" y="80" width="30" height="24" rx="5"/><rect x="150" y="80" width="30" height="24" rx="5"/>
+      <rect x="24" y="116" width="30" height="24" rx="5"/><rect x="66" y="116" width="30" height="24" rx="5"/><rect x="108" y="116" width="30" height="24" rx="5"/><rect x="150" y="116" width="30" height="24" rx="5"/>
+      <rect x="24" y="152" width="30" height="24" rx="5"/><rect x="66" y="152" width="30" height="24" rx="5"/><rect x="150" y="152" width="30" height="24" rx="5"/>
+      <rect x="24" y="188" width="30" height="24" rx="5"/><rect x="66" y="188" width="30" height="24" rx="5"/><rect x="108" y="188" width="30" height="24" rx="5"/>
+    </g>
+    <rect x="108" y="152" width="30" height="24" rx="5" fill="#4f46e5"/>
+    <circle cx="165" cy="200" r="20" fill="none" stroke="#9b2c3a" stroke-width="5"/>
+  </g>
+
+  <!-- ショッピングバッグ（主役） -->
+  <g filter="url(#soft)">
+    <path d="M520 250 q0 -90 80 -90 q80 0 80 90" fill="none" stroke="#1f2350" stroke-width="14" stroke-linecap="round"/>
+    <path d="M455 245 h290 l28 305 q2 24 -22 24 h-302 q-24 0 -22 -24z" fill="url(#bag)" stroke="#1f2350" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M470 270 h260 l4 40 h-268z" fill="#ffffff" opacity="0.15"/>
+    <circle cx="530" cy="290" r="9" fill="#1f2350"/>
+    <circle cx="670" cy="290" r="9" fill="#1f2350"/>
+    <!-- 値札（文字なし） -->
+    <g transform="translate(600 420) rotate(-12)">
+      <path d="M-70 -42 h108 l40 42 l-40 42 h-108 q-12 0 -12 -12 v-60 q0 -12 12 -12z" fill="#ffffff" stroke="#1f2350" stroke-width="5" stroke-linejoin="round"/>
+      <circle cx="40" cy="0" r="9" fill="#f6f7fb" stroke="#1f2350" stroke-width="4"/>
+      <rect x="-52" y="-16" width="64" height="12" rx="6" fill="#9b2c3a"/>
+      <rect x="-52" y="6" width="42" height="10" rx="5" fill="#c7cbf3"/>
+    </g>
+  </g>
+
+  <!-- ギフトの箱 -->
+  <g filter="url(#soft)" transform="translate(800 360)">
+    <rect x="0" y="40" width="200" height="160" rx="10" fill="url(#box)" stroke="#1f2350" stroke-width="5"/>
+    <rect x="-12" y="10" width="224" height="48" rx="10" fill="#ffffff" stroke="#1f2350" stroke-width="5"/>
+    <rect x="86" y="10" width="28" height="190" fill="#9b2c3a" stroke="#1f2350" stroke-width="5"/>
+    <path d="M100 10 q-50 -60 -70 -20 q-10 30 70 20z" fill="#9b2c3a" stroke="#1f2350" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M100 10 q50 -60 70 -20 q10 30 -70 20z" fill="#9b2c3a" stroke="#1f2350" stroke-width="5" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 小さな箱 -->
+  <g filter="url(#soft)" transform="translate(385 470)">
+    <rect width="90" height="80" rx="8" fill="#ffffff" stroke="#1f2350" stroke-width="5"/>
+    <rect x="38" width="14" height="80" fill="#4f46e5"/>
+  </g>
+</svg>

@@ -1800,6 +1800,879 @@
       "updatedAt": "2026-10-21",
       "reviewedAt": "2026-10-21",
       "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "anker-nano-charger-35w-a2658",
+      "slug": "anker-nano-charger-35w-a2658",
+      "name": "Anker Nano Charger (35W, 巻取り式 USB-Cケーブル) A2658",
+      "brand": "Anker",
+      "categoryId": "gadgets",
+      "summary": "約70cmの巻取り式USB-Cケーブルを内蔵し、USB-Cポートも1つ備えた合計最大35WのUSB急速充電器。",
+      "features": [
+        "約70cmの巻取り式USB-Cケーブルを本体に内蔵",
+        "内蔵ケーブルに加えてUSB-Cポートを1つ備え、最大2台を同時に充電できる",
+        "合計最大出力35W、独自の安全機能 ActiveShield 3.0 を搭載と案内されている"
+      ],
+      "pros": [
+        "ケーブルが一体型なので、別にケーブルを持ち運ばずに済む",
+        "本体サイズは約61×48×30mm（プラグ・端子部を除く）で、持ち運びに適したコンパクト設計と案内されている",
+        "保証は24ヶ月で、Ankerの会員登録後はさらに6ヶ月延びる"
+      ],
+      "cons": [
+        "内蔵ケーブルは約70cmなので、コンセントが遠い場所では長さが足りないことがある",
+        "2台同時に使うと合計35Wを分け合う（30W＋5W、または17.5W＋17.5W）",
+        "巻取りケーブルには少量の潤滑油が使われ、長期間収納すると巻き癖がつくことがあると公式に注記されている"
+      ],
+      "specifications": {
+        "型番": "A2658N11（ブラック）/ A2658N21（ホワイト）",
+        "サイズ": "約61×48×30mm（プラグ・端子部を除く）",
+        "重量": "約110g",
+        "入力": "100-240V~, 1.2A, 50-60Hz",
+        "単ポート出力": "USB-C1 / C2：5V⎓3A / 9V⎓3A / 15V⎓2.33A / 20V⎓1.75A（最大35W）",
+        "2ポート出力": "30W＋5W / 17.5W＋17.5W（合計最大35W）",
+        "ケーブル": "約70cmの巻取り式USB-C（USB-C1）",
+        "発売月": "2025年8月"
+      },
+      "price": 4990,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://www.ankerjapan.com/products/a2658",
+      "market": {
+        "keyword": "Anker Nano Charger 35W 巻取り A2658",
+        "match": [
+          "A2658",
+          "Anker Nano Charger + 35W + 巻取り"
+        ],
+        "exclude": [
+          "ケース",
+          "カバー",
+          "保護"
+        ],
+        "minPrice": 2000
+      },
+      "sourceUrls": [
+        "https://www.ankerjapan.com/products/a2658"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "cio-smartcoby-ex02",
+      "slug": "cio-smartcoby-ex02",
+      "name": "SMARTCOBY Ex02 Wireless Charger(Magnet & Watch) plus Stand CIO-MB20W1C-5000-EX02",
+      "brand": "CIO",
+      "categoryId": "gadgets",
+      "summary": "MagSafe対応iPhone・AirPods・Apple Watchにワイヤレス充電できる、スタンド付きの5000mAhモバイルバッテリー。",
+      "features": [
+        "MagSafe対応iPhone、AirPods、Apple Watchをワイヤレス充電できる",
+        "容量5000mAh、USB-Cは最大PD20W出力",
+        "背面のリングを起こすとスタンドとして使える",
+        "本体を充電しながらワイヤレス充電できるパススルーに対応",
+        "充電中は残量を1%単位のデジタル数字で表示する"
+      ],
+      "pros": [
+        "1台でiPhone・AirPods・Apple Watchのワイヤレス充電に使えると案内されている",
+        "約93×63×15.6mm・約140gのカードサイズで、持ち歩き向きの設計",
+        "満充電後は本体のバッテリーセルを介さず充電する「完全パススルー」に対応し、充電器につなげば常時ワイヤレス充電として使える",
+        "表面はシボ加工で、ペンや爪で引っかいても傷が付きにくいと案内されている"
+      ],
+      "cons": [
+        "MFi認証商品ではなく、watchOS・iOSのアップデートで使えなくなることがあると公式に注記されている",
+        "MagSafe対応スマートフォン以外へのワイヤレス充電はできない（AirPods等の一部小型デバイスを除く）",
+        "対応機種の欄に、iPhoneシリーズは最大7.5W出力と注記されている。完全パススルー時はワイヤレス5W（Apple Watchは2.5W）になる"
+      ],
+      "specifications": {
+        "型番": "CIO-MB20W1C-5000-EX02",
+        "サイズ": "約93.0×63.0×15.6mm（リング部 +2.15mm）",
+        "重量": "約140g",
+        "バッテリー容量": "5000mAh 3.7V 18.5Wh",
+        "ポート構成": "USB-C×1",
+        "入力": "USB-C PD：5V⎓3A / 9V⎓2A / 12V⎓1.5A（最大18W）",
+        "出力": "USB-C PD：5V⎓3A / 9V⎓2.22A / 12V⎓1.67A（最大20W）、PPS：3.3-11V⎓2A（最大22W）",
+        "ワイヤレス出力": "マグネットワイヤレス充電 最大15W、Apple Watch充電 最大2.5W",
+        "サイクル回数": "約300回",
+        "付属品": "取扱説明書（日本語/English）、CtoCケーブル 0.5m"
+      },
+      "price": 5980,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://connectinternationalone.co.jp/cioproduct/mobilebattery/smartcoby/cio-mb20w1c-5000-ex02/",
+      "market": {
+        "keyword": "CIO-MB20W1C-5000-EX02",
+        "match": [
+          "MB20W1C-5000-EX02",
+          "SMARTCOBY Ex02"
+        ],
+        "exclude": [
+          "ケース",
+          "カバー",
+          "保護"
+        ],
+        "minPrice": 3000
+      },
+      "sourceUrls": [
+        "https://connectinternationalone.co.jp/cioproduct/mobilebattery/smartcoby/cio-mb20w1c-5000-ex02/"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "cio-nlsc-fl-cc1",
+      "slug": "cio-nlsc-fl-cc1",
+      "name": "Flat Spiral Cable CtoC 1m CIO-NLSC-FL-CC1",
+      "brand": "CIO",
+      "categoryId": "gadgets",
+      "summary": "磁石を内蔵し、ケーブル同士がくっついて渦巻き状にまとまる、最大240W対応の薄型USB-Cケーブル。",
+      "features": [
+        "ケーブル部分に磁石を内蔵し、渦巻き状にまとまる",
+        "端子部分を持って軽く引くと展開し、手を離すと渦巻き状に戻る",
+        "USB-PD3.1 EPR 240Wに対応",
+        "ナイロンの編み込み素材を使ったフラットケーブル"
+      ],
+      "pros": [
+        "ケーブルバンドなしでまとまり、コードリールのように使えると案内されている",
+        "厚みを抑えて渦巻き状にまとまるので、カバンやポーチの隙間に収めやすい",
+        "スマホやイヤホンのほか、デジカメやノートPCへの給電にも使えると案内されている"
+      ],
+      "cons": [
+        "データ転送はUSB2.0（最大480Mbps）まで",
+        "映像出力には対応していないので、モニターをつなぐ用途には使えない",
+        "長さは1m（1.5mは別モデル）で、用途によっては足りないことがある"
+      ],
+      "specifications": {
+        "型番": "CIO-NLSC-FL-CC1",
+        "コネクタ形状": "USB-C ストレート",
+        "ケーブル長": "1m",
+        "転送速度": "最大480Mbps（理論値）",
+        "映像出力": "非対応",
+        "USB規格": "USB2.0",
+        "USB-PD": "USB-PD3.1 EPR 240W",
+        "急速充電規格": "PD3.1 / PD EPR / 5A対応",
+        "カラー": "ライトブラック / ナチュラルホワイト / モスグリーン / シェルピンク / カームブルー / エアリーパープル / ブラック"
+      },
+      "price": 1980,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://connectinternationalone.co.jp/cioproduct/cable/spiral/cio-nlsc-fl-cc1/",
+      "market": {
+        "keyword": "CIO-NLSC-FL-CC1",
+        "match": [
+          "CIO-NLSC-FL-CC1",
+          "CIO + フラットスパイラルケーブル + 1m"
+        ],
+        "exclude": [
+          "CC15",
+          "1.5m",
+          "ぬふぬふ"
+        ],
+        "minPrice": 800
+      },
+      "sourceUrls": [
+        "https://connectinternationalone.co.jp/cioproduct/cable/spiral/cio-nlsc-fl-cc1/"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "moft-multi-phone-stand",
+      "slug": "moft-multi-phone-stand",
+      "name": "MOFT 七変化マルチスタンド MagSafe対応（通常版）",
+      "brand": "MOFT",
+      "categoryId": "gadgets",
+      "summary": "折りたたむと薄いカード状になり、マグネットでiPhoneに付けて多角度のスタンドとして使える、MagSafe対応のスマホスタンド。",
+      "features": [
+        "折りたたみ時の寸法は96.5×63.5×6.9mm",
+        "iPhone 12/13/14/15/16/17シリーズに対応（付属のアイアンリング併用で全機種対応可能と案内されている）",
+        "マンガン鋼製ヒンジで、10度までの前傾と45度までの後傾に対応",
+        "屋内外を問わず、卓上や地面に設置できると案内されている"
+      ],
+      "pros": [
+        "後ろに倒すと手元の作業を記録でき、縦・横の撮影アングルも切り替えられると案内されている",
+        "重さ85gで、自撮りグリップとしても使えると案内されている",
+        "磁力は iPhone 14 Pro との組み合わせで垂直方向16.5Nという実験室での測定値が公式に載っている"
+      ],
+      "cons": [
+        "カードの収納はできない（公式のFAQに明記）",
+        "ヒンジが支えられるスマホは300gまで",
+        "マグネット吸着は接着剤などに比べると外れる危険があると公式に注記されている。対応外の機種はアイアンリングが必要で、スマホ本体に直接貼ってはいけない"
+      ],
+      "specifications": {
+        "SKU": "MS027（通常版）",
+        "対応機種": "iPhone 12/13/14/15/16/17シリーズ（付属のアイアンリング併用で全機種対応可能）",
+        "寸法": "96.5×63.5×6.9mm",
+        "重量": "85g",
+        "素材": "MOVAS ヴィーガンレザー、グラスファイバー、マグネット、金属シート、PC",
+        "支えられるスマホの重さ": "300gまで",
+        "同梱内容": "七変化マルチスタンド×1、アイアンリング（粘着式）×1"
+      },
+      "currency": "JPY",
+      "officialUrl": "https://www.moftjapan.com/products/multi-phone-stand",
+      "market": {
+        "keyword": "MOFT 七変化マルチスタンド",
+        "match": [
+          "MOFT + 七変化マルチスタンド"
+        ],
+        "exclude": [
+          "AERA",
+          "AREA",
+          "レザーセット",
+          "セット",
+          "ケース"
+        ],
+        "minPrice": 3000
+      },
+      "sourceUrls": [
+        "https://www.moftjapan.com/products/multi-phone-stand"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "motteru-mot-cbclip04",
+      "slug": "motteru-mot-cbclip04",
+      "name": "sofumo マグネットケーブルクリップ MOT-CBCLIP04",
+      "brand": "MOTTERU",
+      "categoryId": "desk",
+      "summary": "マグネットでケーブルをピタッと留めて整理できる、シリコン製のケーブルクリップ。",
+      "features": [
+        "マグネットで留める、シリコン製のケーブルクリップ",
+        "直径3.0〜5.0mmのケーブルに対応",
+        "設置方法を選べ、デスクや車のケーブル収納に使えると案内されている"
+      ],
+      "pros": [
+        "使った後もいつもの場所に戻せば、ケーブルを整理した状態を保ちやすい",
+        "全8色のカラーバリエーションがある",
+        "RoHS指令準拠製品と案内されている"
+      ],
+      "cons": [
+        "対応ケーブルは直径3.0〜5.0mmで、これより太い・細いケーブルは対象外",
+        "保証は初期不良のみの交換保証",
+        "本体サイズは約90×36×20mmなので、置き場所の幅を確認する必要がある"
+      ],
+      "specifications": {
+        "型番": "MOT-CBCLIP04（カラー別に -PS / -BL / -PK / -PU / -AM / -GY / -BK / -WH）",
+        "サイズ（本体）": "約90(W)×36(D)×20(H)mm",
+        "重量（本体）": "約46g",
+        "材質": "シリコン、磁石",
+        "対応ケーブル太さ": "直径3.0〜5.0mm",
+        "生産国": "中国",
+        "保証期間": "初期不良のみ交換保証"
+      },
+      "price": 1880,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://motteru.co.jp/product/cable/cable_band_clip/mot-cbclip04/",
+      "market": {
+        "keyword": "MOT-CBCLIP04",
+        "match": [
+          "MOT-CBCLIP04"
+        ]
+      },
+      "sourceUrls": [
+        "https://motteru.co.jp/product/cable/cable_band_clip/mot-cbclip04/"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "benq-screenbar-halo-2",
+      "slug": "benq-screenbar-halo-2",
+      "name": "BenQ ScreenBar Halo 2 モニターライト",
+      "brand": "BenQ",
+      "categoryId": "desk",
+      "summary": "モニター上に取り付け、フロントライトと3ゾーン型バックライトで手元と画面まわりを照らす、リモコン付きのモニターライト。",
+      "features": [
+        "フロントライトは85×50cmの範囲を500ルクスで照らすと案内されている",
+        "3ゾーン型バックライトで画面と周囲とのコントラストを軽減",
+        "明るさと色温度（2700K〜6500K）を無段階で調整できる",
+        "超音波センサーによる自動点灯・消灯に対応"
+      ],
+      "pros": [
+        "リモコンで明るさ・色温度を調整でき、ワンタッチで500ルクスに自動調整できる",
+        "クランプは厚さ0.43〜6cmのモニターと、湾曲率1000R〜1800Rの湾曲モニターに対応",
+        "USB Type-Cアダプターが同梱されている"
+      ],
+      "cons": [
+        "5分以上同じ姿勢で動かないと、動いていないと判断されて消灯することがあると公式に注記されている",
+        "エアコンの温度変化や加湿器の振動の影響で、意図せず点灯・消灯することがあると公式に注記されている",
+        "ライト本体の外形は幅50cm。重量は公式ページの仕様に載っていない"
+      ],
+      "specifications": {
+        "本体カラー": "ダークグレー",
+        "外形寸法": "ライト本体 50×14.3×10.9cm / リモコン 7.4×7.4×3.95cm",
+        "照明範囲（500Lux）": "85cm×50cm",
+        "色温度": "2700K〜6500K（無段階）",
+        "演色性": "Rf>96、Rg≈100",
+        "USBケーブルの長さ": "150cm",
+        "電源入力": "5V / 最大3A USB Type-C",
+        "対応モニター": "厚さ0.43〜6cm、湾曲率1000R〜1800R",
+        "同梱品": "ライト本体、USB Type-Cアダプター、ウェブカメラアクセサリー、クイックスタートガイド、製品保証書"
+      },
+      "currency": "JPY",
+      "officialUrl": "https://www.benq.com/ja-jp/lighting/monitor-light/screenbar-halo-2.html",
+      "market": {
+        "keyword": "BenQ ScreenBar Halo 2",
+        "match": [
+          "ScreenBar Halo 2",
+          "ScreenBar + Halo2"
+        ],
+        "exclude": [
+          "ケース",
+          "カバー"
+        ],
+        "minPrice": 20000
+      },
+      "sourceUrls": [
+        "https://www.benq.com/ja-jp/lighting/monitor-light/screenbar-halo-2.html",
+        "https://www.benq.com/ja-jp/lighting/monitor-light/screenbar-halo-2/buy.html"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "ergotron-45-241-224",
+      "slug": "ergotron-45-241-224",
+      "name": "エルゴトロン LX デスクマウント モニターアーム マットブラック 45-241-224",
+      "brand": "エルゴトロン",
+      "categoryId": "desk",
+      "summary": "34インチまでのモニターを軽い力で動かせる、10年保証のアルミ製モニターアーム。",
+      "features": [
+        "Constant Force テクノロジーで、モニターの位置を手で調整できると案内されている",
+        "34インチまで、重量3.2〜11.3kgのモニターに対応",
+        "昇降33cm、チルト後方70°・前方5°、パン・回転360°",
+        "天板厚10〜60mmのデスククランプと、グロメットマウントが付属"
+      ],
+      "pros": [
+        "アームを折りたためるので、作業スペースを広く使いやすいと案内されている",
+        "保証期間は10年で、昇降機構は1万回のテストを実施したと案内されている",
+        "アームの下にケーブルを通せるケーブルマネジメント機能がある"
+      ],
+      "cons": [
+        "モニターの重さが9.1kgを超えると、昇降範囲が最大11cm狭くなることがある",
+        "奥行8.9cmを超えるモニターでは耐荷重が下がることがある",
+        "取り付けにはVESA 100×100mmまたは75×75mmに対応したモニターと、厚さ10〜60mmの天板が必要（2ピースクランプの場合）"
+      ],
+      "specifications": {
+        "型番": "45-241-224（マットブラック）",
+        "対応画面サイズ": "34インチまで",
+        "耐荷重": "3.2〜11.3kg",
+        "昇降": "33cm",
+        "チルト": "後方70°、前方5°",
+        "パン・回転": "360°",
+        "VESA規格": "100×100mm、75×75mm",
+        "クランプ取付": "天板厚10〜60mm",
+        "グロメット取付": "穴径8〜50mm、天板厚57mmまで",
+        "製品重量": "7.8 lbs",
+        "保証": "10年"
+      },
+      "currency": "JPY",
+      "officialUrl": "https://www.ergotron.com/en-us/products/product-details/45-241",
+      "market": {
+        "keyword": "エルゴトロン 45-241-224",
+        "match": [
+          "45-241-224"
+        ],
+        "exclude": [
+          "追加用",
+          "中古"
+        ],
+        "minPrice": 12000
+      },
+      "sourceUrls": [
+        "https://www.ergotron.com/en-us/products/product-details/45-241",
+        "https://item.rakuten.co.jp/ergotron/e1r00wv/"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "sanwa-direct-200-stn068bk",
+      "slug": "sanwa-direct-200-stn068bk",
+      "name": "デスクサイドホルダー クランプ式 スチール製 ブラック 200-STN068BK",
+      "brand": "サンワダイレクト",
+      "categoryId": "desk",
+      "summary": "デスクの横にクランプで後付けし、ノートPCやタブレット、書類を立てて収納できるスチール製ホルダー。",
+      "features": [
+        "工具不要のクランプ式で、デスクに穴を開けずに取り付けられる",
+        "天板の手前・横・奥のいずれにも取り付けられる（設置場所があれば）",
+        "放熱穴付きで、機器の熱がこもりにくいと案内されている"
+      ],
+      "pros": [
+        "ノートPCをクラムシェルモードで使うときに、デスクの上を広く使える",
+        "スチール製なので、マグネット対応のケーブルホルダーやUSBハブなどを取り付けられる",
+        "滑り止めシートとキズ防止シート4枚が付属する"
+      ],
+      "cons": [
+        "耐荷重は3kgまで。収納できる機器の厚みは35mm以下（キズ防止シートを貼ると30mm以下）",
+        "取り付けられる天板の厚さは15〜35mmで、範囲外だと使えない",
+        "ノックダウン組立式で組み立てが必要。保証は初期不良のみ"
+      ],
+      "specifications": {
+        "型番": "200-STN068BK（ブラック）/ 200-STN068W（ホワイト）",
+        "サイズ": "約W280×D88×H200mm",
+        "重量": "約1.3kg",
+        "耐荷重": "3kg",
+        "材質": "スチール",
+        "クランプ取付条件": "厚み15〜35mmの天板など",
+        "対応機器": "厚み35mm以下（キズ防止シートを貼る場合は30mm以下）、3kgまで",
+        "出荷形態": "ノックダウン組立式（お客様組立式）",
+        "保証期間": "初期不良のみ"
+      },
+      "price": 5480,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://direct.sanwa.co.jp/ItemPage/200-STN068BK",
+      "market": {
+        "keyword": "200-STN068",
+        "match": [
+          "200-STN068"
+        ]
+      },
+      "sourceUrls": [
+        "https://direct.sanwa.co.jp/ItemPage/200-STN068BK"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "elecom-mp-116bk",
+      "slug": "elecom-mp-116bk",
+      "name": "疲労軽減マウスパッド「FITTIO」(High) MP-116BK",
+      "brand": "エレコム",
+      "categoryId": "desk",
+      "summary": "横浜市総合リハビリテーションセンターと共同開発した、ハンドレスト一体型の疲労軽減マウスパッド。",
+      "features": [
+        "操作面に1.5°の傾斜をつけ、手首から肩までの骨格が自然な角度に保たれるようにしている",
+        "ハンドレスト内部に国産の高性能素材「EXGEL」を使用",
+        "表面は合成皮革で、水や洗剤、アルコールで拭き取れる",
+        "日本製"
+      ],
+      "pros": [
+        "長時間のマウス操作で手首にかかる負担を軽くする設計と案内されている",
+        "ハンドレストを一体化しているので、手首の位置が固定しやすく、少ない動作でマウスを動かせると案内されている",
+        "汚れても拭き取れるので、清潔に保ちやすい"
+      ],
+      "cons": [
+        "操作面は幅135mm×奥行150mmで、マウスを大きく動かす使い方では広さを確認する必要がある",
+        "本製品は高さ17mmのHighタイプ。平面のマウスパッドに慣れた人には9mmのLowタイプ（MP-115）が案内されている",
+        "外形は幅135×奥行220mm、重さは245g"
+      ],
+      "specifications": {
+        "型番": "MP-116BK（ブラック）/ MP-116WH（ホワイト）",
+        "外形寸法": "幅135mm×奥行220mm×高さ26mm",
+        "マウス操作面サイズ": "幅135mm×奥行150mm（最大外寸）",
+        "マウス操作面厚み": "7mm（最厚部）",
+        "リストレスト高さ": "26mm（最高部）",
+        "重量": "245g",
+        "材質": "表面：ポリウレタン合成皮革、裏面：ポリウレタン、ハンドレスト内部：合成ゴム"
+      },
+      "price": 5080,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://www.elecom.co.jp/products/MP-116BK.html",
+      "market": {
+        "keyword": "エレコム FITTIO MP-116",
+        "match": [
+          "MP-116BK",
+          "MP-116WH"
+        ]
+      },
+      "sourceUrls": [
+        "https://www.elecom.co.jp/products/MP-116BK.html",
+        "https://shop.elecom.co.jp/category/MOUSEPAD/4953103237278.html"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "logicool-mx2300cr",
+      "slug": "logicool-mx2300cr",
+      "name": "ロジクール MX Master 3S Bluetooth edition MX2300CR",
+      "brand": "ロジクール",
+      "categoryId": "gadgets",
+      "summary": "静音クリックと8000DPIセンサーを備え、ガラス面でもトラッキングできるBluetooth接続のワイヤレスマウス。",
+      "features": [
+        "クリックノイズを90%軽減した静音クリック",
+        "200〜8000DPIのセンサーで、ガラス面でもトラッキングできる",
+        "電磁式のMagSpeedスクロールホイールとサムホイールを搭載",
+        "7個のボタンをLogi Options+でカスタマイズできる（Windows/macOS）"
+      ],
+      "pros": [
+        "クリック音が静かなので、静かな場所でも使いやすいと案内されている",
+        "1分間の急速充電で3時間使える",
+        "Logi Options+で、アプリごとの設定や複数デバイスをまたぐ作業（Flow）に対応する",
+        "保証は2年間（MX2300CRの場合）"
+      ],
+      "cons": [
+        "重さは141g",
+        "Logi Bolt USBレシーバーは標準エディションのみの付属と案内されており、Unifyingレシーバーには対応していない",
+        "Logi Options+はWindows・macOS向けで、それ以外のOSでは基本機能のみ動作する"
+      ],
+      "specifications": {
+        "型番": "MX2300CR（グラファイト・2年保証）/ MX2300CRd（グラファイト・1年保証）",
+        "サイズ": "高さ124.9mm×幅84.3mm×奥行き51mm",
+        "重量": "141g",
+        "センサー": "Darkfield 高精度、200〜8000DPI（50DPI刻み）",
+        "ボタン数": "7個",
+        "バッテリー": "充電式リチウムポリマー（500mAh）",
+        "接続": "Bluetooth Low Energy",
+        "ワイヤレス通信可能範囲": "10m",
+        "対応OS": "Windows 10・11以降、macOS 10.15以降、Linux、ChromeOS、iPadOS 14以降、Android 8.0以降（Windows・macOS以外は基本機能のみ）"
+      },
+      "price": 17820,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://www.logicool.co.jp/ja-jp/shop/p/mx-master-3s",
+      "market": {
+        "keyword": "ロジクール MX2300CR",
+        "match": [
+          "MX2300CR"
+        ],
+        "exclude": [
+          "ケース",
+          "カバー",
+          "ソール",
+          "互換"
+        ],
+        "minPrice": 8000
+      },
+      "sourceUrls": [
+        "https://www.logicool.co.jp/ja-jp/shop/p/mx-master-3s"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "cosori-caf-l501",
+      "slug": "cosori-caf-l501",
+      "name": "COSORI PRO LE 4.7L ノンフライヤー CAF-L501",
+      "brand": "COSORI",
+      "categoryId": "home",
+      "summary": "最高230℃まで設定でき、油を使わずに揚げ物などを調理できる、容量4.7L（3〜5人分）のノンフライヤー。",
+      "features": [
+        "容量4.7L（3〜5人分）",
+        "最高温度230℃まで設定できる",
+        "バスケットを引き出すと自動停止し、戻すと自動再開する中断記憶機能付き",
+        "できあがりは音で知らせる"
+      ],
+      "pros": [
+        "料理を選ぶだけの操作で使えると案内されている",
+        "バスケットは焦げ付き防止加工のアルミニウム製で、食洗機に対応する",
+        "公式ストアの案内は2年間保証で、レシピブックが同梱される",
+        "調理中の音は55dBと案内されている"
+      ],
+      "cons": [
+        "奥行36.5×幅27.4×高さ30.7cm（ハンドルと排気口を含む）で、置き場所の確保が必要",
+        "重さは4.54kg",
+        "定格消費電力は1230W。同じ比較表で発酵機能はなしとなっている"
+      ],
+      "specifications": {
+        "型番": "CAF-L501",
+        "容量": "4.7L（3〜5人分）",
+        "定格消費電力": "1230W",
+        "寸法": "奥行36.5×幅27.4×高さ30.7cm（ハンドルと排気口を含む）",
+        "重量": "4.54kg",
+        "カラー": "グレー / アイボリー / レッド",
+        "同梱物": "本体、クリスパープレート、取扱説明書、レシピブック"
+      },
+      "price": 13980,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://vesync.jp/products/cosori-caf-l501-kjp",
+      "market": {
+        "keyword": "COSORI CAF-L501",
+        "match": [
+          "CAF-L501",
+          "COSORI + PRO LE + 4.7L"
+        ],
+        "exclude": [
+          "用紙",
+          "アクセサリー",
+          "バスケット",
+          "交換",
+          "レシピブック",
+          "専用"
+        ],
+        "minPrice": 9000
+      },
+      "sourceUrls": [
+        "https://vesync.jp/products/cosori-caf-l501-kjp",
+        "https://vesync.jp/pages/faq-l501"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "kinto-21232",
+      "slug": "kinto-21232",
+      "name": "KINTO LT ティーポット 600ml 21232",
+      "brand": "KINTO",
+      "categoryId": "home",
+      "summary": "長崎県波佐見町で作られた磁器のポットに、ステンレスのストレーナーがセットされた600mlのティーポット。",
+      "features": [
+        "ポットは磁器製で日本製（長崎県波佐見町）",
+        "細かな茶葉も漉せるステンレス製の専用ストレーナー付き",
+        "ポット・ストレーナー・ハンドルはいずれも食洗機に対応"
+      ],
+      "pros": [
+        "注ぎ口は手仕事で整えられ、水切れの良さにこだわったと案内されている",
+        "ストレーナーがセットなので、茶こしを別に用意しなくてよい",
+        "食洗機で洗える"
+      ],
+      "cons": [
+        "電子レンジでは使えない",
+        "洗浄にクレンザーやたわしは使えない",
+        "重さは約520gで、ハンドルの耐熱温度は100℃。製造ロットや素材の特性により、大きさ・重さ・色に個体差があると注記されている"
+      ],
+      "specifications": {
+        "品番": "21232（ホワイト）",
+        "サイズ": "φ75×H95×W165mm",
+        "容量": "600ml",
+        "重量": "約520g",
+        "ポット": "磁器 / 食洗機使用可 / 日本製",
+        "ストレーナー": "18-8ステンレス鋼 / 食洗機使用可",
+        "ハンドル": "18-8ステンレス鋼、シリコーン / 耐熱温度100℃ / 食洗機使用可 / 中国製"
+      },
+      "price": 7700,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://kinto.co.jp/products/21232",
+      "market": {
+        "keyword": "KINTO LT ティーポット 600ml",
+        "match": [
+          "KINTO + LT + ティーポット + 600ml",
+          "KINTO + 21232"
+        ],
+        "exclude": [
+          "ストレーナー",
+          "替え",
+          "カップ",
+          "急須"
+        ],
+        "minPrice": 4000
+      },
+      "sourceUrls": [
+        "https://kinto.co.jp/products/21232"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "switchbot-co2-meter",
+      "slug": "switchbot-co2-meter",
+      "name": "SwitchBot CO2センサー（温湿度計）",
+      "brand": "SwitchBot",
+      "categoryId": "home",
+      "summary": "CO2濃度と温湿度をディスプレイで確認でき、換気のタイミングを音や点滅で知らせるセンサー。",
+      "features": [
+        "NDIR方式のCO2センサーとスイス製の温湿度センサーを搭載",
+        "CO2濃度、温湿度、快適指数、日時をディスプレイに表示",
+        "本体の警告音、数値の点滅、アプリ通知の3種類のアラート（アプリ通知はハブ製品が必要）"
+      ],
+      "pros": [
+        "CO2濃度が目に見えるので、換気のタイミングが分かりやすい",
+        "音を鳴らさない点滅アラートがあり、静かな環境でも使える",
+        "単3電池2本で動き、置き場所を選びにくい",
+        "ほかのSwitchBot温湿度計のデータを切り替えて表示できる"
+      ],
+      "cons": [
+        "アプリ通知・外出先からの確認・天気予報の表示にはSwitchBotハブ製品が別に必要",
+        "電池寿命の約1年は、30分ごとにCO2濃度を検知した場合の数値",
+        "CO2の測定範囲は400〜9999ppm。保証期間は1年"
+      ],
+      "specifications": {
+        "本体サイズ": "92×79×25mm",
+        "本体重量": "154g（電池を含む）",
+        "材料": "ABS",
+        "電源": "単3電池×2、5V1A電源アダプター",
+        "電池寿命": "約1年（30分ごとにCO2濃度を検知）",
+        "CO2測定範囲": "400〜9999ppm",
+        "温度測定範囲": "-20〜80°",
+        "相対湿度測定範囲": "0〜99%",
+        "保証期間": "1年"
+      },
+      "price": 7980,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://www.switchbot.jp/products/switchbot-co2-meter",
+      "market": {
+        "keyword": "SwitchBot CO2センサー",
+        "match": [
+          "SwitchBot + CO2センサー"
+        ],
+        "exclude": [
+          "セット",
+          "ケース",
+          "カバー"
+        ],
+        "minPrice": 5000
+      },
+      "sourceUrls": [
+        "https://www.switchbot.jp/products/switchbot-co2-meter"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "delfonics-rollbahn-free-diary-l",
+      "slug": "delfonics-rollbahn-free-diary-l",
+      "name": "ロルバーン フリーダイアリー L",
+      "brand": "デルフォニックス",
+      "categoryId": "stationery",
+      "summary": "月と日付が空欄で好きな時に使い始められる、B6に近いLサイズのダイアリー。",
+      "features": [
+        "月と日付が空欄で、好きな時に使い始められる",
+        "マンスリー12ヶ月分と、ブロックタイプのウィークリー約52週分",
+        "巻末に方眼メモ72ページとクリアポケット5枚",
+        "5mm方眼、切り離しミシン目付き"
+      ],
+      "pros": [
+        "年の途中でも使い始められ、予定管理のほかライフログや趣味の記録にも使えると案内されている",
+        "1列に1カ月を記入できる15カ月分のイヤースケジュールが付く",
+        "表紙に透明フィルム加工が施され、1年間使えると案内されている"
+      ],
+      "cons": [
+        "月と日付は印刷されていないので、自分で書き込む必要がある",
+        "サイズは横148×高さ183×奥行20mmで、小さく持ち歩きたい場合はMやミニのほうが向く",
+        "公式ページに重量は載っていない。表紙の種類によって価格が異なる"
+      ],
+      "specifications": {
+        "サイズ": "横148×高さ183×奥行20mm",
+        "素材": "紙",
+        "生産国": "日本",
+        "ページ構成": "中表紙1ページ、リスト1ページ、日付なしイヤースケジュール（1ページ、ジャバラ1ページ）、日付なしマンスリー24ページ、日付なしブロック105ページ、メモ72ページ",
+        "付属": "PPポケット5枚",
+        "カラー": "ピンク / グレージュ / イエロー / ダークブルー / ターコイズ"
+      },
+      "price": 1595,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://shop.delfonics.com/c/notebooks/501493",
+      "market": {
+        "keyword": "ロルバーン フリーダイアリー L",
+        "match": [
+          "ロルバーン + フリーダイアリー + L"
+        ],
+        "exclude": [
+          "クリア",
+          "メタリック",
+          "Moji",
+          "カルヴェ",
+          "クロスワード",
+          "ミニ",
+          "カバー",
+          "ケース",
+          "リフィル"
+        ],
+        "minPrice": 1000
+      },
+      "sourceUrls": [
+        "https://shop.delfonics.com/c/notebooks/501493",
+        "https://shop.delfonics.com/contents/rollbahn-freediary27/"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
+    },
+    {
+      "id": "midori-35409006",
+      "slug": "midori-35409006",
+      "name": "ミドリ ダンボールカッター 黒 35409006",
+      "brand": "ミドリ",
+      "categoryId": "stationery",
+      "summary": "セラミック刃で段ボールの開梱から雑誌の一枚切りまで使える、閉じると丸型になる手のひらサイズのカッター。",
+      "features": [
+        "錆びにくく耐久性に優れたセラミック刃",
+        "使わないときは丸型に閉じ、カバンやポケットに入れて携帯できる",
+        "ネオジムマグネット内蔵で、両面で金属面に留められる",
+        "刃は反転して再利用でき、別売りの替刃に交換もできる"
+      ],
+      "pros": [
+        "段ボールの開梱のほか、封筒のカットや牛乳パックの解体にも使えると案内されている",
+        "フラット面を水平に当てると、コピー用紙を1枚だけ切れる",
+        "冷蔵庫や金属製の机に付けておけるので、置き場所を決めやすい"
+      ],
+      "cons": [
+        "金属・プラスチックなどの硬い物には使えず、落としたり無理な力を加えるとセラミック刃が欠けるおそれがある",
+        "磁石内蔵のため、携帯電話、磁気カード、医療機器、精密機器に近づけないよう注意書きがある",
+        "刃物なので、6才未満の子どもの手の届かない所に保管する必要がある。「アルミ ダンボールカッター」用の替刃は使えない"
+      ],
+      "specifications": {
+        "品番": "35409006（黒）/ 35410006（カーキ）/ 35489006（ベージュ）",
+        "サイズ": "本体 H50×W50×D12.5mm",
+        "素材": "本体：樹脂（ABS＋グラスファイバー＋POM）、刃：セラミック",
+        "替刃": "別売り（ダンボールカッター替刃 35411006）",
+        "原産国": "日本"
+      },
+      "price": 1320,
+      "currency": "JPY",
+      "priceCheckedAt": "2026-11-07",
+      "officialUrl": "https://www.midori-store.net/SHOP/35409006.html",
+      "market": {
+        "keyword": "ミドリ ダンボールカッター",
+        "match": [
+          "35409006",
+          "35410006",
+          "35489006",
+          "ミドリ + ダンボールカッター"
+        ],
+        "exclude": [
+          "アルミ",
+          "替刃",
+          "ボックスカッター"
+        ],
+        "minPrice": 700
+      },
+      "sourceUrls": [
+        "https://www.midori-store.net/SHOP/35409006.html",
+        "https://www.designphil.co.jp/information/press/entry-4584/"
+      ],
+      "reviewStatus": "verified",
+      "status": "published",
+      "updatedAt": "2026-11-07",
+      "reviewedAt": "2026-11-07",
+      "reviewedBy": "AI（Claude）が公式ページで確認"
     }
   ]
 }

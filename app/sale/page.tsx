@@ -46,6 +46,8 @@ export default async function SalePage() {
         <Breadcrumbs items={[{ label: "便利グッズ", href: "/goods/" }, { label: "セールで買う候補" }]} />
         <p className="w-fit rounded border border-muted px-2 text-xs font-bold text-muted">PR　このページには広告（アフィリエイトリンク）が含まれます</p>
         <PageHeading title="ブラックフライデー・年末セールで買う候補" lead="セールの前に、欲しい物のふだんの値段を知っておくと、本当にお得かを見分けやすくなります。便利グッズを予算別・ジャンル別にまとめました。" />
+        {/* eslint-disable-next-line @next/next/no-img-element -- 静的書き出しの SVG なので最適化は要らない */}
+        <img src="/sale/hero.svg" alt="" width={1200} height={675} className="w-full max-w-3xl rounded-2xl border border-line" />
       </div>
 
       <section className="flex flex-col gap-3" aria-labelledby="sale-schedule">
@@ -66,7 +68,7 @@ export default async function SalePage() {
                     {fmt(s.start)} 〜 {fmt(s.end)}
                   </span>
                 ) : (
-                  <span className="text-sm text-muted">今年の日程はまだ発表されていません。発表され次第、ここに載せます。</span>
+                  <span className="text-sm text-muted">{s.announcement ?? "今年の日程はまだ発表されていません。発表され次第、ここに載せます。"}</span>
                 )}
                 {s.officialUrl && phase !== "after" && (
                   <a href={s.store === "楽天市場" ? rakutenLink(s.officialUrl) : s.officialUrl} target="_blank" rel="sponsored noopener" className="text-sm font-semibold text-accent underline">
